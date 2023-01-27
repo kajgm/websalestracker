@@ -63,10 +63,12 @@ def get_current_post(headers, token):
 
 
 def print_initial_posts(headers, token):
+    post_list = []
     res = requests.get('{}/r/bapcsalescanada/new'.format(API),
                        headers=headers, params={'limit': '10'})
-    for post in res.json()['data']['children']:
-        print(post['data']['title'] + '\n')
+    for post in reversed(res.json()['data']['children']):
+        print(post['data']['title'])
+        print(post['data']['url'] + '\n')
 
 
 def main():
@@ -85,7 +87,8 @@ def main():
 
         current_post = get_current_post(headers, token)
         if latest_post['data']['name'] != current_post['data']['name']:
-            print(current_post['data']['name'])
+            print(current_post['data']['title'])
+            print(current_post['data']['url'])
             latest_post = current_post
         time.sleep(30)
 
