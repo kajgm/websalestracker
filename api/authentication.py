@@ -1,12 +1,9 @@
 import requests
-import json
-import csv
-import getpass
-import os
+import json, csv, getpass, os
 
 API_ENDPOINT = 'https://oauth.reddit.com/r/'
-CRED_PATH = '../src/credentials.json'
-SUBRED_PTH = '../src/subreddits.csv'
+CRED_PATH = 'credentials.json'
+SUBRED_PTH = 'subreddits.csv'
 CUR_PATH = os.path.dirname(__file__)
 
 def check_response_status(res):
