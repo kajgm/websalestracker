@@ -1,6 +1,7 @@
 
 import time
-from api.authentication import reddit_api
+from api.api import reddit_api
+from api.post import post_obj
 
 NUM_INTIAL_POSTS = 10
 
@@ -13,9 +14,8 @@ def main():
 
     while (1):
         current_post = r_api.get_current_post()
-        if latest_post['data']['name'] != current_post['data']['name']:
-            print(current_post['data']['title'])
-            print(current_post['data']['url'])
+        if latest_post.get_name() != current_post.get_name():
+            current_post.print_data()
             latest_post = current_post
         time.sleep(30)
 
