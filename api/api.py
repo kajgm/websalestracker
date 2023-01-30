@@ -68,7 +68,7 @@ class reddit_api:
 
     def wait(self):
         # output the . -> .. -> ... waiting loop animation
-        for i in range(6):
+        for i in range(2):
             for j in range(5):
                 print('.', end='')
                 sys.stdout.flush()
