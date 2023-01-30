@@ -51,3 +51,5 @@ python salestracker.py -s top -n 5
 ## Development
 
 ### Development Prerequisites
+
+- Prettier
