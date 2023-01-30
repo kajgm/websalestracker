@@ -40,24 +40,24 @@ class reddit_api:
     def refresh_token(self):
         self.auth.set_token()
 
-    def get_current_post(self):
+    def get_current_post(self, sort):
         subr_list = get_subreddits()
         res_dict = {}
 
         for subreddit in subr_list:
-            res = requests.get(API_ENDPOINT + subreddit,
+            res = requests.get(API_ENDPOINT + subreddit + '/' + sort,
                                headers=self.headers, params={'limit': '1'})
             check_response_status(res, False)
             res_dict[subreddit] = post_obj(res.json()['data']['children'][0])
 
         return res_dict
 
-    def print_initial_posts(self, num_posts):
+    def print_initial_posts(self, num_posts, sort):
         subr_list = get_subreddits()
         res_dict = {}
 
         for subreddit in subr_list:
-            res = requests.get(API_ENDPOINT + subreddit,
+            res = requests.get(API_ENDPOINT + subreddit + '/' + sort,
                                headers=self.headers, params={'limit': num_posts})
             check_response_status(res, False)
             res_dict[subreddit] = post_obj(res.json()['data']['children'][0])

@@ -12,8 +12,8 @@ def check_response_status(res, printflag):
     if res.status_code != 200:
         raise Exception('Error: Response Returned ' + str(res.status_code))
     elif printflag:
-        print(f'{bcolors.OKGREEN} Request returned ' +
-              str(res.status_code) + f'{bcolors.ENDC}')
+        print(f'{tformatting.OKGREEN} Request returned ' +
+              str(res.status_code) + f'{tformatting.ENDC}')
 
 
 def get_credentials():

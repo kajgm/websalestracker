@@ -11,7 +11,7 @@ class post_obj:
 
     def __init__(self, post_obj):
         self.name = post_obj['data']['name']
-        self.title = post_obj['data']['title']
+        self.title = post_obj['data']['title'].replace('&amp;', '&')
         self.timestamp = post_obj['data']['created']
         self.subreddit = post_obj['data']['subreddit']
         self.url = post_obj['data']['url']
@@ -20,8 +20,8 @@ class post_obj:
         return self.name
 
     def print_data(self):
-        print(f'{bcolors.BOLD}' + self.subreddit + f'{bcolors.ENDC}' +
-              '\n' + self.title + '\n' + f'{bcolors.DIM}' + self.url + f'{bcolors.ENDC}' + '\n')
+        print(f'{tformatting.BOLD}' + self.subreddit + f'{tformatting.ENDC}' +
+              '\n' + self.title + '\n' + f'{tformatting.DIM}' + self.url + f'{tformatting.ENDC}' + '\n')
 
 
 def create_post_list(res):
