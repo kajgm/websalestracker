@@ -10,7 +10,7 @@ API_ENDPOINT = 'https://oauth.reddit.com/r/'
 CUR_PATH = os.path.dirname(__file__)
 SUBRED_PTH = '../subreddits.csv'
 
-
+# retrieve list of subreddits from subreddits.csv
 def get_subreddits():
     subreddits = []
 
@@ -40,24 +40,24 @@ class reddit_api:
     def refresh_token(self):
         self.auth.set_token()
 
-    def get_current_post(self):
+    def get_current_post(self, sort):
         subr_list = get_subreddits()
         res_dict = {}
 
         for subreddit in subr_list:
-            res = requests.get(API_ENDPOINT + subreddit,
+            res = requests.get(API_ENDPOINT + subreddit + '/' + sort,
                                headers=self.headers, params={'limit': '1'})
             check_response_status(res, False)
             res_dict[subreddit] = post_obj(res.json()['data']['children'][0])
 
         return res_dict
 
-    def print_initial_posts(self, num_posts):
+    def print_initial_posts(self, num_posts, sort):
         subr_list = get_subreddits()
         res_dict = {}
 
         for subreddit in subr_list:
-            res = requests.get(API_ENDPOINT + subreddit,
+            res = requests.get(API_ENDPOINT + subreddit + '/' + sort,
                                headers=self.headers, params={'limit': num_posts})
             check_response_status(res, False)
             res_dict[subreddit] = post_obj(res.json()['data']['children'][0])
@@ -67,10 +67,12 @@ class reddit_api:
                 entry.print_data()
 
     def wait(self):
+        # output the . -> .. -> ... waiting loop animation
         for i in range(6):
             for j in range(5):
                 print('.', end='')
                 sys.stdout.flush()
                 time.sleep(1)
+            # clear the terminal line
             print('\r', end='')
             print('     ', end='\r')
