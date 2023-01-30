@@ -10,7 +10,7 @@ API_ENDPOINT = 'https://oauth.reddit.com/r/'
 CUR_PATH = os.path.dirname(__file__)
 SUBRED_PTH = '../subreddits.csv'
 
-
+# retrieve list of subreddits from subreddits.csv
 def get_subreddits():
     subreddits = []
 
@@ -67,10 +67,12 @@ class reddit_api:
                 entry.print_data()
 
     def wait(self):
+        # output the . -> .. -> ... waiting loop animation
         for i in range(6):
             for j in range(5):
                 print('.', end='')
                 sys.stdout.flush()
                 time.sleep(1)
+            # clear the terminal line
             print('\r', end='')
             print('     ', end='\r')

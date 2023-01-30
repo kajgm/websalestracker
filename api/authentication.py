@@ -10,12 +10,12 @@ CRED_PATH = '../credentials.json'
 
 def check_response_status(res, printflag):
     if res.status_code != 200:
-        raise Exception('Error: Response Returned ' + str(res.status_code))
+        raise Exception(f'{tformatting.FAIL}Error: Response Returned ' + str(res.status_code) + f'{tformatting.ENDC}')
     elif printflag:
-        print(f'{tformatting.OKGREEN} Request returned ' +
+        print(f'{tformatting.OKGREEN}  Request returned ' +
               str(res.status_code) + f'{tformatting.ENDC}')
 
-
+# retrieve credentials from credentials.json
 def get_credentials():
     credentials = {}
 
@@ -53,6 +53,7 @@ class auth_obj:
             'password': self.credentials['reddit_password']
         }
 
+        # post request to retrieve token
         post_res = requests.post('https://www.reddit.com/api/v1/access_token',
                                  auth=auth, data=data, headers=self.headers)
         check_response_status(post_res, True)
@@ -60,6 +61,7 @@ class auth_obj:
         token = post_res.json()['access_token']
         self.headers['Authorization'] = 'bearer {}'.format(token)
 
+        # get request to verify get functionality with token works
         get_res = requests.get(
             'https://oauth.reddit.com/api/v1/me', headers=self.headers)
         check_response_status(get_res, True)
