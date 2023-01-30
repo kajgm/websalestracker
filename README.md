@@ -1,6 +1,6 @@
 # RedditSalesTracker
 
-RedditSalesTracker (RST) is a simple tracker for posts on sales-specific subreddits
+RedditSalesTracker (RST) is a simple tracker for posts on sales-specific subreddits.
 
 ## Prerequisites
 
@@ -37,13 +37,13 @@ bapcsalescanada,frugalmalefashioncdn
 3. Run the app by executing:
 
 ```
-python salestracker.py
+$ python salestracker.py
 ```
 
 Optionally, you may use command line arguments to specify the number of initial posts and the sorting method
 > Default is 'new' and 10
 ```
-python salestracker.py -s top -n 5
+$ python salestracker.py -s top -n 5
 ```
 
 ![Example output](docs/img/example1.PNG)
