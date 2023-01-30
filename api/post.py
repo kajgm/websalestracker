@@ -1,3 +1,4 @@
+from api.format import *
 
 
 class post_obj:
@@ -19,7 +20,8 @@ class post_obj:
         return self.name
 
     def print_data(self):
-        print(self.subreddit + '\n' + self.title + '\n' + self.url + '\n')
+        print(f'{bcolors.BOLD}' + self.subreddit + f'{bcolors.ENDC}' +
+              '\n' + self.title + '\n' + f'{bcolors.DIM}' + self.url + f'{bcolors.ENDC}' + '\n')
 
 
 def create_post_list(res):

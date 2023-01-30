@@ -1,24 +1,41 @@
-
-import time
-from api.api import reddit_api
-from api.post import post_obj
+import sys
+import os
+from api.api import *
 
 NUM_INTIAL_POSTS = 10
+
 
 def main():
 
     r_api = reddit_api()
 
+    print('Currently tracking the following subreddits:')
+    print(get_subreddits())
+    print('--------------------\n')
+
     r_api.print_initial_posts(NUM_INTIAL_POSTS)
-    latest_post = r_api.get_current_post()
+    latest_posts = r_api.get_current_post()
 
     while (1):
-        current_post = r_api.get_current_post()
-        if latest_post.get_name() != current_post.get_name():
-            current_post.print_data()
-            latest_post = current_post
-        time.sleep(30)
+        try:
+            current_posts = r_api.get_current_post()
+        except:
+            r_api.refresh_token()
+            current_posts = r_api.get_current_post()
+
+        for subreddit in latest_posts:
+            if latest_posts[subreddit].get_name() != current_posts[subreddit].get_name():
+                current_posts[subreddit].print_data()
+                latest_posts[subreddit] = current_posts[subreddit]
+        r_api.wait()
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('Exiting')
+        try:
+            sys.exit(0)
+        except SystemExit:
+            os._exit(1)
