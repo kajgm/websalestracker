@@ -40,6 +40,12 @@ bapcsalescanada,frugalmalefashioncdn
 python salestracker.py
 ```
 
+Optionally, you may use command line arguments to specify the number of initial posts and the sorting method
+> Default is 'new' and 10
+```
+python salestracker.py -s top -n 5
+```
+
 ![Example output](docs/img/example1.PNG)
 
 ## Development
