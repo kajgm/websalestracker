@@ -11,6 +11,12 @@ RedditSalesTracker (RST) is a simple tracker for posts on sales-specific subredd
 $ python -m pip install requests
 ```
 
+- Playsound
+
+```
+$ python -m pip install playsound
+```
+
 - [Reddit API access](https://github.com/reddit-archive/reddit/wiki/OAuth2)
 
 ## Usage
@@ -41,7 +47,9 @@ $ python salestracker.py
 ```
 
 Optionally, you may use command line arguments to specify the number of initial posts and the sorting method
+
 > Default is 'new' and 10
+
 ```
 $ python salestracker.py -s top -n 5
 ```

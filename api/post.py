@@ -23,7 +23,7 @@ class post_obj:
     def print_data(self):
         time = datetime.datetime.fromtimestamp(self.timestamp)
         time_string = time.strftime('%Y-%m-%d %I:%M:%S %p')
-        print(f'{tformatting.BOLD}' + self.subreddit + ' [' + time_string + ']' + f'{tformatting.ENDC}' +
+        print(f'{tformatting.BOLD}' + self.subreddit + f'{tformatting.DIM} -- ' + time_string + f'{tformatting.ENDC}' + f'{tformatting.ENDC}' +
               '\n' + self.title + '\n' + f'{tformatting.DIM}' + self.url + f'{tformatting.ENDC}' + '\n')
 
 
