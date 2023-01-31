@@ -1,4 +1,5 @@
 from api.format import *
+import datetime
 
 
 class post_obj:
@@ -20,7 +21,9 @@ class post_obj:
         return self.name
 
     def print_data(self):
-        print(f'{tformatting.BOLD}' + self.subreddit + f'{tformatting.ENDC}' +
+        time = datetime.datetime.fromtimestamp(self.timestamp)
+        time_string = time.strftime('%Y-%m-%d %I:%M:%S %p')
+        print(f'{tformatting.BOLD}' + self.subreddit + ' [' + time_string + ']' + f'{tformatting.ENDC}' +
               '\n' + self.title + '\n' + f'{tformatting.DIM}' + self.url + f'{tformatting.ENDC}' + '\n')
 
 
