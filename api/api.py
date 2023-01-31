@@ -11,6 +11,8 @@ CUR_PATH = os.path.dirname(__file__)
 SUBRED_PTH = '../subreddits.csv'
 
 # retrieve list of subreddits from subreddits.csv
+
+
 def get_subreddits():
     subreddits = []
 
@@ -54,17 +56,20 @@ class reddit_api:
 
     def print_initial_posts(self, num_posts, sort):
         subr_list = get_subreddits()
-        res_dict = {}
+        print_list = []
 
         for subreddit in subr_list:
             res = requests.get(API_ENDPOINT + subreddit + '/' + sort,
                                headers=self.headers, params={'limit': num_posts})
             check_response_status(res, False)
-            res_dict[subreddit] = post_obj(res.json()['data']['children'][0])
 
             post_list = create_post_list(res)
-            for entry in post_list:
-                entry.print_data()
+            print_list += post_list
+
+        print_list.sort(key=lambda x: x.timestamp)
+
+        for entry in print_list:
+            entry.print_data()
 
     def wait(self):
         # output the . -> .. -> ... waiting loop animation
