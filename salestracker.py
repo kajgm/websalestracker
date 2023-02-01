@@ -22,6 +22,10 @@ def main(args):
     print('Currently tracking the following subreddits:')
     print(get_subreddits())
     print('Sorting method: ' + sorting)
+    
+    if not sound_flag:
+        print('Sounds muted')
+    
     print('--------------------\n')
 
     # output the initial list of posts
