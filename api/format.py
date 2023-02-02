@@ -9,3 +9,10 @@ class tformatting:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
     DIM = '\033[2m'
+
+
+class emoji:
+    PC = '\U0001F4BB'
+    SHIRT = '\U0001f454'
+    RED_CIRCLE = '\U0001F534'
+    BLUE_CIRCLE = '\U0001F535'
