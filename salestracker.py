@@ -39,10 +39,11 @@ def main(args):
             current_posts = r_api.get_current_post(sorting)
         except:
             print(
-                f'{tformatting.WARNING}\nError: Failed to call post api, attempting to refresh token{tformatting.ENDC}')
+                f'{tformatting.WARNING}Error: Failed to call post api, attempting to refresh token{tformatting.ENDC}')
             r_api.refresh_token()  # refresh token and attempt again if failure
             current_posts = r_api.get_current_post(sorting)
-            print(f'{tformatting.OKGREEN}Success! Token refreshed{tformatting.ENDC}')
+            print(
+                f'{tformatting.OKGREEN}Success! Token refreshed\n{tformatting.ENDC}')
 
         for subreddit in latest_posts:
             # compare the 7 character unqiue post name (i.e. 10p5wam)
