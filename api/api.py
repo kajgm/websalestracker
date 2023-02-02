@@ -71,9 +71,9 @@ class reddit_api:
         for entry in print_list:
             entry.print_data()
 
-    def wait(self):
+    def wait(self, sec):
         # output the . -> .. -> ... waiting loop animation
-        for j in range(10):
+        for j in range(sec):
             print('.', end='')
             sys.stdout.flush()
             time.sleep(1)
