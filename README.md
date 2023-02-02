@@ -37,7 +37,7 @@ $ python -m pip install playsound==1.2.2
    > currently the default subreddits are:
 
 ```
-bapcsalescanada,frugalmalefashioncdn
+bapcsalescanada,buildapcsales,frugalmalefashioncdn,frugalmalefashion,canadianhardwareswap
 ```
 
 3. Run the app by executing:
@@ -46,7 +46,7 @@ bapcsalescanada,frugalmalefashioncdn
 $ python salestracker.py
 ```
 
-Optionally, you may use command line arguments to specify the number of initial posts and the sorting method
+Optionally, you may use command line arguments to specify the number of initial posts per subreddit and the sorting method
 
 > Default is 'new' and 10
 
@@ -63,5 +63,3 @@ $ python salestracker.py -s top -n 5
 - Prettier
 
 ### To do
-
-- Validate argument flag input
