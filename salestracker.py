@@ -52,7 +52,7 @@ def main(args):
                 latest_posts[subreddit] = current_posts[subreddit]
                 if sound_flag:
                     playsound(CUR_PATH + '\\resources\\notification.mp3')
-        r_api.wait()  # wait for 30 seconds before refreshing again
+        r_api.wait(10)  # wait for 10 seconds before refreshing again
 
 
 if __name__ == "__main__":
