@@ -8,7 +8,7 @@ from api.authentication import *
 
 API_ENDPOINT = 'https://oauth.reddit.com/r/'
 CUR_PATH = os.path.dirname(__file__)
-SUBRED_PTH = '../subreddits.csv'
+SUBRED_PTH = '../resources/subreddits.csv'
 
 # retrieve list of subreddits from subreddits.csv
 
@@ -23,7 +23,7 @@ def get_subreddits():
     except:
         print('subreddits.csv not found')
         subreddits = list(
-            input('please enter the subreddits you would like to track seperated by a ,'))
+            input('please enter the subreddits you would like to track seperated by a \',\':\n'))
 
     return subreddits
 

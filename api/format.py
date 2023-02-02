@@ -11,8 +11,9 @@ class tformatting:
     DIM = '\033[2m'
 
 
-class emoji:
+class icon:
     PC = '\U0001F4BB'
     SHIRT = '\U0001f454'
     RED_CIRCLE = '\U0001F534'
     BLUE_CIRCLE = '\U0001F535'
+    WHITE_CIRCLE = '\U000125CB'
