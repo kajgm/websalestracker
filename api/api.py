@@ -42,8 +42,7 @@ class reddit_api:
     def refresh_token(self):
         self.auth.set_token()
 
-    def get_current_post(self, sort):
-        subr_list = get_subreddits()
+    def get_current_post(self, sort, subr_list):
         res_dict = {}
 
         for subreddit in subr_list:
@@ -54,9 +53,8 @@ class reddit_api:
 
         return res_dict
 
-    def print_initial_posts(self, num_posts, sort):
-        subr_list = get_subreddits()
-        print_list = []
+    def get_posts_list(self, num_posts, sort, subr_list):
+        ret_list = []
 
         for subreddit in subr_list:
             res = requests.get(API_ENDPOINT + subreddit + '/' + sort,
@@ -64,12 +62,24 @@ class reddit_api:
             check_response_status(res, False)
 
             post_list = create_post_list(res)
-            print_list += post_list
+            ret_list += post_list
 
-        print_list.sort(key=lambda x: x.timestamp)
+        ret_list.sort(key=lambda x: x.timestamp)
 
-        for entry in print_list:
-            entry.print_data()
+        return ret_list
+
+    def get_posts_dict(self, num_posts, sort, subr_list):
+        ret_dict = {}
+
+        for subreddit in subr_list:
+            res = requests.get(API_ENDPOINT + subreddit + '/' + sort,
+                               headers=self.headers, params={'limit': num_posts})
+            check_response_status(res, False)
+
+            post_list = create_post_list(res)
+            ret_dict[subreddit] = post_list
+
+        return ret_dict
 
     def wait(self, sec):
         # output the . -> .. -> ... waiting loop animation
