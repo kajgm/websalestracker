@@ -49,7 +49,7 @@ def main(args):
     print('--------------------\n')
 
     # output the initial list of posts
-    initial_post_list = r_api.get_posts(num_posts, sorting, subr_list)
+    initial_post_list = r_api.get_posts_list(num_posts, sorting, subr_list)
     for entry in initial_post_list:
         entry.print_data()
 
