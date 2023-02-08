@@ -53,7 +53,7 @@ class reddit_api:
 
         return res_dict
 
-    def get_posts(self, num_posts, sort, subr_list):
+    def get_posts_list(self, num_posts, sort, subr_list):
         ret_list = []
 
         for subreddit in subr_list:
@@ -67,6 +67,19 @@ class reddit_api:
         ret_list.sort(key=lambda x: x.timestamp)
 
         return ret_list
+
+    def get_posts_dict(self, num_posts, sort, subr_list):
+        ret_dict = {}
+
+        for subreddit in subr_list:
+            res = requests.get(API_ENDPOINT + subreddit + '/' + sort,
+                               headers=self.headers, params={'limit': num_posts})
+            check_response_status(res, False)
+
+            post_list = create_post_list(res)
+            ret_dict[subreddit] = post_list
+
+        return ret_dict
 
     def wait(self, sec):
         # output the . -> .. -> ... waiting loop animation
