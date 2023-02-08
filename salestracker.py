@@ -12,29 +12,33 @@ CUR_PATH = os.path.dirname(__file__)
 
 FILTER_OPTIONS = ['new', 'top', 'hot', 'rising', 'controversial']
 
+
 def validate_flags(args):
     if args.num_initial != None:
         if type(args.num_initial) != int:
             raise Exception('Error: num_initial is not a integer')
     if args.filter != None:
         if args.filter not in FILTER_OPTIONS:
-            raise Exception('Error: filter not valid option, must be on of: ' + str(FILTER_OPTIONS))
+            raise Exception(
+                'Error: filter not valid option, must be on of: ' + str(FILTER_OPTIONS))
     if args.sound != None:
         args.sound = args.sound.lower() == ('true' or 't')
         if type(args.sound) != bool:
             raise Exception('Error: sound must be either True or False')
     return args
 
+
 def main(args):
 
     r_api = reddit_api()
+    subr_list = get_subreddits()
 
     num_posts = args.num_initial or NUM_INTIAL_POSTS
     sorting = args.filter or SORT_METHOD
     sound_flag = args.sound
     if args.sound == None:
         sound_flag = SOUND_FLAG
-    
+
     print('Currently tracking the following subreddits:')
     print(get_subreddits())
     print('Sorting method: ' + sorting)
@@ -45,19 +49,22 @@ def main(args):
     print('--------------------\n')
 
     # output the initial list of posts
-    r_api.print_initial_posts(num_posts, sorting)
+    initial_post_list = r_api.get_posts(num_posts, sorting, subr_list)
+    for entry in initial_post_list:
+        entry.print_data()
+
     # set the latest set of posts to compare
-    latest_posts = r_api.get_current_post(sorting)
+    latest_posts = r_api.get_current_post(sorting, subr_list)
 
     while (1):
         # attempt to get the current latest post
         try:
-            current_posts = r_api.get_current_post(sorting)
+            current_posts = r_api.get_current_post(sorting, subr_list)
         except:
             print(
                 f'{tformatting.WARNING}Error: Failed to call post api, attempting to refresh token{tformatting.ENDC}')
             r_api.refresh_token()  # refresh token and attempt again if failure
-            current_posts = r_api.get_current_post(sorting)
+            current_posts = r_api.get_current_post(sorting, subr_list)
             print(
                 f'{tformatting.OKGREEN}Success! Token refreshed\n{tformatting.ENDC}')
 
@@ -69,6 +76,7 @@ def main(args):
                 if sound_flag:
                     playsound(CUR_PATH + '\\resources\\notification.mp3')
         r_api.wait(10)  # wait for 10 seconds before refreshing again
+
 
 if __name__ == "__main__":
 
