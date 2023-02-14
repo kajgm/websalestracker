@@ -6,6 +6,7 @@ from playsound import playsound
 
 
 NUM_INTIAL_POSTS = 10
+CACHE_SIZE = 5
 SORT_METHOD = 'new'
 SOUND_FLAG = True
 CUR_PATH = os.path.dirname(__file__)
@@ -28,6 +29,15 @@ def validate_flags(args):
     return args
 
 
+def get_post_names(subreddit_list):
+    names_list = []
+
+    for post in subreddit_list:
+        names_list.append(post.get_name())
+    
+    return names_list
+
+
 def main(args):
 
     r_api = reddit_api()
@@ -39,9 +49,9 @@ def main(args):
     if args.sound == None:
         sound_flag = SOUND_FLAG
 
-    print('Currently tracking the following subreddits:')
+    print('\nCurrently tracking the following subreddits:')
     print(get_subreddits())
-    print('Sorting method: ' + sorting)
+    print('\nSorting method: ' + sorting)
 
     if not sound_flag:
         print('Sounds muted')
@@ -54,13 +64,15 @@ def main(args):
         entry.print_data()
 
     # set the latest set of posts to compare
-    latest_posts = r_api.get_current_post(sorting, subr_list)
+    latest_posts = r_api.get_posts_dict(CACHE_SIZE, sorting, subr_list)
 
+    # main loop
     while (1):
+
         # attempt to get the current latest post
         try:
             current_posts = r_api.get_current_post(sorting, subr_list)
-        except:
+        except not KeyboardInterrupt:
             print(
                 f'{tformatting.WARNING}Error: Failed to call post api, attempting to refresh token{tformatting.ENDC}')
             r_api.refresh_token()  # refresh token and attempt again if failure
@@ -69,12 +81,20 @@ def main(args):
                 f'{tformatting.OKGREEN}Success! Token refreshed\n{tformatting.ENDC}')
 
         for subreddit in latest_posts:
+            post_names = get_post_names(latest_posts[subreddit])
+            
             # compare the 7 character unqiue post name (i.e. 10p5wam)
-            if latest_posts[subreddit].get_name() != current_posts[subreddit].get_name():
+            if current_posts[subreddit].get_name() not in post_names:
                 current_posts[subreddit].print_data()
-                latest_posts[subreddit] = current_posts[subreddit]
+
+                # add the new post to the cache of latest posts
+                latest_posts[subreddit].append(current_posts[subreddit])
+                latest_posts[subreddit].pop(0)
+
+                # play a notification sound if enabled
                 if sound_flag:
                     playsound(CUR_PATH + '\\resources\\notification.mp3')
+
         r_api.wait(10)  # wait for 10 seconds before refreshing again
 
 

@@ -35,12 +35,13 @@ class reddit_api:
 
     def __init__(self):
         self.auth = auth_obj()
-        self.auth.set_token()
         self.headers = {'User-Agent': 'salestrackerbot/0.0.1',
                         'Authorization': 'bearer ' + self.auth.get_token()}
 
     def refresh_token(self):
-        self.auth.set_token()
+        status = self.auth.set_token()
+        if not status:
+            raise Exception(f'{tformatting.FAIL}Error: Failed to refresh token{tformatting.ENDC}')
 
     def get_current_post(self, sort, subr_list):
         res_dict = {}
