@@ -40,10 +40,11 @@ class auth_obj:
     def __init__(self):
         self.headers = {'User-Agent': 'salestrackerbot/0.0.1'}
         self.credentials = get_credentials()
-        self.token = self.set_token()
+        self.set_token()
 
     def set_token(self):
 
+        print('Attempting to connect to the reddit api...')
         auth = requests.auth.HTTPBasicAuth(
             self.credentials['app_id'], self.credentials['secret'])
 
@@ -53,22 +54,31 @@ class auth_obj:
             'password': self.credentials['reddit_password']
         }
 
-        # post request to retrieve token
-        post_res = requests.post('https://www.reddit.com/api/v1/access_token',
-                                 auth=auth, data=data, headers=self.headers)
-        check_response_status(post_res, True)
+        try:
+            # post request to retrieve token
+            post_res = requests.post('https://www.reddit.com/api/v1/access_token',
+                                    auth=auth, data=data, headers=self.headers)
+            check_response_status(post_res, True)
+        except:
+            print(f'{tformatting.FAIL}Error: Failed to perform post request{tformatting.ENDC}')
+            return False
 
         token = post_res.json()['access_token']
         self.headers['Authorization'] = 'bearer {}'.format(token)
 
-        # get request to verify get functionality with token works
-        get_res = requests.get(
-            'https://oauth.reddit.com/api/v1/me', headers=self.headers)
-        check_response_status(get_res, True)
+        try:
+            # get request to verify get functionality with token works
+            get_res = requests.get(
+                'https://oauth.reddit.com/api/v1/me', headers=self.headers)
+            check_response_status(get_res, True)
+        except:
+            print(f'{tformatting.FAIL}Error: Failed to perform get request{tformatting.ENDC}')
+            return False
 
         token = post_res.json()['access_token']
-
         self.token = token
+
+        return True
 
     def get_token(self):
         return self.token
