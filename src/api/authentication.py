@@ -5,7 +5,7 @@ import os
 from api.format import *
 
 CUR_PATH = os.path.dirname(__file__)
-CRED_PATH = '../credentials.json'
+CRED_PATH = '../../credentials.json'
 
 
 def check_response_status(res, printflag):

@@ -10,6 +10,7 @@ CACHE_SIZE = 5
 SORT_METHOD = 'new'
 SOUND_FLAG = True
 CUR_PATH = os.path.dirname(__file__)
+SOUND_PATH = '/../resources/notification.mp3'
 
 FILTER_OPTIONS = ['new', 'top', 'hot', 'rising', 'controversial']
 
@@ -93,7 +94,7 @@ def main(args):
 
                 # play a notification sound if enabled
                 if sound_flag:
-                    playsound(CUR_PATH + '\\resources\\notification.mp3')
+                    playsound(CUR_PATH + SOUND_PATH)
 
         r_api.wait(10)  # wait for 10 seconds before refreshing again
 

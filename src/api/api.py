@@ -8,7 +8,7 @@ from api.authentication import *
 
 API_ENDPOINT = 'https://oauth.reddit.com/r/'
 CUR_PATH = os.path.dirname(__file__)
-SUBRED_PTH = '../resources/subreddits.csv'
+SUBRED_PTH = '../../resources/subreddits.csv'
 
 # retrieve list of subreddits from subreddits.csv
 
