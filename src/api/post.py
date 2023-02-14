@@ -4,7 +4,7 @@ import os
 import json
 
 CUR_PATH = os.path.dirname(__file__)
-SUBRED_DATA_PATH = '../resources/subredditTypes.json'
+SUBRED_DATA_PATH = '../../resources/subredditTypes.json'
 
 def create_post_list(res):
     post_list = []
