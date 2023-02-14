@@ -10,7 +10,7 @@ CACHE_SIZE = 5
 SORT_METHOD = 'new'
 SOUND_FLAG = True
 CUR_PATH = os.path.dirname(__file__)
-SOUND_PATH = '/../resources/notification.mp3'
+SOUND_PATH = '/../res/notification.mp3'
 
 FILTER_OPTIONS = ['new', 'top', 'hot', 'rising', 'controversial']
 
