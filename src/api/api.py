@@ -7,32 +7,14 @@ from api.post import *
 from api.authentication import *
 
 API_ENDPOINT = 'https://oauth.reddit.com/r/'
-CUR_PATH = os.path.dirname(__file__)
-SUBRED_PTH = '../../res/subreddits.csv'
 
-# retrieve list of subreddits from subreddits.csv
-def get_subreddits():
-    subreddits = []
-
-    try:
-        with open(os.path.join(CUR_PATH, SUBRED_PTH), newline='') as csv_file:
-            reader = csv.reader(csv_file)
-            subreddits = list(reader)[0]
-    except:
-        print('subreddits.csv not found')
-        subreddits = list(
-            input('please enter the subreddits you would like to track seperated by a \',\':\n'))
-
-    return subreddits
-
-
-class reddit_api:
+class redditApi:
 
     headers = None
     auth = None
 
     def __init__(self):
-        self.auth = auth_obj()
+        self.auth = authorization()
         self.headers = {'User-Agent': 'salestrackerbot/0.0.1',
                         'Authorization': 'bearer ' + self.auth.get_token()}
 
@@ -88,5 +70,5 @@ class reddit_api:
             time.sleep(1)
         # clear the terminal line
         print('\r', end='')
-        print('          ', end='\r')
+        print('                              ', end='\r')
         time.sleep(1)
