@@ -6,6 +6,8 @@ from api.format import *
 
 CUR_PATH = os.path.dirname(__file__)
 CRED_PATH = '../../credentials.json'
+TOKEN_URL = 'https://www.reddit.com/api/v1/access_token'
+GET_URL = 'https://oauth.reddit.com/api/v1/me'
 
 
 def check_response_status(res, printflag):
@@ -32,7 +34,7 @@ def get_credentials():
     return credentials
 
 
-class auth_obj:
+class authorization:
     credentials = None
     token = None
     headers = None
@@ -56,8 +58,7 @@ class auth_obj:
 
         try:
             # post request to retrieve token
-            post_res = requests.post('https://www.reddit.com/api/v1/access_token',
-                                    auth=auth, data=data, headers=self.headers)
+            post_res = requests.post(TOKEN_URL, auth=auth, data=data, headers=self.headers)
             check_response_status(post_res, True)
         except:
             print(f'{tformatting.FAIL}Error: Failed to perform post request{tformatting.ENDC}')
@@ -68,8 +69,7 @@ class auth_obj:
 
         try:
             # get request to verify get functionality with token works
-            get_res = requests.get(
-                'https://oauth.reddit.com/api/v1/me', headers=self.headers)
+            get_res = requests.get(GET_URL, headers=self.headers)
             check_response_status(get_res, True)
         except:
             print(f'{tformatting.FAIL}Error: Failed to perform get request{tformatting.ENDC}')

@@ -4,7 +4,7 @@ import os
 import json
 
 CUR_PATH = os.path.dirname(__file__)
-SUBRED_DATA_PATH = '../../res/subredditTypes.json'
+SUBRED_INFO_PATH = '../../res/subredditTypes.json'
 
 def create_post_list(res):
     post_list = []
@@ -13,6 +13,16 @@ def create_post_list(res):
         post_list.append(p)
 
     return post_list
+
+def get_subreddit_info():
+    data = {}
+    try:
+        with open(os.path.join(CUR_PATH, SUBRED_INFO_PATH), 'r') as json_file:
+            data = json.load(json_file)
+    except:
+        raise Exception('Error: subredditTypes.json not found')
+
+    return data
 
 class post_obj:
 
@@ -43,19 +53,9 @@ class post_obj:
               f'{tformatting.DIM} -- '+ time_string + f'{tformatting.ENDC}' + f'{tformatting.ENDC}' +
               '\n' + self.title + '\n' + f'{tformatting.DIM}' + self.url + f'{tformatting.ENDC}' + '\n')
     
-    def get_subreddit_info(self):
-        data = {}
-        try:
-            with open(os.path.join(CUR_PATH, SUBRED_DATA_PATH), 'r') as json_file:
-                data = json.load(json_file)
-        except:
-            raise Exception('Error: subredditTypes.json not found')
-
-        return data
-    
     def set_country_icon(self):
         c_icon = ''
-        subred_data = self.get_subreddit_info()
+        subred_data = get_subreddit_info()
         subred = self.subreddit
         if subred in subred_data:
             match subred_data[subred]['country']:
@@ -70,7 +70,7 @@ class post_obj:
 
     def set_type_icon(self):
         t_icon = ''
-        subred_data = self.get_subreddit_info()
+        subred_data = get_subreddit_info()
         subred = self.subreddit
         if subred in subred_data:
             match subred_data[subred]['type']:
