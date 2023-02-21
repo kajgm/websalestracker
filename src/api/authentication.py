@@ -1,28 +1,24 @@
 import requests
 import json
 import getpass
-import os
 from api.format import *
-
-CUR_PATH = os.path.dirname(__file__)
-CRED_PATH = '../../credentials.json'
-TOKEN_URL = 'https://www.reddit.com/api/v1/access_token'
-GET_URL = 'https://oauth.reddit.com/api/v1/me'
+from helpers import *
 
 
 def check_response_status(res, printflag):
     if res.status_code != 200:
-        raise Exception(f'{tformatting.FAIL}Error: Response Returned ' + str(res.status_code) + f'{tformatting.ENDC}')
+        raise Exception(f'{tformatting.FAIL}Error: Response Returned ' +
+                        str(res.status_code) + f'{tformatting.ENDC}')
     elif printflag:
         print(f'{tformatting.OKGREEN}  Request returned ' +
               str(res.status_code) + f'{tformatting.ENDC}')
 
+
 # retrieve credentials from credentials.json
 def get_credentials():
     credentials = {}
-
     try:
-        with open(os.path.join(CUR_PATH, CRED_PATH), 'r') as json_file:
+        with open(CRED_PATH, 'r') as json_file:
             credentials = json.load(json_file)
     except:
         print('credentials.json not found, please enter credentials')
@@ -42,7 +38,7 @@ class authorization:
     def __init__(self):
         self.headers = {'User-Agent': 'salestrackerbot/0.0.1'}
         self.credentials = get_credentials()
-        self.set_token()
+        self.set_token_loop()
 
     def set_token(self):
 
@@ -58,10 +54,12 @@ class authorization:
 
         try:
             # post request to retrieve token
-            post_res = requests.post(TOKEN_URL, auth=auth, data=data, headers=self.headers)
+            post_res = requests.post(
+                TOKEN_URL, auth=auth, data=data, headers=self.headers)
             check_response_status(post_res, True)
         except:
-            print(f'{tformatting.FAIL}Error: Failed to perform post request{tformatting.ENDC}')
+            print(
+                f'{tformatting.FAIL}Error: Failed to perform post request{tformatting.ENDC}')
             return False
 
         token = post_res.json()['access_token']
@@ -72,13 +70,20 @@ class authorization:
             get_res = requests.get(GET_URL, headers=self.headers)
             check_response_status(get_res, True)
         except:
-            print(f'{tformatting.FAIL}Error: Failed to perform get request{tformatting.ENDC}')
+            print(
+                f'{tformatting.FAIL}Error: Failed to perform get request{tformatting.ENDC}')
             return False
 
         token = post_res.json()['access_token']
         self.token = token
 
         return True
+
+    def set_token_loop(self):
+        tk_status = self.set_token()
+        while (not tk_status):
+            wait(WAIT_TIME)
+            tk_status = self.set_token()
 
     def get_token(self):
         return self.token
