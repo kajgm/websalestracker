@@ -60,7 +60,7 @@ def main(args):
 
                 # play a notification sound if enabled
                 if sound_flag:
-                    playsound(CUR_PATH + SOUND_PATH)
+                    playsound(SOUND_PATH)
 
         wait(WAIT_TIME)  # wait for 10 seconds before refreshing again
 
