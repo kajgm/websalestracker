@@ -1,12 +1,8 @@
 import requests
-import csv
-import os
-import sys
-import time
 from api.post import *
 from api.authentication import *
+from helpers import *
 
-API_ENDPOINT = 'https://oauth.reddit.com/r/'
 
 class redditApi:
 
@@ -19,9 +15,7 @@ class redditApi:
                         'Authorization': 'bearer ' + self.auth.get_token()}
 
     def refresh_token(self):
-        status = self.auth.set_token()
-        if not status:
-            raise Exception(f'{tformatting.FAIL}Error: Failed to refresh token{tformatting.ENDC}')
+        self.auth.set_token_loop()
 
     def get_current_post(self, sort, subr_list):
         res_dict = {}
@@ -61,14 +55,3 @@ class redditApi:
             ret_dict[subreddit] = post_list
 
         return ret_dict
-
-    def wait(self, sec):
-        # output the . -> .. -> ... waiting loop animation
-        for j in range(sec):
-            print('.', end='')
-            sys.stdout.flush()
-            time.sleep(1)
-        # clear the terminal line
-        print('\r', end='')
-        print('                              ', end='\r')
-        time.sleep(1)

@@ -3,57 +3,7 @@ import os
 import argparse
 from api.api import *
 from playsound import playsound
-
-WAIT_TIME = 10
-NUM_INTIAL_POSTS = 10
-CACHE_SIZE = 5
-SORT_METHOD = 'new'
-SOUND_FLAG = True
-CUR_PATH = os.path.dirname(__file__)
-SOUND_PATH = '../res/notification.mp3'
-FILTER_OPTIONS = ['new', 'top', 'hot', 'rising', 'controversial']
-SUBRED_PATH = '../res/subreddits.csv'
-
-
-# retrieve list of subreddits from subreddits.csv
-def get_subreddits():
-    subreddits = []
-
-    try:
-        with open(os.path.join(CUR_PATH, SUBRED_PATH), newline='') as csv_file:
-            reader = csv.reader(csv_file)
-            subreddits = list(reader)[0]
-    except:
-        print('subreddits.csv not found')
-        subreddits = list(
-            input('please enter the subreddits you would like to track seperated by a \',\':\n'))
-
-    return subreddits
-
-
-def validate_flags(args):
-    if args.num_initial != None:
-        if type(args.num_initial) != int:
-            raise Exception('Error: num_initial is not a integer')
-    if args.filter != None:
-        if args.filter not in FILTER_OPTIONS:
-            raise Exception(
-                'Error: filter not valid option, must be on of: ' + str(FILTER_OPTIONS))
-    if args.sound != None:
-        args.sound = args.sound.lower() == ('true' or 't')
-        if type(args.sound) != bool:
-            raise Exception('Error: sound must be either True or False')
-
-    return args
-
-
-def get_post_names(subreddit_list):
-    names_list = []
-
-    for post in subreddit_list:
-        names_list.append(post.get_name())
-    
-    return names_list
+from helpers import *
 
 
 def main(args):
@@ -99,7 +49,7 @@ def main(args):
 
         for subreddit in subr_cache:
             post_names = get_post_names(subr_cache[subreddit])
-            
+
             # compare the 7 character unqiue post name (i.e. 10p5wam)
             if current_posts[subreddit].get_name() not in post_names:
                 current_posts[subreddit].print_data()
@@ -112,7 +62,7 @@ def main(args):
                 if sound_flag:
                     playsound(CUR_PATH + SOUND_PATH)
 
-        rApi.wait(WAIT_TIME)  # wait for 10 seconds before refreshing again
+        wait(WAIT_TIME)  # wait for 10 seconds before refreshing again
 
 
 if __name__ == "__main__":
