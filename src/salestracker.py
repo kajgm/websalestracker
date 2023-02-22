@@ -48,10 +48,11 @@ def main(args):
                 f'{tformatting.OKGREEN}Success! Token refreshed\n{tformatting.ENDC}')
 
         for subreddit in subr_cache:
-            post_names = get_post_names(subr_cache[subreddit])
+            post_names = get_post_attr(subr_cache[subreddit], 'name')
+            post_urls = get_post_attr(subr_cache[subreddit], 'url')
 
             # compare the 7 character unqiue post name (i.e. 10p5wam)
-            if current_posts[subreddit].get_name() not in post_names:
+            if current_posts[subreddit].get_name() not in post_names and current_posts[subreddit].get_url() not in post_urls:
                 current_posts[subreddit].print_data()
 
                 # add the new post to the cache of latest posts

@@ -51,13 +51,17 @@ def validate_flags(args):
     return args
 
 
-def get_post_names(subreddit_list):
-    names_list = []
+def get_post_attr(subreddit_list, attr):
+    attr_list = []
 
-    for post in subreddit_list:
-        names_list.append(post.get_name())
+    if attr == 'name':
+        for post in subreddit_list:
+            attr_list.append(post.get_name())
+    elif attr == 'url':
+        for post in subreddit_list:
+            attr_list.append(post.get_url())
 
-    return names_list
+    return attr_list
 
 
 def wait(sec):

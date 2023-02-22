@@ -6,6 +6,7 @@ import json
 CUR_PATH = os.path.dirname(__file__)
 SUBRED_INFO_PATH = '../../res/subredditTypes.json'
 
+
 def create_post_list(res):
     post_list = []
     for entry in reversed(res.json()['data']['children']):
@@ -13,6 +14,7 @@ def create_post_list(res):
         post_list.append(p)
 
     return post_list
+
 
 def get_subreddit_info():
     data = {}
@@ -23,6 +25,7 @@ def get_subreddit_info():
         raise Exception('Error: subredditTypes.json not found')
 
     return data
+
 
 class post_obj:
 
@@ -46,13 +49,16 @@ class post_obj:
     def get_name(self):
         return self.name
 
+    def get_url(self):
+        return self.url
+
     def print_data(self):
         time = datetime.datetime.fromtimestamp(self.timestamp)
         time_string = time.strftime('%Y-%m-%d %I:%M:%S %p')
         print(f'{tformatting.BOLD}' + self.country_icon + ' ' + self.subreddit + ' ' + self.type_icon +
-              f'{tformatting.DIM} -- '+ time_string + f'{tformatting.ENDC}' + f'{tformatting.ENDC}' +
+              f'{tformatting.DIM} -- ' + time_string + f'{tformatting.ENDC}' + f'{tformatting.ENDC}' +
               '\n' + self.title + '\n' + f'{tformatting.DIM}' + self.url + f'{tformatting.ENDC}' + '\n')
-    
+
     def set_country_icon(self):
         c_icon = ''
         subred_data = get_subreddit_info()
