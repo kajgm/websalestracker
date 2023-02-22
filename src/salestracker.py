@@ -39,7 +39,7 @@ def main(args):
         # attempt to get the current latest post
         try:
             current_posts = rApi.get_current_post(sorting, subr_list)
-        except not KeyboardInterrupt:
+        except:
             print(
                 f'{tformatting.WARNING}Error: Failed to call post api, attempting to refresh token{tformatting.ENDC}')
             rApi.refresh_token()  # refresh token and attempt again if failure
