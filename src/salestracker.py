@@ -11,16 +11,14 @@ def main(args):
 
     subr_list = args.reddit or get_subreddits()
     num_posts = args.num_initial or NUM_INTIAL_POSTS
-    sorting = args.filter or SORT_METHOD
-    sound_flag = args.sound
-    if args.sound == None:
-        sound_flag = SOUND_FLAG
+    sorting = args.sorting or SORT_METHOD
+    sound_flag = args.mute
 
     print("\nCurrently tracking the following subreddits:")
     print(get_subreddits())
     print("\nSorting method: " + sorting)
 
-    if not sound_flag:
+    if sound_flag:
         print("\nSounds muted")
 
     print("\n------------------------------------------------------------\n")
@@ -62,7 +60,7 @@ def main(args):
                 subr_cache[subreddit].pop(0)
 
                 # play a notification sound if enabled
-                if sound_flag:
+                if not sound_flag:
                     playsound(SOUND_PATH)
 
         wait(WAIT_TIME)  # wait for 10 seconds before refreshing again
@@ -71,9 +69,11 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-n", "--num_initial", required=False)
-    parser.add_argument("-f", "--filter", required=False)
-    parser.add_argument("-s", "--sound", required=False)
+    parser.add_argument("-s", "--sorting", required=False)
     parser.add_argument("-r", "--reddit", required=False)
+    parser.add_argument(
+        "-m", "--mute", required=False, default=False, action="store_true"
+    )
     raw_args = parser.parse_args()
     args = validate_flags(raw_args)
 

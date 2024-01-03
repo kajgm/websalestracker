@@ -46,12 +46,15 @@ bapcsalescanada,buildapcsales,frugalmalefashioncdn,frugalmalefashion,canadianhar
 $ python salestracker.py
 ```
 
-Optionally, you may use command line arguments to specify the number of initial posts per subreddit and the sorting method
+Optionally, you may use command line arguments to specify the sorting method, the number of initial posts per subreddit, a comma seperated list of subreddits, or sounds
 
-> Default is 'new' and 10
+> Defaults:
+> sorting - 'new'
+> number of posts - 10
+> mute - False (Will play sounds)
 
 ```
-$ python salestracker.py -s top -n 5
+$ python salestracker.py -s top -n 5 -r bapcsales,mechmarket -s t
 ```
 
 ![Example output](docs/img/example1.PNG)

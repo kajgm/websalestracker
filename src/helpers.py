@@ -8,7 +8,7 @@ NUM_INTIAL_POSTS = 10
 CACHE_SIZE = 5
 SORT_METHOD = "new"
 SOUND_FLAG = True
-FILTER_OPTIONS = ["new", "top", "hot", "rising", "controversial"]
+SORTING_OPTIONS = ["new", "top", "hot", "rising", "controversial"]
 TOP_PATH = os.path.realpath("..")
 API_PATH = TOP_PATH, "/src/api"
 SOUND_PATH = TOP_PATH + "/res/notification.mp3"
@@ -42,15 +42,11 @@ def validate_flags(args):
     if args.num_initial != None:
         if type(args.num_initial) != int:
             raise Exception("Error: num_initial is not a integer")
-    if args.filter != None:
-        if args.filter not in FILTER_OPTIONS:
+    if args.sorting != None:
+        if args.sorting not in SORTING_OPTIONS:
             raise Exception(
-                "Error: filter not valid option, must be on of: " + str(FILTER_OPTIONS)
+                "Error: filter not valid option, must be on of: " + str(SORTING_OPTIONS)
             )
-    if args.sound != None:
-        args.sound = args.sound.lower() == ("true" or "t")
-        if type(args.sound) != bool:
-            raise Exception("Error: sound must be either True or False")
 
     return args
 
