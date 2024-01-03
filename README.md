@@ -48,10 +48,7 @@ $ python salestracker.py
 
 Optionally, you may use command line arguments to specify the sorting method, the number of initial posts per subreddit, a comma seperated list of subreddits, or sounds
 
-> Defaults:
-> sorting - 'new'
-> number of posts - 10
-> mute - False (Will play sounds)
+> Defaults: sorting - 'new', number of posts - 10, mute - False (Will play sounds)
 
 ```
 $ python salestracker.py -s top -n 5 -r bapcsales,mechmarket -s t
