@@ -63,3 +63,6 @@ $ python salestracker.py -s top -n 5 -r bapcsales,mechmarket -s t
 - Prettier
 
 ### To do
+
+- [ ] Add executable
+- [ ] Make runable in a small window
