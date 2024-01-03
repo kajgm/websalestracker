@@ -4,12 +4,12 @@ import os
 import json
 
 CUR_PATH = os.path.dirname(__file__)
-SUBRED_INFO_PATH = '../../res/subredditTypes.json'
+SUBRED_INFO_PATH = "../../res/subredditTypes.json"
 
 
 def create_post_list(res):
     post_list = []
-    for entry in reversed(res.json()['data']['children']):
+    for entry in reversed(res.json()["data"]["children"]):
         p = post_obj(entry)
         post_list.append(p)
 
@@ -19,16 +19,15 @@ def create_post_list(res):
 def get_subreddit_info():
     data = {}
     try:
-        with open(os.path.join(CUR_PATH, SUBRED_INFO_PATH), 'r') as json_file:
+        with open(os.path.join(CUR_PATH, SUBRED_INFO_PATH), "r") as json_file:
             data = json.load(json_file)
     except:
-        raise Exception('Error: subredditTypes.json not found')
+        raise Exception("Error: subredditTypes.json not found")
 
     return data
 
 
 class post_obj:
-
     name = None
     title = None
     timestamp = None
@@ -38,11 +37,11 @@ class post_obj:
     type_icon = None
 
     def __init__(self, post_obj):
-        self.name = post_obj['data']['name']
-        self.title = post_obj['data']['title'].replace('&amp;', '&')
-        self.timestamp = post_obj['data']['created']
-        self.subreddit = post_obj['data']['subreddit'].lower()
-        self.url = post_obj['data']['url']
+        self.name = post_obj["data"]["name"]
+        self.title = post_obj["data"]["title"].replace("&amp;", "&")
+        self.timestamp = post_obj["data"]["created"]
+        self.subreddit = post_obj["data"]["subreddit"].lower()
+        self.url = post_obj["data"]["url"]
         self.country_icon = self.set_country_icon()
         self.type_icon = self.set_type_icon()
 
@@ -54,37 +53,53 @@ class post_obj:
 
     def print_data(self):
         time = datetime.datetime.fromtimestamp(self.timestamp)
-        time_string = time.strftime('%Y-%m-%d %I:%M:%S %p')
-        print(f'{tformatting.BOLD}' + self.country_icon + ' ' + self.subreddit + ' ' + self.type_icon +
-              f'{tformatting.DIM} -- ' + time_string + f'{tformatting.ENDC}' + f'{tformatting.ENDC}' +
-              '\n' + self.title + '\n' + f'{tformatting.DIM}' + self.url + f'{tformatting.ENDC}' + '\n')
+        time_string = time.strftime("%Y-%m-%d %I:%M:%S %p")
+        print(
+            f"{tformatting.BOLD}"
+            + self.country_icon
+            + " "
+            + self.subreddit
+            + " "
+            + self.type_icon
+            + f"{tformatting.DIM} -- "
+            + time_string
+            + f"{tformatting.ENDC}"
+            + f"{tformatting.ENDC}"
+            + "\n"
+            + self.title
+            + "\n"
+            + f"{tformatting.DIM}"
+            + self.url
+            + f"{tformatting.ENDC}"
+            + "\n"
+        )
 
     def set_country_icon(self):
-        c_icon = ''
+        c_icon = ""
         subred_data = get_subreddit_info()
         subred = self.subreddit
         if subred in subred_data:
-            match subred_data[subred]['country']:
-                case 'CA':
+            match subred_data[subred]["country"]:
+                case "CA":
                     c_icon = icon.RED_CIRCLE
-                case 'US':
+                case "US":
                     c_icon = icon.BLUE_CIRCLE
                 case _:
-                    c_icon = ''
+                    c_icon = ""
 
         return c_icon
 
     def set_type_icon(self):
-        t_icon = ''
+        t_icon = ""
         subred_data = get_subreddit_info()
         subred = self.subreddit
         if subred in subred_data:
-            match subred_data[subred]['type']:
-                case 'computer':
+            match subred_data[subred]["type"]:
+                case "computer":
                     t_icon = icon.PC
-                case 'clothing':
+                case "clothing":
                     t_icon = icon.SHIRT
                 case _:
-                    t_icon = ''
+                    t_icon = ""
 
         return t_icon
