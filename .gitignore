@@ -1,5 +1,14 @@
-# Credentials
-credentials.json
+# Misc
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+
+# Production
+/main
+/dist
+/src/out
 
 # Logs
 logs
