@@ -29,11 +29,11 @@ function createWindow() {
   // and load the index.html of the app.
   if (isDev) {
     window?.loadURL(url);
+    // Open the DevTools.
+    window.webContents.openDevTools();
   } else {
     window?.loadFile(url);
   }
-  // Open the DevTools.
-  // window.webContents.openDevTools();
 
   // For AppBar
   ipcMain.on('minimize', () => {
