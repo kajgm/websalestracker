@@ -5,15 +5,17 @@ import data from '../data/testCellData';
 import SideBar from '../components/SideBar';
 
 function Main() {
+  const [sidebarWidth, setWidth] = useState('');
+
   return (
-    <div className="flex">
-      <SideBar />
-      <div className="flex flex-wrap items-center justify-center gap-6">
+    <>
+      <SideBar sendSideBarWidth={setWidth} />
+      <div className={'flex flex-wrap items-center gap-6 ' + sidebarWidth}>
         {data.map((item) => (
           <Cell title={item.title} description={item.description} key={item.title}></Cell>
         ))}
       </div>
-    </div>
+    </>
   );
 }
 
