@@ -5,11 +5,24 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { IconContext } from 'react-icons';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
-function SideBar() {
-  const [isOpen, setOpen] = useState(false);
+function SideBar(props: { sendSideBarWidth: React.Dispatch<React.SetStateAction<string>> }) {
+  const handleWidth = (sideBarWidth: string) => {
+    props.sendSideBarWidth(sideBarWidth);
+  };
+
   const ref = useRef(null);
-  useClickAway(ref, () => setOpen(false));
-  const toggleSidebar = () => setOpen((prev) => !prev);
+
+  const [isOpen, setOpen] = useState(false);
+  useClickAway(ref, () => {
+    handleWidth('ml-28');
+    setOpen(false);
+  });
+  const toggleSidebar = () => {
+    setOpen((prev) => {
+      prev ? handleWidth('ml-28') : handleWidth('ml-80');
+      return !prev;
+    });
+  };
 
   return (
     <>
@@ -18,7 +31,7 @@ function SideBar() {
           <>
             <motion.div
               {...framerSidebarPanel}
-              className="fixed bottom-0 left-0 w-full h-screen max-w-xs bg-gray"
+              className="fixed bottom-0 left-0 w-full h-screen max-w-72 bg-gray"
               ref={ref}
               aria-label="Sidebar"
             >
