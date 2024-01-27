@@ -49,7 +49,11 @@ module.exports = {
     }
   },
   variants: {
-    extend: {},
+    extend: {
+      borderWidth: {
+        1: '1px'
+      }
+    },
     fontFamily: {
       sans: ['Inter', 'ui-sans-serif', 'system-ui']
     }
