@@ -5,7 +5,7 @@ import data from '../data/testCellData';
 import SideBar from '../components/SideBar';
 
 function Main() {
-  const [sidebarWidth, setWidth] = useState('');
+  const [sidebarWidth, setWidth] = useState('ml-28');
 
   return (
     <>
