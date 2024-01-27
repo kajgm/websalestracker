@@ -31,12 +31,12 @@ function SideBar(props: { sendSideBarWidth: React.Dispatch<React.SetStateAction<
           <>
             <motion.div
               {...framerSidebarPanel}
-              className="fixed bottom-0 left-0 w-full h-screen max-w-72 bg-gray"
+              className="fixed bottom-0 left-0 w-full h-screen max-w-72 bg-gray-dark2 border-r-2 border-gray-dark"
               ref={ref}
               aria-label="Sidebar"
             >
               <div className="fixed items-center justify-between p-5">
-                <button onClick={toggleSidebar} className="m-3" aria-label="toggle sidebar">
+                <button onClick={toggleSidebar} className="m-3 mt-8" aria-label="toggle sidebar">
                   <IconContext.Provider value={{ color: 'white' }}>
                     <GiHamburgerMenu />
                   </IconContext.Provider>
@@ -48,12 +48,12 @@ function SideBar(props: { sendSideBarWidth: React.Dispatch<React.SetStateAction<
           <>
             <motion.div
               {...framerSidebarPanel}
-              className="fixed bottom-0 left-0 w-full h-screen max-w-20 bg-gray"
+              className="fixed bottom-0 left-0 w-full h-screen max-w-20 bg-gray-dark2 border-r-2 border-gray-dark"
               ref={ref}
               aria-label="Sidebar"
             >
               <div className="flex items-center justify-between p-5">
-                <button onClick={toggleSidebar} className="m-3" aria-label="toggle sidebar">
+                <button onClick={toggleSidebar} className="m-3 mt-8" aria-label="toggle sidebar">
                   <IconContext.Provider value={{ color: 'white' }}>
                     <GiHamburgerMenu />
                   </IconContext.Provider>

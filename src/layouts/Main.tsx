@@ -10,7 +10,7 @@ function Main() {
   return (
     <>
       <SideBar sendSideBarWidth={setWidth} />
-      <div className={'flex flex-wrap items-center gap-6 ' + sidebarWidth}>
+      <div className={'flex flex-wrap items-center gap-6 mt-12 pb-6 ' + sidebarWidth}>
         {data.map((item) => (
           <Cell title={item.title} description={item.description} key={item.title}></Cell>
         ))}
