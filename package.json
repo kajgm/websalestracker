@@ -1,10 +1,10 @@
 {
-  "name": "redditsalestracker",
+  "name": "websalestracker",
   "version": "1.0.0",
   "author": "Kaj Grant-Mathiasen",
   "license": "MIT",
-  "homepage": "https://github.com/kajgrant/redditsalestracker",
-  "description": "redditsalestracker",
+  "homepage": "https://github.com/kajgrant/websalestracker",
+  "description": "websalestracker",
   "keywords": [
     "vite",
     "react",
@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/kajgrant/redditsalestracker.git"
+    "url": "https://github.com/kajgrant/websalestracker.git"
   },
   "scripts": {
     "clean": "rimraf dist main src/out",
