@@ -5,17 +5,17 @@ import data from '../data/testCellData';
 import SideBar from '../components/SideBar';
 
 function Main() {
-  const [sidebarWidth, setWidth] = useState('ml-28');
-
   return (
-    <>
-      <SideBar sendSideBarWidth={setWidth} />
-      <div className={'flex flex-wrap items-center gap-6 mt-12 pb-6 ' + sidebarWidth}>
-        {data.map((item) => (
-          <Cell title={item.title} description={item.description} key={item.title}></Cell>
-        ))}
+    <div className="w-full max-w-screen h-full grid grid-cols-[min-content_auto]">
+      <SideBar />
+      <div>
+        <div className="flex flex-wrap items-center gap-6 m-6 pb-6">
+          {data.map((item) => (
+            <Cell title={item.title} description={item.description} key={item.description}></Cell>
+          ))}
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 

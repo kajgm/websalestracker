@@ -1,77 +1,53 @@
-import React, { useRef, useState } from 'react';
-import { useClickAway } from 'react-use';
-import { AnimatePresence, motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 
-import { IconContext } from 'react-icons';
-import { GiHamburgerMenu } from 'react-icons/gi';
+const minWidth = 100; //px
+const maxWidth = 300; //px
+const defaultWidth = 100; //px
 
-function SideBar(props: { sendSideBarWidth: React.Dispatch<React.SetStateAction<string>> }) {
-  const handleWidth = (sideBarWidth: string) => {
-    props.sendSideBarWidth(sideBarWidth);
-  };
+function SideBar() {
+  const [width, setWidth] = useState(parseInt(localStorage.getItem('sidebarWidth')!) || defaultWidth);
 
-  const ref = useRef(null);
+  const isResized = useRef(false);
 
-  const [isOpen, setOpen] = useState(false);
-  useClickAway(ref, () => {
-    handleWidth('ml-28');
-    setOpen(false);
-  });
-  const toggleSidebar = () => {
-    setOpen((prev) => {
-      prev ? handleWidth('ml-28') : handleWidth('ml-80');
-      return !prev;
+  useEffect(() => {
+    localStorage.setItem('sidebarWidth', width.toString());
+  }, [width]);
+
+  useEffect(() => {
+    window.addEventListener('mousemove', (e) => {
+      if (!isResized.current) {
+        return;
+      }
+
+      setWidth((previousWidth) => {
+        const newWidth = previousWidth + e.movementX / 2;
+        const isWidthInRange = newWidth >= minWidth && newWidth <= maxWidth;
+        return isWidthInRange ? newWidth : previousWidth;
+      });
     });
-  };
+
+    window.addEventListener('mouseup', () => {
+      isResized.current = false;
+    });
+  }, []);
 
   return (
-    <>
-      <AnimatePresence mode="wait" initial={false}>
-        {isOpen ? (
-          <>
-            <motion.div
-              {...framerSidebarPanel}
-              className="fixed bottom-0 left-0 w-full h-screen max-w-72 bg-gray-dark2 border-r-2 border-gray-dark"
-              ref={ref}
-              aria-label="Sidebar"
-            >
-              <div className="fixed items-center justify-between p-5">
-                <button onClick={toggleSidebar} className="m-3 mt-8" aria-label="toggle sidebar">
-                  <IconContext.Provider value={{ color: 'white' }}>
-                    <GiHamburgerMenu />
-                  </IconContext.Provider>
-                </button>
-              </div>
-            </motion.div>
-          </>
-        ) : (
-          <>
-            <motion.div
-              {...framerSidebarPanel}
-              className="fixed bottom-0 left-0 w-full h-screen max-w-20 bg-gray-dark2 border-r-2 border-gray-dark"
-              ref={ref}
-              aria-label="Sidebar"
-            >
-              <div className="flex items-center justify-between p-5">
-                <button onClick={toggleSidebar} className="m-3 mt-8" aria-label="toggle sidebar">
-                  <IconContext.Provider value={{ color: 'white' }}>
-                    <GiHamburgerMenu />
-                  </IconContext.Provider>
-                </button>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </>
+    <div className="flex relative overflow-y-hidden select-none">
+      <aside className="relative flex flex-col gap-2 bg-gray-dark py-6" style={{ width: `${width / 16}rem` }}>
+        <button className="bg-gray gap-6 py-2 rounded-lg mx-auto" style={{ width: `${width / 20}rem` }}>
+          Refresh Data
+        </button>
+      </aside>
+
+      {/* Handle */}
+      <div
+        className="w-2 bg-transparent cursor-col-resize"
+        onMouseDown={() => {
+          isResized.current = true;
+        }}
+      />
+    </div>
   );
 }
-
-const framerSidebarPanel = {
-  initial: { x: '-100%' },
-  animate: { x: 0 },
-  exit: { x: '-100%' },
-  transition: { duration: 0.3 }
-};
 
 export default SideBar;
