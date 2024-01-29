@@ -6,11 +6,11 @@ function App() {
   return (
     <div className="flex flex-col h-screen">
       {window.Main && (
-        <div className="no-flex fixed z-50 w-screen bg-gray-dark">
+        <div className="z-50 w-screen bg-gray-dark">
           <AppBar />
         </div>
       )}
-      <Main></Main>
+      <Main />
     </div>
   );
 }

@@ -1,9 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* For AppBar */
+:root {
+  background-color: #09090b;
+  background-image: linear-gradient(to bottom right, #1e1b4b, #09090b);
+  background-attachment: fixed;
+}
+
+html {
+  color-scheme: dark;
+}
+
 .draggable {
   -webkit-user-select: none;
   -webkit-app-region: drag;
@@ -11,10 +19,4 @@
 
 .undraggable {
   -webkit-app-region: no-drag;
-}
-
-:root {
-  background-color: #09090b;
-  background-image: linear-gradient(to bottom right, #1e1b4b, #09090b);
-  background-attachment: fixed;
 }
