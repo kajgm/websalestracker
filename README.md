@@ -1,48 +1,68 @@
-# WebSalesTracker
+# RedditSalesTracker
 
-WebSalesTracker (WST) is an electron based sales tracker for use across the web.
-
-## Developed With
-
-- [Node 18.12.1](https://nodejs.org/en)
-- [React 18.2.0](https://react.dev/)
-- [Vite 5.89.0](https://vitejs.dev/)
-- [Electron 17.1.2](https://www.electronjs.org/)
+RedditSalesTracker (RST) is a simple tracker for posts on sales-specific subreddits.
 
 ## Prerequisites
 
-Please ensure the following software is installed on your system:
-
-- [Node 18.x](https://nodejs.org/en/download)
-
-## Installation
-
-Follow these steps to install and run the development environment:
-
-1. Clone the repository
+- \>= [Python 3.11.0](https://www.python.org/downloads/)
+- Requests
 
 ```
-git clone git@github.com:kajgrant/websalestracker
+$ python -m pip install requests
 ```
 
-2. Install node modules
+- == playsound 1.2.2
 
 ```
-cd websalestracker/
-npm install
+$ python -m pip install playsound==1.2.2
 ```
 
-```
-cd client/
-npm install
-```
+- [Reddit API access](https://github.com/reddit-archive/reddit/wiki/OAuth2)
 
-## Running development server
+## Usage
 
-To start the development server use the following command from within the `client` directory:
+1. To automate the authentication process, you can create a credentials.json file in the top level directory
+   > i.e. it should look something like:
 
 ```
-npm run dev
+{
+    "app_id": "your_appid",
+    "secret": "your_secret",
+    "reddit_username": "your_username",
+    "reddit_password": "your_password"
+}
 ```
 
-The electron development environment should automatically startup. Alternatively, you can navigate to [http://localhost:3000/](http://localhost:3000/)
+2. Modify the subreddits.csv to track your preferred subreddits
+   > currently the default subreddits are:
+
+```
+bapcsalescanada,buildapcsales,frugalmalefashioncdn,frugalmalefashion,canadianhardwareswap
+```
+
+3. Run the app by executing:
+
+```
+$ python salestracker.py
+```
+
+Optionally, you may use command line arguments to specify the sorting method, the number of initial posts per subreddit, a comma seperated list of subreddits, or sounds
+
+> Defaults: sorting - 'new', number of posts - 10, mute - False (Will play sounds)
+
+```
+$ python salestracker.py -s top -n 5 -r bapcsales,mechmarket -s t
+```
+
+![Example output](docs/img/example1.PNG)
+
+## Development
+
+### Development Prerequisites
+
+- Prettier
+
+### To do
+
+- [ ] Add executable
+- [ ] Make runable in a small window
