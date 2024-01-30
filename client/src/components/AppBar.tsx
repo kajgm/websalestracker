@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import icon from '../../public/assets/icon.png';
 
 function AppBar() {
   const [isMaximize, setMaximize] = useState(false);
@@ -26,7 +27,8 @@ function AppBar() {
     <>
       <div className="flex justify-between draggable text-white">
         <div className="inline-flex">
-          <p className="text-xs mt-1 ml-2">RST</p>
+          <img src={icon} className="w-6 h-auto mt-1 ml-1"></img>
+          {/* <p className="text-xs mt-1 ml-2">RST</p> */}
         </div>
         <div className="inline-flex">
           <button onClick={handleMinimze} className="undraggable px-4 pt-1 hover:bg-gray-light2">
