@@ -12,6 +12,16 @@ function AppBar() {
     window.Main.Maximize();
   };
 
+  // For some reason these are required otherwise this error is thrown:
+  // Error: An object could not be cloned.
+  const handleMinimze = () => {
+    window.Main.Minimize();
+  };
+
+  const handleClose = () => {
+    window.Main.Close();
+  };
+
   return (
     <>
       <div className="flex justify-between draggable text-white">
@@ -19,13 +29,13 @@ function AppBar() {
           <p className="text-xs mt-1 ml-2">RST</p>
         </div>
         <div className="inline-flex">
-          <button onClick={window.Main.Minimize} className="undraggable px-4 pt-1 hover:bg-gray-light2">
+          <button onClick={handleMinimze} className="undraggable px-4 pt-1 hover:bg-gray-light2">
             &#8211;
           </button>
           <button onClick={handleToggle} className="undraggable px-6 pt-1 hover:bg-gray-light2">
             {isMaximize ? '\u2752' : '⃞'}
           </button>
-          <button onClick={window.Main.Close} className="undraggable px-4 pt-1 hover:bg-red hover:text-white">
+          <button onClick={handleClose} className="undraggable px-4 pt-1 hover:bg-red hover:text-white">
             &#10005;
           </button>
         </div>
