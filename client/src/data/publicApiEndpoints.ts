@@ -1,7 +1,7 @@
 const data = {
   reddit: {
     link: 'https://www.reddit.com/r/',
-    type: 'json'
+    type: '.json'
   }
 };
 export default data;

@@ -1,18 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import Cell from '../components/Cell';
+import React from 'react';
+import { useAppSelector } from '../hooks';
+import { selectUpdateStatus, selectPosts } from '../slices/apiSlice';
+import { requestPostUpdate, updatePosts } from '../slices/apiSlice';
+import { useAppDispatch } from '../hooks';
+import ApiService from '../services/api.service';
 
-import data from '../data/testCellData';
+import Cell from '../components/Cell';
 import SideBar from '../components/SideBar';
 
 function Main() {
+  const dispatch = useAppDispatch();
+
+  const getApiData = () => {
+    dispatch(requestPostUpdate());
+    ApiService.getReddit('bapcsalescanada', 'new').then((response) => {
+      dispatch(updatePosts(response.data.data.children));
+    });
+  };
+
+  const updated = useAppSelector(selectUpdateStatus);
+  if (!updated) {
+    getApiData();
+  }
+  const posts = useAppSelector(selectPosts);
+
   return (
     <div className="w-full max-w-screen h-full grid grid-cols-[min-content_auto]">
       <SideBar />
       <div>
         <div className="flex flex-wrap items-center gap-6 m-6 pb-6">
-          {data.map((item) => (
-            <Cell title={item.title} description={item.description} key={item.description}></Cell>
-          ))}
+          {posts.map((item) => {
+            return <Cell title={item.data.title} description={item.data.url} key={item.data.title}></Cell>;
+          })}
         </div>
       </div>
     </div>

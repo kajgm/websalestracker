@@ -50,6 +50,11 @@ function createWindow() {
   ipcMain.on('close', () => {
     window.close();
   });
+
+  window.webContents.on('new-window', function (e, url) {
+    e.preventDefault();
+    require('electron').shell.openExternal(url);
+  });
 }
 
 // This method will be called when Electron has finished
