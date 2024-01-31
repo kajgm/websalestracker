@@ -1,22 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { requestPostUpdate, updatePosts } from '../slices/apiSlice';
-import { useAppDispatch } from '../hooks';
-import ApiService from '../services/api.service';
+import Section from '../components/Section';
 
 const minWidth = 100; //px
 const maxWidth = 300; //px
 const defaultWidth = 100; //px
 
-function SideBar() {
-  const dispatch = useAppDispatch();
-
-  const getApiData = () => {
-    dispatch(requestPostUpdate());
-    ApiService.getReddit('bapcsalescanada', 'new').then((response) => {
-      dispatch(updatePosts(response.data.data.children));
-    });
-  };
-
+function SideBar(props: any) {
   const [width, setWidth] = useState(parseInt(localStorage.getItem('sidebarWidth')!) || defaultWidth);
   const isResized = useRef(false);
 
@@ -45,13 +34,7 @@ function SideBar() {
   return (
     <div className="flex relative overflow-y-hidden select-none">
       <aside className="relative flex flex-col gap-2 bg-gray-dark py-6" style={{ width: `${width / 16}rem` }}>
-        <button
-          className="bg-gray gap-6 py-2 rounded-lg mx-auto"
-          onClick={getApiData}
-          style={{ width: `${width / 20}rem` }}
-        >
-          Refresh Data
-        </button>
+        <Section width={width} />
       </aside>
 
       {/* Handle */}

@@ -8,13 +8,17 @@ import ApiService from '../services/api.service';
 import Cell from '../components/Cell';
 import SideBar from '../components/SideBar';
 
+import data from '../data/publicApiEndpoints';
+
 function Main() {
   const dispatch = useAppDispatch();
 
   const getApiData = () => {
-    dispatch(requestPostUpdate());
-    ApiService.getReddit('bapcsalescanada', 'new').then((response) => {
-      dispatch(updatePosts(response.data.data.children));
+    data.map((endpoint) => {
+      dispatch(requestPostUpdate());
+      ApiService.getReddit(endpoint.endpoint, endpoint.extensions[0], 'new', endpoint.type).then((response) => {
+        dispatch(updatePosts(response.data.data.children));
+      });
     });
   };
 
