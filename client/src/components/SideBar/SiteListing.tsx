@@ -1,11 +1,11 @@
 import React from 'react';
-import { requestPostUpdate, updatePosts } from '../slices/apiSlice';
-import { useAppDispatch } from '../hooks';
-import ApiService from '../services/api.service';
+import { requestPostUpdate, updatePosts } from '../../slices/apiSlice';
+import { useAppDispatch } from '../../hooks';
+import ApiService from '../../services/api.service';
 
-import data from '../data/publicApiEndpoints';
+import data from '../../data/publicApiEndpoints';
 
-function Section(props: any) {
+function SiteListing(props: any) {
   const dispatch = useAppDispatch();
 
   const getApiData = (endpoint: string, extension: string, sorting: string, type: string) => {
@@ -26,4 +26,4 @@ function Section(props: any) {
   ));
 }
 
-export default Section;
+export default SiteListing;

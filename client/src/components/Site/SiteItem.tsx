@@ -1,6 +1,11 @@
 import React from 'react';
 
-function Cell(props: { title: string; description: string }) {
+interface SiteProps {
+  title: string;
+  description: string;
+}
+
+function SiteItem(props: SiteProps) {
   const searchTitle = props.title.match('\\[(.*?)\\]');
   const displayTitle = searchTitle ? searchTitle[0].replace(/[\[\]']+/g, '') : null;
 
@@ -20,4 +25,4 @@ function Cell(props: { title: string; description: string }) {
   );
 }
 
-export default Cell;
+export default SiteItem;

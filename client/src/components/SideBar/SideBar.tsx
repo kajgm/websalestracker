@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Section from '../components/Section';
+import SiteListing from './SiteListing';
 
 const minWidth = 100; //px
 const maxWidth = 300; //px
@@ -34,7 +34,7 @@ function SideBar(props: any) {
   return (
     <div className="flex relative overflow-y-hidden select-none">
       <aside className="relative flex flex-col gap-2 bg-gray-dark py-6" style={{ width: `${width / 16}rem` }}>
-        <Section width={width} />
+        <SiteListing width={width} />
       </aside>
 
       {/* Handle */}
