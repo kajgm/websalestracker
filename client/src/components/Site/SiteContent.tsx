@@ -20,9 +20,9 @@ function SiteContent() {
   };
 
   const updated = useAppSelector(selectUpdateStatus);
-  if (!updated) {
-    getApiData();
-  }
+  // if (!updated) {
+  //   getApiData();
+  // }
   const posts = useAppSelector(selectPosts);
 
   return (

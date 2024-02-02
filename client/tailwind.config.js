@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: ['./src/index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
@@ -36,7 +38,8 @@ module.exports = {
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
-      serif: ['Merriweather', 'serif']
+      serif: ['Merriweather', 'serif'],
+      pmarker: ['Permanent Marker', ...defaultTheme.fontFamily.sans]
     },
     extend: {
       spacing: {

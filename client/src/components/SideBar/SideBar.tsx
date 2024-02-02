@@ -5,7 +5,7 @@ const minWidth = 100; //px
 const maxWidth = 300; //px
 const defaultWidth = 100; //px
 
-function SideBar(props: any) {
+function SideBar() {
   const [width, setWidth] = useState(parseInt(localStorage.getItem('sidebarWidth')!) || defaultWidth);
   const isResized = useRef(false);
 
