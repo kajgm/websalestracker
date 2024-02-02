@@ -5,6 +5,7 @@ interface redditPost {
   data: {
     title: string;
     url: string;
+    id: string;
   };
 }
 
@@ -15,7 +16,7 @@ interface ApiState {
 
 const initialState: ApiState = {
   updated: false,
-  posts: [{ data: { title: 'test', url: 'test' } }]
+  posts: [{ data: { title: '', url: '', id: '' } }]
 };
 
 export const apiSlice = createSlice({

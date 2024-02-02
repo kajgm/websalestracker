@@ -13,7 +13,7 @@ function SiteContent() {
   const getApiData = () => {
     data.map((endpoint) => {
       dispatch(requestPostUpdate());
-      ApiService.getReddit(endpoint.endpoint, endpoint.extensions[0], 'new', endpoint.type).then((response) => {
+      ApiService.getReddit(endpoint.endpoint, endpoint.categories[0], 'new', endpoint.type).then((response) => {
         dispatch(updatePosts(response.data.data.children));
       });
     });
@@ -26,9 +26,9 @@ function SiteContent() {
   const posts = useAppSelector(selectPosts);
 
   return (
-    <div className="flex flex-wrap items-center gap-6 m-6 pb-6">
+    <div className="flex flex-wrap items-center content-start gap-6 m-6">
       {posts.map((item) => {
-        return <SiteItem title={item.data.title} description={item.data.url} key={item.data.url}></SiteItem>;
+        return <SiteItem title={item.data.title} description={item.data.url} key={item.data.id}></SiteItem>;
       })}
     </div>
   );

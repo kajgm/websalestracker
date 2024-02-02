@@ -1,15 +1,9 @@
 const data = [
   {
-    name: 'redditCDN',
+    name: 'reddit',
     endpoint: 'https://www.reddit.com/r/',
-    extensions: ['bapcsalescanada', 'frugalmalefashioncdn'],
+    categories: ['bapcsalescanada', 'frugalmalefashioncdn', 'buildapcsales', 'frugalmalefashion'],
     type: '.json'
   },
-  {
-    name: 'redditUS',
-    endpoint: 'https://www.reddit.com/r/',
-    extensions: ['buildapcsales', 'frugalmalefashion'],
-    type: '.json'
-  }
 ];
 export default data;
