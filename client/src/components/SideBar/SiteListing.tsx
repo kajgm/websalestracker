@@ -1,6 +1,6 @@
 import React from 'react';
-import { requestPostUpdate, updatePosts } from '../../slices/apiSlice';
-import { selectIconState, selectWidth } from '../../slices/sideBarSlice';
+import { requestPostUpdate, updatePosts, updateName, updateCategory } from '../../slices/apiSlice';
+import { selectWidth } from '../../slices/sideBarSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import ApiService from '../../services/api.service';
 
@@ -9,11 +9,13 @@ import data from '../../data/publicApiEndpoints';
 function SiteListing() {
   const dispatch = useAppDispatch();
 
-  const getApiData = (site: string, category: string, sorting: string, type: string) => {
+  const getApiData = (name: string, endpoint: string, category: string, sorting: string, type: string) => {
     dispatch(requestPostUpdate());
-    ApiService.getReddit(site, category, sorting, type).then((response) => {
+    ApiService.getReddit(endpoint, category, sorting, type).then((response) => {
       dispatch(updatePosts(response.data.data.children));
     });
+    dispatch(updateName(name));
+    dispatch(updateCategory(category));
   };
 
   const curWidth = useAppSelector(selectWidth);
@@ -31,7 +33,7 @@ function SiteListing() {
         </h1>
         {site.categories.map((cat: string) => (
           <button
-          onClick={() => getApiData(site.endpoint, cat, 'new', site.type)}
+          onClick={() => getApiData(site.name, site.endpoint, cat, 'new', site.type)}
           className="bg-gray py-2 rounded-lg">
             {cat}
           </button>

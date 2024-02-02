@@ -10,11 +10,15 @@ interface redditPost {
 }
 
 interface ApiState {
+  name: string;
+  category: string;
   updated: Boolean;
   posts: Array<redditPost>;
 }
 
 const initialState: ApiState = {
+  name: '',
+  category: '',
   updated: false,
   posts: [{ data: { title: '', url: '', id: '' } }]
 };
@@ -28,12 +32,20 @@ export const apiSlice = createSlice({
     },
     updatePosts: (state, action: PayloadAction<Array<redditPost>>) => {
       state.posts = action.payload;
-    }
+    },
+    updateName: (state, action: PayloadAction<string>) => {
+      state.name = action.payload;
+    },
+    updateCategory: (state, action: PayloadAction<string>) => {
+      state.category = action.payload;
+    }, 
   }
 });
 
-export const { requestPostUpdate, updatePosts } = apiSlice.actions;
+export const { requestPostUpdate, updatePosts, updateName, updateCategory } = apiSlice.actions;
 
+export const selectSite = (state: RootState) => state.api.name;
+export const selectCategory = (state: RootState) => state.api.category;
 export const selectPosts = (state: RootState) => state.api.posts;
 export const selectUpdateStatus = (state: RootState) => state.api.updated;
 
