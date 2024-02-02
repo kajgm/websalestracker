@@ -1,12 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
-import SiteListing from './SiteListing';
+import { setIconState, setWidth } from '../../slices/sideBarSlice';
+import { useAppDispatch } from '../../hooks';
 
-const minWidth = 100; //px
+import SiteListing from './SiteListing';
+import Navigation from './Navigation';
+
+const minWidth = 150; //px
 const maxWidth = 300; //px
-const defaultWidth = 100; //px
+const defaultWidth = 150; //px //TODO: move to global variable
+const iconWidth = 150; //TODO: move to global variable
 
 function SideBar() {
-  const [width, setWidth] = useState(parseInt(localStorage.getItem('sidebarWidth')!) || defaultWidth);
+  const dispatch = useAppDispatch();
+  const [width, updateWidth] = useState(parseInt(localStorage.getItem('sidebarWidth')!) || defaultWidth);
   const isResized = useRef(false);
 
   useEffect(() => {
@@ -19,22 +25,29 @@ function SideBar() {
         return;
       }
 
-      setWidth((previousWidth) => {
-        const newWidth = previousWidth + e.movementX / 2;
-        const isWidthInRange = newWidth >= minWidth && newWidth <= maxWidth;
-        return isWidthInRange ? newWidth : previousWidth;
+      updateWidth((previousWidth) => {
+        const curWidth = previousWidth + e.movementX / 2;
+        const isWidthInRange = curWidth >= minWidth && curWidth <= maxWidth;
+        const newWidth = isWidthInRange ? curWidth : previousWidth;
+        return newWidth;
       });
     });
 
     window.addEventListener('mouseup', () => {
       isResized.current = false;
     });
-  }, []);
+
+    dispatch(setWidth(width));
+    dispatch(setIconState(width == iconWidth));
+
+  }, [width]);
 
   return (
+    <>
     <div className="flex relative overflow-y-hidden select-none">
-      <aside className="relative flex flex-col gap-2 bg-gray-dark py-6" style={{ width: `${width / 16}rem` }}>
-        <SiteListing width={width} />
+      <aside className="flex flex-col gap-2 bg-gray-dark py-6" style={{ width: `${width / 16}rem` }}>
+        <Navigation />
+        <SiteListing/>
       </aside>
 
       {/* Handle */}
@@ -45,6 +58,7 @@ function SideBar() {
         }}
       />
     </div>
+    </>
   );
 }
 

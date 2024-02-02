@@ -1,11 +1,12 @@
 import React from 'react';
 import { requestPostUpdate, updatePosts } from '../../slices/apiSlice';
-import { useAppDispatch } from '../../hooks';
+import { selectIconState, selectWidth } from '../../slices/sideBarSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import ApiService from '../../services/api.service';
 
 import data from '../../data/publicApiEndpoints';
 
-function SiteListing(props: any) {
+function SiteListing() {
   const dispatch = useAppDispatch();
 
   const getApiData = (endpoint: string, extension: string, sorting: string, type: string) => {
@@ -15,11 +16,13 @@ function SiteListing(props: any) {
     });
   };
 
+  const curWidth = useAppSelector(selectWidth);
+
   return data.map((endpoint: any) => (
     <button
       className="bg-gray gap-6 py-2 rounded-lg mx-auto"
       onClick={() => getApiData(endpoint.endpoint, endpoint.extensions[0], 'new', endpoint.type)}
-      style={{ width: `${props.width / 20}rem` }}
+      style={{ width: `${curWidth / 20}rem` }}
     >
       {endpoint.name}
     </button>

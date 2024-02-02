@@ -3,7 +3,7 @@ import type { RootState } from '../store';
 
 interface SideBarState {
   iconState: Boolean;
-  width: Number;
+  width: number;
 }
 
 const initialState: SideBarState = {
@@ -18,7 +18,7 @@ export const sideBarSlice = createSlice({
     setIconState: (state, action: PayloadAction<Boolean>) => {
       state.iconState = action.payload;
     },
-    setWidth: (state, action: PayloadAction<Number>) => {
+    setWidth: (state, action: PayloadAction<number>) => {
       state.width = action.payload;
     }
   }
