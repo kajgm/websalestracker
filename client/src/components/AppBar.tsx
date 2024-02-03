@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import icon from '../../public/assets/icon.png';
 
 function AppBar() {
   const [isMaximize, setMaximize] = useState(false);

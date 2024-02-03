@@ -39,25 +39,24 @@ function SideBar() {
 
     dispatch(setWidth(width));
     dispatch(setIconState(width == iconWidth));
-
   }, [width]);
 
   return (
     <>
-    <div className="relative flex overflow-y-hidden select-none">
-      <aside className="relative flex flex-col gap-2 bg-gray-dark py-6" style={{ width: `${width / 16}rem` }}>
-        <Navigation />
-        <SiteListing/>
-      </aside>
+      <div className="relative flex overflow-y-hidden select-none">
+        <aside className="relative flex flex-col gap-2 bg-gray-dark py-6" style={{ width: `${width / 16}rem` }}>
+          <Navigation />
+          <SiteListing />
+        </aside>
 
-      {/* Handle */}
-      <div
-        className="w-2 bg-transparent cursor-col-resize"
-        onMouseDown={() => {
-          isResized.current = true;
-        }}
-      />
-    </div>
+        {/* Handle */}
+        <div
+          className="w-2 bg-transparent cursor-col-resize"
+          onMouseDown={() => {
+            isResized.current = true;
+          }}
+        />
+      </div>
     </>
   );
 }

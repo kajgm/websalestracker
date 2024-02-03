@@ -1,16 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import { FaCog } from "react-icons/fa";
+import { FaCog } from 'react-icons/fa';
 
 function Settings() {
-
-    return (
-        <>
-            <div>
-                <FaCog />
-            </div>
-        </>
-    )
+  return (
+    <>
+      <div>
+        <FaCog />
+      </div>
+    </>
+  );
 }
 
 export default Settings;

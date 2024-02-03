@@ -4,10 +4,10 @@ import SideBar from '../components/SideBar/SideBar';
 import SiteContent from '../components/Site/SiteContent';
 import BottomBar from '../components/BottomBar/BottomBar';
 
-function Main(props: {topPad: string}) {
+function Main(props: { topPad: string }) {
   return (
     <>
-      <div className={"w-full max-w-screen h-full grid grid-cols-[min-content_auto] pt-" + props.topPad}>
+      <div className={'w-full max-w-screen h-full grid grid-cols-[min-content_auto] pt-' + props.topPad}>
         <SideBar />
         <SiteContent />
       </div>

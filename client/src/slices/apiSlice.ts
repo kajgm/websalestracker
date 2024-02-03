@@ -38,7 +38,7 @@ export const apiSlice = createSlice({
     },
     updateCategory: (state, action: PayloadAction<string>) => {
       state.category = action.payload;
-    }, 
+    }
   }
 });
 

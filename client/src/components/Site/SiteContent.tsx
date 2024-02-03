@@ -30,17 +30,17 @@ function SiteContent() {
 
   return (
     <>
-    <div className='flex flex-col overflow-auto'>
-      <div>
-        <SiteInfo name={site} category={category}/>
+      <div className="flex flex-col overflow-auto">
+        <div>
+          <SiteInfo name={site} category={category} />
+        </div>
+
+        <div className="flex flex-wrap items-center content-start gap-6 m-6">
+          {posts.map((item) => {
+            return <SiteItem title={item.data.title} description={item.data.url} key={item.data.id}></SiteItem>;
+          })}
+        </div>
       </div>
-    
-      <div className="flex flex-wrap items-center content-start gap-6 m-6">
-        {posts.map((item) => {
-          return <SiteItem title={item.data.title} description={item.data.url} key={item.data.id}></SiteItem>;
-        })}
-      </div>
-    </div>
     </>
   );
 }
