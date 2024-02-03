@@ -22,8 +22,8 @@ function SiteListing() {
 
   return (
     <>
-    {
-    data.map((site: any) => (
+    <div className='overflow-auto'>
+    {data.map((site: any) => (
       <div className='flex flex-col gap-2 mx-auto' style={{ width: `${curWidth / 20}rem` }}>
         <h1
           className="font-pmarker text-2xl pt-6 mx-auto"
@@ -40,6 +40,7 @@ function SiteListing() {
         ))}
       </div>
   ))}
+  </div>
   </>);
 }
 

@@ -44,8 +44,8 @@ function SideBar() {
 
   return (
     <>
-    <div className="flex relative overflow-y-hidden select-none">
-      <aside className="flex flex-col gap-2 bg-gray-dark py-6" style={{ width: `${width / 16}rem` }}>
+    <div className="relative flex overflow-y-hidden select-none">
+      <aside className="relative flex flex-col gap-2 bg-gray-dark py-6" style={{ width: `${width / 16}rem` }}>
         <Navigation />
         <SiteListing/>
       </aside>

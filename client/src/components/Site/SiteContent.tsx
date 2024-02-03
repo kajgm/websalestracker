@@ -30,7 +30,7 @@ function SiteContent() {
 
   return (
     <>
-    <div className='flex flex-col'>
+    <div className='flex flex-col overflow-auto'>
       <div>
         <SiteInfo name={site} category={category}/>
       </div>
