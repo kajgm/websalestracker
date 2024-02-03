@@ -14,10 +14,6 @@ const StrictApp = () => (
 );
 
 const rootElement = document.getElementById('root')!;
+const root = createRoot(rootElement);
 
-if (rootElement.hasChildNodes()) {
-  hydrateRoot(rootElement, <StrictApp />);
-} else {
-  const root = createRoot(rootElement);
-  root.render(<StrictApp />);
-}
+root.render(<StrictApp />);
