@@ -10,6 +10,7 @@ import Trending from '../../views/Trending';
 
 function Navigation() {
   const curWidth = useAppSelector(selectWidth);
+  const calcWidth = curWidth / (25 * 4);
 
   return (
     <>
@@ -18,13 +19,13 @@ function Navigation() {
     </div>
       <div className="relative flex flex-row gap-2 mx-auto bg-gray-dark justify-center">
         <div className='bg-gray rounded-lg mx-auto px-2'>
-          <Favourites width={curWidth}/>
+          <Favourites width={calcWidth}/>
         </div>
         <div className='bg-gray rounded-lg mx-auto px-2'>
-          <Discover width={curWidth}/>
+          <Discover width={calcWidth}/>
         </div>
         <div className='bg-gray rounded-lg mx-auto px-2'>
-          <Trending width={curWidth}/>
+          <Trending width={calcWidth}/>
         </div>
       </div>
     </>
