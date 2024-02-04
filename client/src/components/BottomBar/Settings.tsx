@@ -5,9 +5,9 @@ import { FaCog } from 'react-icons/fa';
 function Settings() {
   return (
     <>
-      <div>
+      <button>
         <FaCog />
-      </div>
+      </button>
     </>
   );
 }

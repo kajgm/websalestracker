@@ -27,16 +27,14 @@ function SiteListing() {
           const charScale = curWidth / 15;
           const siteName = site.name.length < charScale ? site.name : site.name.slice(0, charScale) + '...';
           return (
-            <div className="flex flex-col gap-2 mx-auto" style={{ width: `${curWidth / 20}rem` }}>
-              <h1 className="font-pmarker text-2xl pt-6" key={site}>
-                {siteName}
-              </h1>
+            <div className="flex flex-col gap-2 mx-auto" style={{ width: `${curWidth / 20}rem` }} key={site}>
+              <h1 className="font-rubik font-bold text-2xl pt-6">{siteName}</h1>
               {site.categories.map((cat: string) => {
                 const catName = cat.length < charScale ? cat : cat.slice(0, charScale) + '...';
                 return (
                   <button
                     onClick={() => getApiData(site.name, site.endpoint, cat, 'new', site.type)}
-                    className="bg-gray py-2 rounded-lg"
+                    className="bg-gray py-2 rounded-lg font-rubik font-bold"
                     key={cat}
                   >
                     {catName}

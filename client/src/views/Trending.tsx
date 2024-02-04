@@ -1,10 +1,10 @@
 import React from 'react';
-import { FaFire } from "react-icons/fa";
+import { FaFire } from 'react-icons/fa';
 
-function Trending(props: {width: number}) {
+function Trending(props: { width: number }) {
   return (
     <>
-      <div className='flex justify-center bg-gray rounded-lg py-1' style={{ width: `${props.width}rem` }}>
+      <div className="flex justify-center bg-gray rounded-lg py-1" style={{ width: `${props.width}rem` }}>
         <FaFire />
       </div>
     </>

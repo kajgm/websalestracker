@@ -17,10 +17,10 @@ function GlobalSearch() {
     <>
       <input
         type="text"
-        placeholder="Search.."
+        placeholder="search.."
         onChange={handleChange}
         value={searchInput}
-        className="bg-gray p-1 outline-none font-pmarker"
+        className="bg-gray p-1 outline-none font-rubik"
         style={{ width: `${curWidth / 24}rem` }}
       />
       <FaSearch className="relative top-2" />

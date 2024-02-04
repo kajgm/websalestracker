@@ -39,7 +39,8 @@ module.exports = {
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
-      pmarker: ['Permanent Marker', ...defaultTheme.fontFamily.sans]
+      pmarker: ['Permanent Marker', ...defaultTheme.fontFamily.sans],
+      rubik: ['Rubik', ...defaultTheme.fontFamily.sans]
     },
     extend: {
       spacing: {

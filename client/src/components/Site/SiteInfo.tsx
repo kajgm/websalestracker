@@ -5,7 +5,7 @@ function SiteInfo(props: { name: string; category: string }) {
 
   return (
     <div className="flex flex-wrap p-6 mb-2 mr-2 bg-gray-dark rounded-xl">
-      <h1 className="text-4xl font-pmarker">{infoTitle}</h1>
+      <h1 className="text-4xl font-rubik font-bold">{infoTitle}</h1>
     </div>
   );
 }
