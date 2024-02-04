@@ -7,7 +7,9 @@ import BottomBar from '../components/BottomBar/BottomBar';
 function Main(props: { topPad: string }) {
   return (
     <>
-      <div className={'w-full max-w-screen h-full grid grid-cols-[min-content_auto] pt-' + props.topPad}>
+      <div
+        className={'w-full max-w-screen h-full grid grid-cols-[min-content_auto] pl-2 pb-10 mt-2 pt-' + props.topPad}
+      >
         <SideBar />
         <SiteContent />
       </div>

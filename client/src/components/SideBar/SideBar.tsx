@@ -44,14 +44,17 @@ function SideBar() {
   return (
     <>
       <div className="relative flex overflow-y-hidden select-none">
-        <aside className="relative flex flex-col gap-2 bg-gray-dark py-6" style={{ width: `${width / 16}rem` }}>
+        <aside
+          className="relative flex flex-col gap-2 py-6 bg-gray-dark rounded-lg"
+          style={{ width: `${width / 16}rem` }}
+        >
           <Navigation />
           <SiteListing />
         </aside>
 
         {/* Handle */}
         <div
-          className="w-2 bg-transparent cursor-col-resize"
+          className="w-2 bg-transparent cursor-col-resize hover:bg-gray"
           onMouseDown={() => {
             isResized.current = true;
           }}

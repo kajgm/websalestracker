@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface SiteProps {
   title: string;
   description: string;
 }
 
+const collapsedWidth = '1/3';
+const expandedWidth = 'full';
+
 function SiteItem(props: SiteProps) {
+  const [isExpanded, setExpand] = useState(false);
+
   const searchTitle = props.title.match('\\[(.*?)\\]'); //Will need to update this
   const displayTitle = searchTitle ? searchTitle[0].replace(/[\[\]']+/g, '') : null;
 
@@ -14,14 +19,30 @@ function SiteItem(props: SiteProps) {
   }
 
   return (
-    <a href={props.description} target="_blank">
-      <div className="shadow-lg rounded-full hover:shadow-purple hover:-translate-y-3 ease-in-out duration-300 max-w-40">
-        <div className="bg-gradient-to-br from-gray-dark to-gray-dark2 p-5 rounded-lg text-center">
-          <h1 className="p-1 text-white text-xl">{displayTitle}</h1>
-          <p className="p-1 text-white text-base">desc</p>
+    <>
+      <div className={'ease-in-out duration-300 w-' + (isExpanded ? expandedWidth : collapsedWidth)}>
+        <div className="m-2">
+          <button
+            className="bg-gradient-to-br from-gray-dark to-gray-dark2 rounded-lg hover:shadow-lg hover:shadow-purple hover:-translate-y-3 ease-in-out duration-300 w-full"
+            onClick={() => setExpand(!isExpanded)}
+          >
+            <div className="p-2 rounded-lg">
+              <div className="text-center">
+                <h1 className="p-1 text-white text-xl font-pmarker">{displayTitle}</h1>
+                <p className="p-1 text-white text-base">desc</p>
+              </div>
+              {isExpanded && (
+                <div>
+                  <a href={props.description} target="_blank">
+                    Link
+                  </a>
+                </div>
+              )}
+            </div>
+          </button>
         </div>
       </div>
-    </a>
+    </>
   );
 }
 

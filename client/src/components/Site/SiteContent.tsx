@@ -34,11 +34,12 @@ function SiteContent() {
         <div>
           <SiteInfo name={site} category={category} />
         </div>
-
-        <div className="flex flex-wrap items-center content-start gap-6 m-6">
-          {posts.map((item) => {
-            return <SiteItem title={item.data.title} description={item.data.url} key={item.data.id}></SiteItem>;
-          })}
+        <div className="bg-gray-dark rounded-lg h-full mr-2">
+          <div className="flex flex-wrap items-center content-start">
+            {posts.map((item) => {
+              return <SiteItem title={item.data.title} description={item.data.url} key={item.data.id}></SiteItem>;
+            })}
+          </div>
         </div>
       </div>
     </>

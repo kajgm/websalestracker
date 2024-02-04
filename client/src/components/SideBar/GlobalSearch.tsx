@@ -20,7 +20,7 @@ function GlobalSearch() {
         placeholder="Search.."
         onChange={handleChange}
         value={searchInput}
-        className="bg-gray p-1 outline-none"
+        className="bg-gray p-1 outline-none font-pmarker"
         style={{ width: `${curWidth / 24}rem` }}
       />
       <FaSearch className="relative top-2" />

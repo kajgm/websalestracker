@@ -19,7 +19,6 @@ function SiteListing() {
   };
 
   const curWidth = useAppSelector(selectWidth);
-  console.log(curWidth);
 
   return (
     <>
@@ -29,7 +28,7 @@ function SiteListing() {
           const siteName = site.name.length < charScale ? site.name : site.name.slice(0, charScale) + '...';
           return (
             <div className="flex flex-col gap-2 mx-auto" style={{ width: `${curWidth / 20}rem` }}>
-              <h1 className="font-pmarker text-2xl pt-6 mx-auto" key={site}>
+              <h1 className="font-pmarker text-2xl pt-6" key={site}>
                 {siteName}
               </h1>
               {site.categories.map((cat: string) => {
@@ -38,6 +37,7 @@ function SiteListing() {
                   <button
                     onClick={() => getApiData(site.name, site.endpoint, cat, 'new', site.type)}
                     className="bg-gray py-2 rounded-lg"
+                    key={cat}
                   >
                     {catName}
                   </button>

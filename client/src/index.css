@@ -3,9 +3,7 @@
 @tailwind utilities;
 
 :root {
-  background-color: #09090b;
-  background-image: linear-gradient(to bottom right, #1e1b4b, #09090b);
-  background-attachment: fixed;
+  background-color: black;
 }
 
 html {
