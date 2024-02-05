@@ -19,11 +19,6 @@ html {
   -webkit-app-region: no-drag;
 }
 
-.scroll_enabled {
-  overflow: scroll;
-  height: 1000px; /* define your custom height */
-}
-
 ::-webkit-scrollbar {
   width: 12px; /* width of the entire scrollbar */
 }
