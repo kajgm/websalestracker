@@ -34,7 +34,7 @@ function SiteListing() {
                 return (
                   <button
                     onClick={() => getApiData(site.name, site.endpoint, cat, 'new', site.type)}
-                    className="bg-gray py-2 rounded-lg font-rubik font-bold"
+                    className="bg-gray py-2 rounded-full font-rubik font-bold"
                     key={cat}
                   >
                     {catName}

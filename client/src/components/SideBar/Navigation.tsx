@@ -14,19 +14,18 @@ function Navigation() {
 
   return (
     <>
-      <div className="bg-gray rounded-lg mx-auto px-2 flex flex-row">
+      <div className="bg-gray rounded-full mx-auto px-2 w-4/5">
         <GlobalSearch />
       </div>
-      <div className="relative flex flex-row gap-2 mx-auto bg-gray-dark justify-center">
-        <button className="bg-gray rounded-lg mx-auto px-2">
-          <Favourites width={calcWidth} />
+      <div className="relative flex flex-row gap-1 mx-auto bg-gray-dark justify-center w-4/5">
+        <button className="bg-gray rounded-full mx-auto px-2 w-1/3">
+          <Favourites />
         </button>
-
-        <button className="bg-gray rounded-lg mx-auto px-2">
-          <Discover width={calcWidth} />
+        <button className="bg-gray rounded-full mx-auto px-2 w-1/3">
+          <Discover />
         </button>
-        <button className="bg-gray rounded-lg mx-auto px-2">
-          <Trending width={calcWidth} />
+        <button className="bg-gray rounded-full mx-auto px-2 w-1/3">
+          <Trending />
         </button>
       </div>
     </>

@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
-import { selectWidth } from '../../slices/sideBarSlice';
-import { useAppSelector } from '../../hooks';
 
 function GlobalSearch() {
   const [searchInput, setSearchInput] = useState('');
-  const curWidth = useAppSelector(selectWidth);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -15,15 +12,16 @@ function GlobalSearch() {
 
   return (
     <>
-      <input
-        type="text"
-        placeholder="search.."
-        onChange={handleChange}
-        value={searchInput}
-        className="bg-gray p-1 outline-none font-rubik"
-        style={{ width: `${curWidth / 24}rem` }}
-      />
-      <FaSearch className="relative top-2" />
+      <div className="flex flex-row">
+        <input
+          type="text"
+          placeholder="search.."
+          onChange={handleChange}
+          value={searchInput}
+          className="bg-gray mx-2 py-1 outline-none font-rubik w-4/5"
+        />
+        <FaSearch className="relative top-2" />
+      </div>
     </>
   );
 }
