@@ -6,7 +6,7 @@ function App() {
   const appBarPadding = window.Main ? '6' : '0';
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen overflow-hidden">
       {window.Main && (
         <div className="z-50 w-screen fixed">
           <AppBar />

@@ -10,7 +10,7 @@ function Status() {
 
   return (
     <>
-      <div className="flex flex-row ml-auto mr-0">
+      <div className="flex flex-row ml-auto pr-2">
         <IconContext.Provider value={{ color: updated ? 'green' : 'red', className: 'global-class-name' }}>
           <div className="inline-flex items-baseline">
             <FaCircle />

@@ -17,10 +17,10 @@ function SiteItem(props: SiteProps) {
 
   return (
     <>
-      <div className={'ease-in-out duration-300 ' + (isExpanded ? 'w-full' : 'w-1/3')}>
+      <div className={'ease-in-out duration-300 min-w-40 ' + (isExpanded ? 'w-full' : 'w-1/3')}>
         <div className="m-2">
           <button
-            className="bg-gradient-to-br from-gray-dark to-gray-dark2 rounded-lg hover:shadow-lg hover:shadow-purple hover:-translate-y-3 ease-in-out duration-300 w-full"
+            className="bg-gradient-to-br from-gray-dark to-gray-dark2 rounded-lg hover:shadow-lg hover:shadow-purple ease-in-out duration-300 w-full"
             onClick={() => setExpand(!isExpanded)}
           >
             <div className="p-2 rounded-lg">
