@@ -20,13 +20,14 @@ html {
 }
 
 ::-webkit-scrollbar {
-  width: 12px; /* width of the entire scrollbar */
+  width: 12px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent; /* color of the tracking area */
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: gray; /* color of the scroll thumb */
+  background-color: #27272a;
 }

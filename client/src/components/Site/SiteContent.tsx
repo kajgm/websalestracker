@@ -32,7 +32,7 @@ function SiteContent() {
     <>
       <div className="flex flex-col overflow-auto">
         <SiteInfo name={site} category={category} />
-        <div className="bg-gray-dark rounded-lg">
+        <div className="bg-gray-dark rounded-lg overflow-auto">
           <div className="flex flex-wrap items-center content-start">
             {posts.map((item) => {
               return <SiteItem title={item.data.title} description={item.data.url} key={item.data.id}></SiteItem>;

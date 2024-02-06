@@ -27,7 +27,7 @@ function SiteListing() {
           const charScale = curWidth / 15;
           const siteName = site.name.length < charScale ? site.name : site.name.slice(0, charScale) + '...';
           return (
-            <div className="flex flex-col gap-2 mx-auto" style={{ width: `${curWidth / 20}rem` }} key={site}>
+            <div className="flex flex-col gap-2 mx-auto w-4/5" key={site}>
               <h1 className="font-rubik font-bold text-2xl pt-6">{siteName}</h1>
               {site.categories.map((cat: string) => {
                 const catName = cat.length < charScale ? cat : cat.slice(0, charScale) + '...';
