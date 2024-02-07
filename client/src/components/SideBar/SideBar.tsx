@@ -45,7 +45,7 @@ function SideBar() {
     <>
       <div className="relative flex overflow-y-hidden select-none">
         <div
-          className="relative flex flex-col gap-2 py-6 bg-gray-dark2 rounded-lg"
+          className="relative flex flex-col gap-2 pt-6 bg-gray-dark2 rounded-lg"
           style={{ width: `${width / 16}rem` }}
         >
           <Navigation />
