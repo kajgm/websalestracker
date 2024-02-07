@@ -1,9 +1,18 @@
 import React from 'react';
 import { requestPostUpdate, updatePosts, updateName, updateCategory } from '../../slices/apiSlice';
 import { selectWidth } from '../../slices/sideBarSlice';
-import { selectSites } from '../../slices/configSlice';
+import { removeSiteConfig, selectSites } from '../../slices/configSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import ApiService from '../../services/api.service';
+
+import { FaTrash } from 'react-icons/fa';
+
+interface siteInfo {
+  name: string;
+  endpoint: string;
+  categories: Array<string>;
+  type: string;
+}
 
 function SiteListing() {
   const dispatch = useAppDispatch();
@@ -24,12 +33,23 @@ function SiteListing() {
     <>
       {data.length > 0 && (
         <div className="overflow-auto">
-          {data.map((site: any) => {
+          {data.map((site: siteInfo) => {
             const charScale = curWidth / 15;
             const siteName = site.name.length < charScale ? site.name : site.name.slice(0, charScale) + '...';
             return (
-              <div className="flex flex-col gap-2 mx-auto w-4/5" key={site}>
-                <h1 className="font-rubik font-bold text-2xl pt-6">{siteName}</h1>
+              <div className="flex flex-col gap-2 mx-auto w-4/5 pt-6" key={site.name}>
+                <div className="flex flex-row">
+                  <h1 className="font-rubik font-bold text-2xl">{siteName}</h1>
+                  <button
+                    onClick={() => {
+                      dispatch(removeSiteConfig(site.name));
+                      window.Main.deletePlugin(site.name);
+                    }}
+                    className="ml-auto"
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
                 {site.categories.map((cat: string) => {
                   const catName = cat.length < charScale ? cat : cat.slice(0, charScale) + '...';
                   return (

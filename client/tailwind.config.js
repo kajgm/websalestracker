@@ -30,11 +30,11 @@ module.exports = {
       red: '#ef4444',
       white: '#fafafa',
       gray: '#27272a', //zinc 800
-      gray2: '#71717a', //zinc 400
+      gray2: '#52525b', //zinc 600
       'gray-dark': '#09090b', //zinc 950
       'gray-dark2': '#18181b', //zinc 900
       'gray-light': '#d4d4d8', //zinc 300
-      'gray-light2': '#52525b' //zinc 600
+      'gray-light2': '#71717a' //zinc 400
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],

@@ -55,6 +55,9 @@ const api = {
   setPlugin: (plugin: configData) => {
     ipcRenderer.send('setPlugin', plugin);
   },
+  deletePlugin: (plugin: string) => {
+    ipcRenderer.send('deletePlugin', plugin);
+  },
   getDefaultPlugin: (id: string) => {
     return ipcRenderer.invoke('getDefaultPlugin', id);
   },
