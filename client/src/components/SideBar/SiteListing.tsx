@@ -19,7 +19,6 @@ function SiteListing() {
 
   const curWidth = useAppSelector(selectWidth);
   const data = useAppSelector(selectSites);
-  console.log(data);
 
   return (
     <>
