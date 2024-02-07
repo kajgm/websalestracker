@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../hooks';
 
 import SiteListing from './SiteListing';
 import Navigation from './Navigation';
+import NewSite from './NewSite';
 
 const minWidth = 150; //px
 const maxWidth = 300; //px
@@ -44,17 +45,18 @@ function SideBar() {
   return (
     <>
       <div className="relative flex overflow-y-hidden select-none">
-        <aside
+        <div
           className="relative flex flex-col gap-2 py-6 bg-gray-dark rounded-lg"
           style={{ width: `${width / 16}rem` }}
         >
           <Navigation />
+          <NewSite />
           <SiteListing />
-        </aside>
+        </div>
 
         {/* Handle */}
         <div
-          className="w-2 bg-transparent cursor-col-resize hover:bg-gray"
+          className="w-1 mr-1 bg-transparent cursor-col-resize hover:bg-gray"
           onMouseDown={() => {
             isResized.current = true;
           }}

@@ -1,29 +1,11 @@
 import React from 'react';
-import { selectUpdateStatus, selectPosts, selectSite, selectCategory } from '../../slices/apiSlice';
-import { requestPostUpdate, updatePosts } from '../../slices/apiSlice';
-import { useAppSelector, useAppDispatch } from '../../hooks';
-import ApiService from '../../services/api.service';
-import SiteItem from './SiteItem';
+import { selectPosts, selectSite, selectCategory } from '../../slices/apiSlice';
+import { useAppSelector } from '../../hooks';
 
-import data from '../../data/publicApiEndpoints';
+import SiteItem from './SiteItem';
 import SiteInfo from './SiteInfo';
 
 function SiteContent() {
-  const dispatch = useAppDispatch();
-
-  const getApiData = () => {
-    data.map((endpoint) => {
-      dispatch(requestPostUpdate());
-      ApiService.getReddit(endpoint.endpoint, endpoint.categories[0], 'new', endpoint.type).then((response) => {
-        dispatch(updatePosts(response.data.data.children));
-      });
-    });
-  };
-
-  const updated = useAppSelector(selectUpdateStatus);
-  // if (!updated) {
-  //   getApiData();
-  // }
   const posts = useAppSelector(selectPosts);
   const site = useAppSelector(selectSite);
   const category = useAppSelector(selectCategory);

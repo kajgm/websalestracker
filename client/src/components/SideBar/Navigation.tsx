@@ -10,23 +10,24 @@ import Trending from '../../views/Trending';
 
 function Navigation() {
   const curWidth = useAppSelector(selectWidth);
-  const calcWidth = curWidth / (28 * 4);
 
   return (
     <>
-      <div className="bg-gray rounded-full mx-auto px-2 w-4/5">
-        <GlobalSearch />
-      </div>
-      <div className="relative flex flex-row gap-1 mx-auto bg-gray-dark justify-center w-4/5">
-        <button className="bg-gray rounded-full mx-auto px-2 w-1/3">
-          <Favourites />
-        </button>
-        <button className="bg-gray rounded-full mx-auto px-2 w-1/3">
-          <Discover />
-        </button>
-        <button className="bg-gray rounded-full mx-auto px-2 w-1/3">
-          <Trending />
-        </button>
+      <div className="mx-auto w-4/5">
+        <div className="bg-gray rounded-full">
+          <GlobalSearch />
+        </div>
+        <div className="flex flex-row gap-2 pt-2 bg-gray-dark w-full">
+          <button className="flex justify-center bg-gray rounded-full py-1 w-1/3">
+            <Favourites />
+          </button>
+          <button className="flex justify-center bg-gray rounded-full py-1 w-1/3">
+            <Discover />
+          </button>
+          <button className="flex justify-center bg-gray rounded-full py-1 w-1/3">
+            <Trending />
+          </button>
+        </div>
       </div>
     </>
   );

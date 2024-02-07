@@ -1,5 +1,6 @@
 // Native
 import { join } from 'path';
+import Store from 'electron-store';
 
 // Packages
 import { BrowserWindow, app, ipcMain, IpcMainEvent } from 'electron';
@@ -7,6 +8,12 @@ import isDev from 'electron-is-dev';
 
 const height = 600;
 const width = 800;
+const store = new Store();
+
+async function handlePlugins() {
+  const plugins = await store.get('plugins');
+  return plugins;
+}
 
 function createWindow() {
   // Create the browser window.
@@ -51,10 +58,14 @@ function createWindow() {
     window.close();
   });
 
-  window.webContents.on('new-window', function (e, url) {
-    e.preventDefault();
-    require('electron').shell.openExternal(url);
+  //For user configured plugins
+  ipcMain.on('setPlugins', (event, payload) => {
+    if (event) {
+      store.set('plugins', payload);
+    }
   });
+
+  ipcMain.handle('getPlugins', handlePlugins);
 }
 
 // This method will be called when Electron has finished

@@ -35,6 +35,16 @@ const api = {
    */
   on: (channel: string, callback: (data: any) => void) => {
     ipcRenderer.on(channel, (_, data) => callback(data));
+  },
+
+  /**
+   * Access user stored data
+   */
+  setPlugins: (plugins: any) => {
+    ipcRenderer.send('setPlugins', plugins);
+  },
+  getPlugins: () => {
+    return ipcRenderer.invoke('getPlugins');
   }
 };
 contextBridge.exposeInMainWorld('Main', api);

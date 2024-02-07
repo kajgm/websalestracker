@@ -6,9 +6,11 @@ import Status from './Status';
 function BottomBar() {
   return (
     <>
-      <div className="flex flex-row p-2">
-        <Settings />
-        <Status />
+      <div className="w-full bg-gray-dark bottom-0 rounded-lg mb-2">
+        <div className="flex flex-row p-2">
+          <Settings />
+          <Status />
+        </div>
       </div>
     </>
   );

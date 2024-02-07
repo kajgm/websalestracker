@@ -12,7 +12,7 @@ function GlobalSearch() {
 
   return (
     <>
-      <div className="flex flex-row">
+      <div className="flex flex-row px-2">
         <input
           type="text"
           placeholder="search.."

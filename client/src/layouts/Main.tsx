@@ -13,9 +13,7 @@ function Main(props: { topPad: string }) {
           <SiteContent />
         </div>
 
-        <div className="w-full bg-gray-dark bottom-0 rounded-lg mb-2">
-          <BottomBar />
-        </div>
+        <BottomBar />
       </div>
     </>
   );
