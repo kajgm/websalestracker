@@ -3,7 +3,7 @@ import { join } from 'path';
 import Store from 'electron-store';
 
 // Packages
-import { BrowserWindow, app, ipcMain, IpcMainEvent } from 'electron';
+import { BrowserWindow, app, ipcMain } from 'electron';
 import isDev from 'electron-is-dev';
 
 const height = 600;
@@ -58,6 +58,10 @@ function createWindow() {
     store.set('plugins.' + payload.id, payload.info);
   });
 
+  ipcMain.on('deletePlugin', (_event, payload) => {
+    store.delete('plugins.' + payload);
+  });
+
   ipcMain.handle('getAllPlugins', async () => {
     const localData = await store.get('plugins');
     return localData;
@@ -87,13 +91,4 @@ app.whenReady().then(() => {
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
-});
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
-
-// listen the channel `message` and resend the received message to the renderer process
-ipcMain.on('message', (event: IpcMainEvent, message: any) => {
-  console.log(message);
-  setTimeout(() => event.sender.send('message', 'hi from electron'), 500);
 });

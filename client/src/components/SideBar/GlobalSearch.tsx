@@ -18,7 +18,7 @@ function GlobalSearch() {
           placeholder="search.."
           onChange={handleChange}
           value={searchInput}
-          className="bg-gray mx-2 py-1 outline-none font-rubik w-4/5"
+          className="bg-gray2 mx-2 py-1 outline-none font-rubik w-4/5"
         />
         <FaSearch className="relative top-2" />
       </div>

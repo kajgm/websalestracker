@@ -11,21 +11,21 @@ function Navigation() {
   return (
     <>
       <div className="mx-auto w-4/5">
-        <div className="bg-gray rounded-full">
+        <div className="bg-gray2 rounded-full">
           <GlobalSearch />
         </div>
-        <div className="flex flex-row gap-2 pt-2 bg-gray-dark w-full">
-          <Link to="/Favourite" className="flex justify-center bg-gray rounded-full py-1 w-1/3">
+        <div className="flex flex-row gap-2 pt-2 w-full">
+          <Link to="/Favourite" className="flex justify-center bg-gray2 rounded-full py-1 w-1/3">
             <button>
               <FaHeart />
             </button>
           </Link>
-          <Link to="/Discover" className="flex justify-center bg-gray rounded-full py-1 w-1/3">
+          <Link to="/Discover" className="flex justify-center bg-gray2 rounded-full py-1 w-1/3">
             <button>
               <FaRocket />
             </button>
           </Link>
-          <Link to="/Hot" className="flex justify-center bg-gray rounded-full py-1 w-1/3">
+          <Link to="/Hot" className="flex justify-center bg-gray2 rounded-full py-1 w-1/3">
             <button>
               <FaFire />
             </button>
