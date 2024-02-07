@@ -10,11 +10,6 @@ const height = 600;
 const width = 800;
 const store = new Store();
 
-async function handlePlugins() {
-  const plugins = await store.get('plugins');
-  return plugins;
-}
-
 function createWindow() {
   // Create the browser window.
   const window = new BrowserWindow({
@@ -59,13 +54,21 @@ function createWindow() {
   });
 
   //For user configured plugins
-  ipcMain.on('setPlugins', (event, payload) => {
-    if (event) {
-      store.set('plugins', payload);
-    }
+  ipcMain.on('setPlugin', (_event, payload) => {
+    store.set('plugins.' + payload.id, payload.info);
   });
 
-  ipcMain.handle('getPlugins', handlePlugins);
+  ipcMain.handle('getAllPlugins', async () => {
+    const localData = await store.get('plugins');
+    return localData;
+  });
+
+  ipcMain.handle('getDefaultPlugin', async (_event, id) => {
+    console.log(id);
+    const localData = await store.get('plugins.' + id);
+    console.log(localData);
+    return localData;
+  });
 }
 
 // This method will be called when Electron has finished

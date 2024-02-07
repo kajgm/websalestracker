@@ -7,6 +7,18 @@ declare global {
   }
 }
 
+interface siteInfo {
+  name: string;
+  endpoint: string;
+  categories: Array<string>;
+  type: string;
+}
+
+interface configData {
+  id: string;
+  info: siteInfo;
+}
+
 const api = {
   /**
    * Here you can expose functions to the renderer process
@@ -40,11 +52,14 @@ const api = {
   /**
    * Access user stored data
    */
-  setPlugins: (plugins: any) => {
-    ipcRenderer.send('setPlugins', plugins);
+  setPlugin: (plugin: configData) => {
+    ipcRenderer.send('setPlugin', plugin);
   },
-  getPlugins: () => {
-    return ipcRenderer.invoke('getPlugins');
+  getDefaultPlugin: (id: string) => {
+    return ipcRenderer.invoke('getDefaultPlugin', id);
+  },
+  getAllPlugins: () => {
+    return ipcRenderer.invoke('getAllPlugins');
   }
 };
 contextBridge.exposeInMainWorld('Main', api);
