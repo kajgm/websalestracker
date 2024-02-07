@@ -64,9 +64,7 @@ function createWindow() {
   });
 
   ipcMain.handle('getDefaultPlugin', async (_event, id) => {
-    console.log(id);
     const localData = await store.get('plugins.' + id);
-    console.log(localData);
     return localData;
   });
 }

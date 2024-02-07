@@ -24,7 +24,6 @@ function NewSite() {
             onClick={async () => {
               window.Main.setPlugin({ id: data[0].name, info: data[0] });
               const localConfig = (await window.Main.getDefaultPlugin('reddit')) as siteInfo;
-              console.log(localConfig);
               dispatch(addSiteConfig(localConfig));
             }}
           >
