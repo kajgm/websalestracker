@@ -1,13 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
-interface siteInfo {
-  name: string;
-  endpoint: string;
-  categories: Array<string>;
-  type: string;
-}
-
 interface SiteConfigState {
   sites: Array<siteInfo>;
 }
@@ -31,11 +24,20 @@ export const configSlice = createSlice({
         .indexOf(action.payload);
 
       state.sites.splice(index, 1);
+    },
+    getSavedConfig: (state) => {
+      async () => {
+        const savedPlugins = await window.Main.getAllPlugins();
+
+        savedPlugins.keys.map((site: string) => {
+          state.sites.push(savedPlugins[site]);
+        });
+      };
     }
   }
 });
 
-export const { addSiteConfig, removeSiteConfig } = configSlice.actions;
+export const { addSiteConfig, removeSiteConfig, getSavedConfig } = configSlice.actions;
 
 export const selectSites = (state: RootState) => state.config.sites;
 

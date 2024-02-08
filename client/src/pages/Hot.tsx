@@ -1,11 +1,16 @@
 import React from 'react';
 import Main from '../layouts/Main';
 
+import { FaFire } from 'react-icons/fa';
+
 function Hot() {
   return (
     <>
       <Main>
-        <div>This is the hot page</div>
+        <div className="flex flex-row p-6 mb-2 bg-gray-dark2 rounded-xl items-center space-x-4">
+          <FaFire size={25} />
+          <h1 className="text-4xl font-rubik font-bold">Favourites</h1>
+        </div>
       </Main>
     </>
   );

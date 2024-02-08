@@ -6,13 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import ApiService from '../../services/api.service';
 
 import { FaTrash } from 'react-icons/fa';
-
-interface siteInfo {
-  name: string;
-  endpoint: string;
-  categories: Array<string>;
-  type: string;
-}
+import { Link } from 'react-router-dom';
 
 function SiteListing() {
   const dispatch = useAppDispatch();
@@ -41,7 +35,7 @@ function SiteListing() {
                 <div className="flex flex-row">
                   <h1 className="font-rubik font-bold text-2xl">{siteName}</h1>
                   <button
-                    onClick={() => {
+                    onClick={async () => {
                       dispatch(removeSiteConfig(site.name));
                       window.Main.deletePlugin(site.name);
                     }}
@@ -53,13 +47,17 @@ function SiteListing() {
                 {site.categories.map((cat: string) => {
                   const catName = cat.length < charScale ? cat : cat.slice(0, charScale) + '...';
                   return (
-                    <button
-                      onClick={() => getApiData(site.name, site.endpoint, cat, 'new', site.type)}
-                      className="bg-gray py-2 rounded-full font-rubik font-bold"
-                      key={cat}
-                    >
-                      {catName}
-                    </button>
+                    <div className="bg-gray py-2 rounded-full font-rubik font-bold text-center">
+                      <Link to="/Site">
+                        <button
+                          onClick={() => getApiData(site.name, site.endpoint, cat, 'new', site.type)}
+                          className="font-rubik font-bold"
+                          key={cat}
+                        >
+                          {catName}
+                        </button>
+                      </Link>
+                    </div>
                   );
                 })}
               </div>

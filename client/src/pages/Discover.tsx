@@ -7,13 +7,6 @@ import Main from '../layouts/Main';
 
 import data from '../data/defaultApiEndpoints';
 
-interface siteInfo {
-  name: string;
-  endpoint: string;
-  categories: Array<string>;
-  type: string;
-}
-
 function Discover() {
   const dispatch = useAppDispatch();
 
