@@ -6,11 +6,9 @@ import SiteContent from '../components/Site/SiteContent';
 function Site() {
   return (
     <>
-      <div>
-        <Main>
-          <SiteContent />
-        </Main>
-      </div>
+      <Main>
+        <SiteContent />
+      </Main>
     </>
   );
 }

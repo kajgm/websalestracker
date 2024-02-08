@@ -4,7 +4,7 @@ function SiteInfo(props: { name: string; category: string }) {
   const infoTitle = props.name && props.category ? props.name + ': ' + props.category : '';
 
   return (
-    <div className="flex flex-wrap p-6 mb-2 bg-gray-dark rounded-xl">
+    <div className="flex flex-wrap p-6 mb-2 bg-gray-dark2 rounded-xl">
       <h1 className="text-4xl font-rubik font-bold">{infoTitle}</h1>
     </div>
   );

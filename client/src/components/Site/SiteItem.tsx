@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
 
-interface SiteProps {
-  title: string;
-  description: string;
-}
-
 function SiteItem(props: SiteProps) {
   const [isExpanded, setExpand] = useState(false);
 
@@ -20,7 +15,7 @@ function SiteItem(props: SiteProps) {
       <div className={'ease-in-out duration-300 min-w-40 ' + (isExpanded ? 'w-full' : 'w-1/3')}>
         <div className="m-2">
           <button
-            className="bg-gradient-to-br from-gray-dark to-gray-dark2 rounded-lg hover:shadow-lg hover:shadow-purple ease-in-out duration-300 w-full"
+            className="bg-gradient-to-br from-gray2 to-gray rounded-lg hover:shadow-lg hover:shadow-purple ease-in-out duration-300 w-full"
             onClick={() => setExpand(!isExpanded)}
           >
             <div className="p-2 rounded-lg">

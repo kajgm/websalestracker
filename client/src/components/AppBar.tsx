@@ -17,7 +17,7 @@ function AppBar() {
       <div className="flex justify-between draggable text-white">
         <div className="inline-flex">
           {/* <img src={icon} className="w-6 h-auto mt-1 ml-1"></img> */}
-          <p className="text-xs mt-1 ml-2 font-pmarker">WST</p>
+          <p className="text-xs mt-1 ml-2 font-pmarker">SWT</p>
         </div>
         <div className="inline-flex">
           <button onClick={() => window.Main.Minimize()} className="undraggable px-4 pt-1 hover:bg-gray-light2">
