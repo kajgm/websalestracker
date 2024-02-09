@@ -8,12 +8,11 @@ function Main(props: any) {
 
   return (
     <>
-      <div className="w-full max-w-screen h-full pl-2 pr-2 pb-10 mt-2">
+      <div className="w-full h-full pl-2 pr-2 pb-10 mt-2">
         <div className={'w-full h-full grid grid-cols-[min-content_auto] pb-2 pt-' + appBarPadding}>
           <SideBar />
-          {props.children}
+          <div className="h-full overflow-auto">{props.children}</div>
         </div>
-
         <BottomBar />
       </div>
     </>

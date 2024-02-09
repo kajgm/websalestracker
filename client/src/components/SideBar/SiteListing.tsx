@@ -47,12 +47,11 @@ function SiteListing() {
                 {site.categories.map((cat: string) => {
                   const catName = cat.length < charScale ? cat : cat.slice(0, charScale) + '...';
                   return (
-                    <div className="bg-gray py-2 rounded-full font-rubik font-bold text-center">
+                    <div className="bg-gray py-2 rounded-full font-rubik font-bold text-center" key={cat}>
                       <Link to="/Site">
                         <button
                           onClick={() => getApiData(site.name, site.endpoint, cat, 'new', site.type)}
                           className="font-rubik font-bold"
-                          key={cat}
                         >
                           {catName}
                         </button>

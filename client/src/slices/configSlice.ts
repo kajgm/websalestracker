@@ -1,18 +1,30 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../store';
-
+import type { AppDispatch, RootState } from '../store';
 interface SiteConfigState {
+  loading: string;
   sites: Array<siteInfo>;
 }
 
 const initialState: SiteConfigState = {
+  loading: 'idle',
   sites: []
 };
 
-export const configSlice = createSlice({
+const configSlice = createSlice({
   name: 'config',
   initialState,
   reducers: {
+    sitesLoading(state) {
+      if (state.loading === 'idle') {
+        state.loading = 'pending';
+      }
+    },
+    sitesReceived(state, action: PayloadAction<Array<siteInfo>>) {
+      if (state.loading === 'pending') {
+        state.loading = 'idle';
+        state.sites = action.payload;
+      }
+    },
     addSiteConfig: (state, action: PayloadAction<siteInfo>) => {
       state.sites.push(action.payload);
     },
@@ -24,21 +36,18 @@ export const configSlice = createSlice({
         .indexOf(action.payload);
 
       state.sites.splice(index, 1);
-    },
-    getSavedConfig: (state) => {
-      async () => {
-        const savedPlugins = await window.Main.getAllPlugins();
-
-        savedPlugins.keys.map((site: string) => {
-          state.sites.push(savedPlugins[site]);
-        });
-      };
     }
   }
 });
 
-export const { addSiteConfig, removeSiteConfig, getSavedConfig } = configSlice.actions;
+export const { sitesLoading, sitesReceived, addSiteConfig, removeSiteConfig } = configSlice.actions;
 
 export const selectSites = (state: RootState) => state.config.sites;
+
+export const getSavedConfig = () => async (dispatch: AppDispatch) => {
+  dispatch(sitesLoading());
+  const localSites = await window.Main.getAllPlugins();
+  dispatch(sitesReceived(localSites));
+};
 
 export default configSlice.reducer;

@@ -1,11 +1,10 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useAppDispatch } from './hooks';
-import { addSiteConfig, getSavedConfig } from './slices/configSlice';
+
+import Home from './pages/Home';
 
 import AppBar from './components/AppBar';
 
-const Home = lazy(() => import('./pages/Home'));
 const Favourite = lazy(() => import('./pages/Favourite'));
 const Discover = lazy(() => import('./pages/Discover'));
 const Hot = lazy(() => import('./pages/Hot'));
@@ -13,9 +12,6 @@ const Settings = lazy(() => import('./pages/Settings'));
 const Site = lazy(() => import('./pages/Site'));
 
 function App() {
-  const dispatch = useAppDispatch();
-  dispatch(getSavedConfig());
-
   return (
     <BrowserRouter>
       <Suspense fallback={<Home />}>

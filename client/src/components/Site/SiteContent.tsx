@@ -12,7 +12,7 @@ function SiteContent() {
 
   return (
     <>
-      <div className="flex flex-col overflow-auto">
+      <div className="flex flex-col h-full overflow-auto">
         <SiteInfo name={site} category={category} />
         <div className="bg-gray-dark2 rounded-lg overflow-auto">
           <div className="flex flex-wrap items-center content-start">
