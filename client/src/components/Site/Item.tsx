@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SiteItem(props: SiteProps) {
+function Item(props: SiteProps) {
   const [isExpanded, setExpand] = useState(false);
 
   const searchTitle = props.title.match('\\[(.*?)\\]'); //Will need to update this
@@ -38,4 +38,4 @@ function SiteItem(props: SiteProps) {
   );
 }
 
-export default SiteItem;
+export default Item;

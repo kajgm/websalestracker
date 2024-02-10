@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 
-function GlobalSearch() {
+function Search() {
   const [searchInput, setSearchInput] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,4 +26,4 @@ function GlobalSearch() {
   );
 }
 
-export default GlobalSearch;
+export default Search;

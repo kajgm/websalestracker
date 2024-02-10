@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import GlobalSearch from './GlobalSearch';
+import Search from './Search';
 
 import { FaHeart } from 'react-icons/fa';
 import { FaRocket } from 'react-icons/fa';
@@ -12,7 +12,7 @@ function Navigation() {
     <>
       <div className="mx-auto w-4/5">
         <div className="bg-gray2 rounded-full">
-          <GlobalSearch />
+          <Search />
         </div>
         <div className="flex flex-row gap-2 pt-2 w-full">
           <Link to="/Favourite" className="flex justify-center bg-gray2 rounded-full py-1 w-1/3">

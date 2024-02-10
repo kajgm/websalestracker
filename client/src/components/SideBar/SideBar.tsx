@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { setIconState, setWidth } from '../../slices/sideBarSlice';
 import { useAppDispatch } from '../../hooks';
 
-import SiteListing from './SiteListing';
-import Navigation from './Navigation';
+import Listings from './Listings/Listings';
+import Navigation from './Navigation/Navigation';
 
 const minWidth = 150; //px
 const maxWidth = 300; //px
@@ -49,7 +49,7 @@ function SideBar() {
           style={{ width: `${width / 16}rem` }}
         >
           <Navigation />
-          <SiteListing />
+          <Listings />
         </div>
 
         {/* Handle */}
