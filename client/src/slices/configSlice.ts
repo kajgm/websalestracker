@@ -1,30 +1,27 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { AppDispatch, RootState } from '../store';
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import type { RootState } from '../store';
+
 interface SiteConfigState {
-  loading: string;
+  status: string;
+  error: string;
   sites: Array<siteInfo>;
 }
 
 const initialState: SiteConfigState = {
-  loading: 'idle',
+  status: 'idle',
+  error: '',
   sites: []
 };
+
+export const getSavedConfig = createAsyncThunk('config/getSavedConfig', async () => {
+  const localSites = await window.Main.getAllPlugins();
+  return localSites;
+});
 
 const configSlice = createSlice({
   name: 'config',
   initialState,
   reducers: {
-    sitesLoading(state) {
-      if (state.loading === 'idle') {
-        state.loading = 'pending';
-      }
-    },
-    sitesReceived(state, action: PayloadAction<Array<siteInfo>>) {
-      if (state.loading === 'pending') {
-        state.loading = 'idle';
-        state.sites = action.payload;
-      }
-    },
     addSiteConfig: (state, action: PayloadAction<siteInfo>) => {
       state.sites.push(action.payload);
     },
@@ -37,17 +34,26 @@ const configSlice = createSlice({
 
       state.sites.splice(index, 1);
     }
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(getSavedConfig.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(getSavedConfig.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.sites = action.payload;
+      })
+      .addCase(getSavedConfig.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message || 'error';
+      });
   }
 });
 
-export const { sitesLoading, sitesReceived, addSiteConfig, removeSiteConfig } = configSlice.actions;
+export const { addSiteConfig, removeSiteConfig } = configSlice.actions;
 
 export const selectSites = (state: RootState) => state.config.sites;
-
-export const getSavedConfig = () => async (dispatch: AppDispatch) => {
-  dispatch(sitesLoading());
-  const localSites = await window.Main.getAllPlugins();
-  dispatch(sitesReceived(localSites));
-};
+export const selectStatus = (state: RootState) => state.config.status;
 
 export default configSlice.reducer;

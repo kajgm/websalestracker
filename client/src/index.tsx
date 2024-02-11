@@ -1,9 +1,14 @@
 import React from 'react';
-import { createRoot, hydrateRoot } from 'react-dom/client';
-import store from './store';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+
+import store from './store';
 import App from './App';
+import { getSavedConfig } from './slices/configSlice';
+
 import './global.css';
+
+store.dispatch(getSavedConfig()); // Asynchronously load local config on start
 
 const StrictApp = () => (
   <React.StrictMode>

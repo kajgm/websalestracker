@@ -65,7 +65,7 @@ function createWindow() {
   ipcMain.handle('getAllPlugins', async () => {
     const localData = (await store.get('plugins')) as any;
     const siteArr = <any>[];
-    localData.keys().map((site: string) => {
+    Object.keys(localData).map((site: string) => {
       siteArr.push(localData[site]);
     });
     return siteArr;
