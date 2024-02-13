@@ -1,14 +1,11 @@
-// Native
 import { join } from 'path';
-import Store from 'electron-store';
-
-// Packages
 import { BrowserWindow, app, ipcMain } from 'electron';
 import isDev from 'electron-is-dev';
+import { SiteData } from '../common/types';
+import store, { STORE_KEYS } from './store';
 
 const height = 600;
 const width = 800;
-const store = new Store();
 
 function createWindow() {
   // Create the browser window.
@@ -54,25 +51,21 @@ function createWindow() {
   });
 
   //For user configured plugins
-  ipcMain.on('setPlugin', (_event, payload) => {
-    store.set('plugins.' + payload.id, payload.info);
+  ipcMain.handle('setPlugin', async (_, newPlugin: SiteData) => {
+    const prevPlugins = store.get(STORE_KEYS.PLUGINS);
+    const result = store.set(STORE_KEYS.PLUGINS, [...(prevPlugins || []), newPlugin]);
+    return result;
   });
 
-  ipcMain.on('deletePlugin', (_event, payload) => {
-    store.delete('plugins.' + payload);
+  ipcMain.handle('deletePlugin', async (_, pluginIndex: number) => {
+    const prevPlugins = store.get(STORE_KEYS.PLUGINS);
+    const plugins = prevPlugins ?? [];
+    const newPlugins = plugins.filter((__, id: number) => pluginIndex !== id);
+    store.set(STORE_KEYS.PROJECTS, newPlugins);
   });
 
   ipcMain.handle('getAllPlugins', async () => {
-    const localData = (await store.get('plugins')) as any;
-    const siteArr = <any>[];
-    Object.keys(localData).map((site: string) => {
-      siteArr.push(localData[site]);
-    });
-    return siteArr;
-  });
-
-  ipcMain.handle('getDefaultPlugin', async (_event, id) => {
-    const localData = await store.get('plugins.' + id);
+    const localData = store.get(STORE_KEYS.PLUGINS);
     return localData;
   });
 }

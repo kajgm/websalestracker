@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
+import { SiteData } from '../../common/types';
 
 interface SiteConfigState {
   status: string;
   error: string;
-  sites: Array<siteInfo>;
+  sites: Array<SiteData>;
 }
 
 const initialState: SiteConfigState = {
@@ -22,17 +23,11 @@ const configSlice = createSlice({
   name: 'config',
   initialState,
   reducers: {
-    addSiteConfig: (state, action: PayloadAction<siteInfo>) => {
+    addSiteConfig: (state, action: PayloadAction<SiteData>) => {
       state.sites.push(action.payload);
     },
-    removeSiteConfig: (state, action: PayloadAction<string>) => {
-      const index = state.sites
-        .map((e) => {
-          return e.name;
-        })
-        .indexOf(action.payload);
-
-      state.sites.splice(index, 1);
+    removeSiteConfig: (state, action: PayloadAction<number>) => {
+      state.sites.splice(action.payload, 1);
     }
   },
   extraReducers(builder) {

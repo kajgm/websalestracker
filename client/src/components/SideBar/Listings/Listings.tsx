@@ -2,6 +2,7 @@ import React from 'react';
 
 import { selectSites, selectStatus } from '../../../slices/configSlice';
 import { useAppSelector } from '../../../hooks';
+import { SiteData } from '../../../../common/types';
 
 import Site from './Site';
 
@@ -16,9 +17,9 @@ function Listings() {
   } else if (status == 'succeeded') {
     content = data.length > 0 && (
       <div className="overflow-auto">
-        {data.map((site: siteInfo) => (
-          <Site site={site} name={site.name} categories={site.categories} />
-        ))}
+        {data.map((siteInfo: SiteData, index: number) => {
+          return <Site id={index} siteInfo={siteInfo} key={siteInfo.name} />;
+        })}
       </div>
     );
   } else if (status == 'failed') {
