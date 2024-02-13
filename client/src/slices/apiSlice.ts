@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
+import { SiteData } from '../../common/types';
 
 interface redditPost {
   data: {
@@ -10,14 +11,19 @@ interface redditPost {
 }
 
 interface ApiState {
-  name: string;
+  site: SiteData;
   category: string;
   updated: Boolean;
   posts: Array<redditPost>;
 }
 
 const initialState: ApiState = {
-  name: '',
+  site: {
+    name: '',
+    endpoint: '',
+    type: '',
+    categories: []
+  },
   category: '',
   updated: false,
   posts: [{ data: { title: '', url: '', id: '' } }]
@@ -33,8 +39,8 @@ export const apiSlice = createSlice({
     updatePosts: (state, action: PayloadAction<Array<redditPost>>) => {
       state.posts = action.payload;
     },
-    updateName: (state, action: PayloadAction<string>) => {
-      state.name = action.payload;
+    updateSite: (state, action: PayloadAction<SiteData>) => {
+      state.site = action.payload;
     },
     updateCategory: (state, action: PayloadAction<string>) => {
       state.category = action.payload;
@@ -42,9 +48,9 @@ export const apiSlice = createSlice({
   }
 });
 
-export const { requestPostUpdate, updatePosts, updateName, updateCategory } = apiSlice.actions;
+export const { requestPostUpdate, updatePosts, updateSite, updateCategory } = apiSlice.actions;
 
-export const selectSite = (state: RootState) => state.api.name;
+export const selectSite = (state: RootState) => state.api.site;
 export const selectCategory = (state: RootState) => state.api.category;
 export const selectPosts = (state: RootState) => state.api.posts;
 export const selectUpdateStatus = (state: RootState) => state.api.updated;

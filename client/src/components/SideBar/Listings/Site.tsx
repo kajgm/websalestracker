@@ -4,8 +4,8 @@ import { FaTrash } from 'react-icons/fa';
 import ApiService from '../../../services/api.service';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { selectWidth } from '../../../slices/sideBarSlice';
-import { removeSiteConfig } from '../../../slices/configSlice';
-import { requestPostUpdate, updatePosts, updateName, updateCategory } from '../../../slices/apiSlice';
+import { removeLocalPlugin } from '../../../slices/pluginSlice';
+import { requestPostUpdate, updatePosts, updateSite, updateCategory } from '../../../slices/apiSlice';
 import { SiteData } from '../../../../common/types';
 
 import Category from './Category';
@@ -23,7 +23,7 @@ function Site(props: { id: number; siteInfo: SiteData }) {
     ApiService.getReddit(props.siteInfo.endpoint, categoryName, sorting, props.siteInfo.type).then((response) => {
       dispatch(updatePosts(response.data.data.children));
     });
-    dispatch(updateName(props.siteInfo.name));
+    dispatch(updateSite(props.siteInfo));
     dispatch(updateCategory(categoryName));
   };
 
@@ -34,7 +34,7 @@ function Site(props: { id: number; siteInfo: SiteData }) {
           <h1 className="font-rubik font-bold text-2xl">{siteNameConcat}</h1>
           <button
             onClick={async () => {
-              dispatch(removeSiteConfig(props.id));
+              dispatch(removeLocalPlugin(props.id));
               window.Main.deletePlugin(props.id);
             }}
             className="ml-auto"
@@ -42,8 +42,8 @@ function Site(props: { id: number; siteInfo: SiteData }) {
             <FaTrash />
           </button>
         </div>
-        {props.siteInfo.categories.map((category: string) => {
-          return <Category getCategory={getCategory} category={category} charScale={charScale} key={category} />;
+        {props.siteInfo.categories.map((name: string) => {
+          return <Category getCategory={getCategory} name={name} charScale={charScale} key={name} />;
         })}
       </div>
     </>

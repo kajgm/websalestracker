@@ -1,5 +1,5 @@
 import React from 'react';
-import { addSiteConfig } from '../slices/configSlice';
+import { addLocalPlugin } from '../slices/pluginSlice';
 import { useAppDispatch } from '../hooks';
 import { FaRocket } from 'react-icons/fa';
 
@@ -27,7 +27,7 @@ function Discover() {
                   <button
                     onClick={async () => {
                       window.Main.addPlugin(site);
-                      dispatch(addSiteConfig(site));
+                      dispatch(addLocalPlugin(site));
                     }}
                     key={site.name}
                     className="text-2xl font-rubik font-bold p-6 bg-gray2 rounded-xl gap-2"
