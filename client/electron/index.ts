@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { BrowserWindow, app, ipcMain } from 'electron';
 import isDev from 'electron-is-dev';
-import { SiteData } from '../common/types';
+import { SiteData } from './types';
 import store, { STORE_KEYS } from './store';
 
 const height = 600;
@@ -51,6 +51,18 @@ function createWindow() {
   });
 
   //For user configured plugins
+  ipcMain.handle('getPlugin', async (_, pluginIndex: number) => {
+    const localData = store.get(STORE_KEYS.PLUGINS);
+    console.log(localData);
+    console.log(pluginIndex);
+    return localData[pluginIndex];
+  });
+
+  ipcMain.handle('getAllPlugins', async () => {
+    const localData = store.get(STORE_KEYS.PLUGINS);
+    return localData;
+  });
+
   ipcMain.handle('setPlugin', async (_, newPlugin: SiteData) => {
     const prevPlugins = store.get(STORE_KEYS.PLUGINS);
     const result = store.set(STORE_KEYS.PLUGINS, [...(prevPlugins || []), newPlugin]);
@@ -62,11 +74,6 @@ function createWindow() {
     const plugins = prevPlugins ?? [];
     const newPlugins = plugins.filter((__, id: number) => pluginIndex !== id);
     store.set(STORE_KEYS.PROJECTS, newPlugins);
-  });
-
-  ipcMain.handle('getAllPlugins', async () => {
-    const localData = store.get(STORE_KEYS.PLUGINS);
-    return localData;
   });
 }
 

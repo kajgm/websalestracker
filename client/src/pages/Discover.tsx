@@ -3,6 +3,7 @@ import { addSiteConfig } from '../slices/configSlice';
 import { useAppDispatch } from '../hooks';
 import { FaRocket } from 'react-icons/fa';
 
+import { SiteData } from '../types';
 import Main from '../layouts/Main';
 
 import data from '../data/defaultApiEndpoints';
@@ -21,12 +22,12 @@ function Discover() {
           <h2 className="text-2xl font-rubik font-bold text-gray-light pb-6">Sites</h2>
           <div className="flex flex-row gap-6">
             {data &&
-              data.map((site) => {
+              data.map((site, index) => {
                 return (
                   <button
                     onClick={async () => {
-                      window.Main.setPlugin({ id: site.name, info: site });
-                      const localConfig = (await window.Main.getDefaultPlugin(site.name)) as siteInfo;
+                      window.Main.setPlugin(site);
+                      const localConfig = (await window.Main.getPlugin(index)) as SiteData;
                       dispatch(addSiteConfig(localConfig));
                     }}
                     key={site.name}

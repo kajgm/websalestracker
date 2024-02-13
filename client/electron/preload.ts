@@ -1,22 +1,11 @@
 import { ipcRenderer, contextBridge } from 'electron';
+import { SiteData } from './types';
 
 declare global {
   interface Window {
     Main: typeof api;
     ipcRenderer: typeof ipcRenderer;
   }
-}
-
-interface siteInfo {
-  name: string;
-  endpoint: string;
-  categories: Array<string>;
-  type: string;
-}
-
-interface configData {
-  id: string;
-  info: siteInfo;
 }
 
 const api = {
@@ -52,17 +41,17 @@ const api = {
   /**
    * Access user stored data
    */
-  setPlugin: (plugin: configData) => {
-    ipcRenderer.send('setPlugin', plugin);
+  setPlugin: async (plugin: SiteData) => {
+    ipcRenderer.invoke('setPlugin', plugin);
   },
-  deletePlugin: (plugin: string) => {
-    ipcRenderer.send('deletePlugin', plugin);
+  getPlugin: async (pluginId: number) => {
+    return ipcRenderer.invoke('getPlugin', pluginId);
   },
-  getDefaultPlugin: (id: string) => {
-    return ipcRenderer.invoke('getDefaultPlugin', id);
-  },
-  getAllPlugins: () => {
+  getAllPlugins: async () => {
     return ipcRenderer.invoke('getAllPlugins');
+  },
+  deletePlugin: async (pluginId: number) => {
+    ipcRenderer.invoke('deletePlugin', pluginId);
   }
 };
 contextBridge.exposeInMainWorld('Main', api);

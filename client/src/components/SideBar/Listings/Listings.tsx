@@ -2,7 +2,7 @@ import React from 'react';
 
 import { selectSites, selectStatus } from '../../../slices/configSlice';
 import { useAppSelector } from '../../../hooks';
-import { SiteData } from '../../../../common/types';
+import { SiteData } from '../../../types';
 
 import Site from './Site';
 
