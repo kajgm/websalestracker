@@ -53,8 +53,6 @@ function createWindow() {
   //For user configured plugins
   ipcMain.handle('getPlugin', async (_, pluginIndex: number) => {
     const localData = store.get(STORE_KEYS.PLUGINS);
-    console.log(localData);
-    console.log(pluginIndex);
     return localData[pluginIndex];
   });
 
@@ -73,7 +71,7 @@ function createWindow() {
     const prevPlugins = store.get(STORE_KEYS.PLUGINS);
     const plugins = prevPlugins ?? [];
     const newPlugins = plugins.filter((__, id: number) => pluginIndex !== id);
-    store.set(STORE_KEYS.PROJECTS, newPlugins);
+    store.set(STORE_KEYS.PLUGINS, newPlugins);
   });
 }
 
