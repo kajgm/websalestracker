@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import { SiteData } from '../../common/types';
+import { SiteData } from '../types';
 
 interface SiteConfigState {
   status: string;

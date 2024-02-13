@@ -1,12 +1,11 @@
 import Store from 'electron-store';
-import { JSONSchemaType } from 'ajv';
-import { SiteData } from '../common/types';
+import { SiteData } from './types';
 
 export type SchemaType = {
   plugins: SiteData[];
 };
 
-const schema: JSONSchemaType<SchemaType> = {
+interface schema {
   type: 'object',
   properties: {
     plugins: {
@@ -27,15 +26,12 @@ const schema: JSONSchemaType<SchemaType> = {
     }
   },
   required: ['plugins']
-};
+}
 
 export const STORE_KEYS: { [key: string]: keyof SchemaType } = {
   PLUGINS: 'plugins'
 };
 
-// Not sure why this is throwing an error
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const store = new Store<SchemaType>({ schema });
+const store = new Store<schema>
 
 export default store;

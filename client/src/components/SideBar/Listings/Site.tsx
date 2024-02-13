@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { selectWidth } from '../../../slices/sideBarSlice';
 import { removeSiteConfig } from '../../../slices/configSlice';
 import { requestPostUpdate, updatePosts, updateName, updateCategory } from '../../../slices/apiSlice';
-import { SiteData } from '../../../../common/types';
+import { SiteData } from '../../../types';
 
 import Category from './Category';
 
@@ -35,7 +35,7 @@ function Site(props: { id: number; siteInfo: SiteData }) {
           <button
             onClick={async () => {
               dispatch(removeSiteConfig(props.id));
-              window.Main.deletePlugin(props.siteInfo.name);
+              window.Main.deletePlugin(props.id);
             }}
             className="ml-auto"
           >
