@@ -1,37 +1,25 @@
-import Store from 'electron-store';
+import Store, { Schema } from 'electron-store';
 import { SiteData } from './types';
 
-export type SchemaType = {
+interface DataStore {
   plugins: SiteData[];
-};
-
-interface schema {
-  type: 'object',
-  properties: {
-    plugins: {
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: {
-          name: { type: 'string' },
-          endpoint: { type: 'string' },
-          type: { type: 'string' },
-          categories: {
-            type: 'array',
-            items: { type: 'string' }
-          }
-        },
-        required: ['name', 'endpoint', 'type', 'categories']
-      }
-    }
-  },
-  required: ['plugins']
 }
 
-export const STORE_KEYS: { [key: string]: keyof SchemaType } = {
-  PLUGINS: 'plugins'
+const schema: Schema<DataStore> = {
+  plugins: {
+    type: 'array',
+    properties: {
+      siteData: {
+        type: 'object',
+        default: {}
+      }
+    },
+    default: {}
+  }
 };
 
-const store = new Store<schema>
+export const STORE_KEYS: { [key: string]: keyof DataStore } = { PLUGINS: 'plugins' };
+
+const store = new Store<DataStore>({ schema });
 
 export default store;
