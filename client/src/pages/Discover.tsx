@@ -3,7 +3,7 @@ import { addSiteConfig } from '../slices/configSlice';
 import { useAppDispatch } from '../hooks';
 import { FaRocket } from 'react-icons/fa';
 
-import { SiteData } from '../types';
+import { SiteData } from '../../common/types';
 import Main from '../layouts/Main';
 
 import data from '../data/defaultApiEndpoints';
@@ -26,9 +26,8 @@ function Discover() {
                 return (
                   <button
                     onClick={async () => {
-                      window.Main.setPlugin(site);
-                      const localConfig = (await window.Main.getPlugin(index)) as SiteData;
-                      dispatch(addSiteConfig(localConfig));
+                      window.Main.addPlugin(site);
+                      dispatch(addSiteConfig(site));
                     }}
                     key={site.name}
                     className="text-2xl font-rubik font-bold p-6 bg-gray2 rounded-xl gap-2"

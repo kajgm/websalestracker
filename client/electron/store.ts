@@ -1,5 +1,5 @@
 import Store, { Schema } from 'electron-store';
-import { SiteData } from './types';
+import { SiteData } from '../common/types';
 
 interface DataStore {
   plugins: SiteData[];

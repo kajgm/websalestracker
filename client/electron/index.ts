@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { BrowserWindow, app, ipcMain } from 'electron';
 import isDev from 'electron-is-dev';
-import { SiteData } from './types';
+import { SiteData } from '../common/types';
 import store, { STORE_KEYS } from './store';
 
 const height = 600;
@@ -61,7 +61,7 @@ function createWindow() {
     return localData;
   });
 
-  ipcMain.handle('setPlugin', async (_, newPlugin: SiteData) => {
+  ipcMain.handle('addPlugin', async (_, newPlugin: SiteData) => {
     const prevPlugins = store.get(STORE_KEYS.PLUGINS);
     const result = store.set(STORE_KEYS.PLUGINS, [...(prevPlugins || []), newPlugin]);
     return result;

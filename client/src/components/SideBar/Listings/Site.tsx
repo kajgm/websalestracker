@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { selectWidth } from '../../../slices/sideBarSlice';
 import { removeSiteConfig } from '../../../slices/configSlice';
 import { requestPostUpdate, updatePosts, updateName, updateCategory } from '../../../slices/apiSlice';
-import { SiteData } from '../../../types';
+import { SiteData } from '../../../../common/types';
 
 import Category from './Category';
 

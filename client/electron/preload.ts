@@ -1,5 +1,5 @@
 import { ipcRenderer, contextBridge } from 'electron';
-import { SiteData } from './types';
+import { SiteData } from '../common/types';
 
 declare global {
   interface Window {
@@ -41,8 +41,8 @@ const api = {
   /**
    * Access user stored data
    */
-  setPlugin: async (plugin: SiteData) => {
-    ipcRenderer.invoke('setPlugin', plugin);
+  addPlugin: async (plugin: SiteData) => {
+    ipcRenderer.invoke('addPlugin', plugin);
   },
   getPlugin: async (pluginId: number) => {
     return ipcRenderer.invoke('getPlugin', pluginId);
