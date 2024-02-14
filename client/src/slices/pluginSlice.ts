@@ -5,13 +5,13 @@ import { SiteData } from '../../common/types';
 interface PluginState {
   status: string;
   error: string;
-  sites: Array<SiteData>;
+  trackedSites: Array<SiteData>;
 }
 
 const initialState: PluginState = {
   status: 'idle',
   error: '',
-  sites: []
+  trackedSites: []
 };
 
 export const getLocalPlugins = createAsyncThunk('plugin/getLocalPlugin', async () => {
@@ -19,15 +19,15 @@ export const getLocalPlugins = createAsyncThunk('plugin/getLocalPlugin', async (
   return localPlugins;
 });
 
-const configSlice = createSlice({
-  name: 'config',
+const pluginSlice = createSlice({
+  name: 'plugin',
   initialState,
   reducers: {
     addLocalPlugin: (state, action: PayloadAction<SiteData>) => {
-      state.sites.push(action.payload);
+      state.trackedSites.push(action.payload);
     },
     removeLocalPlugin: (state, action: PayloadAction<number>) => {
-      state.sites.splice(action.payload, 1);
+      state.trackedSites.splice(action.payload, 1);
     }
   },
   extraReducers(builder) {
@@ -37,7 +37,7 @@ const configSlice = createSlice({
       })
       .addCase(getLocalPlugins.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.sites = action.payload;
+        state.trackedSites = action.payload;
       })
       .addCase(getLocalPlugins.rejected, (state, action) => {
         state.status = 'failed';
@@ -46,9 +46,9 @@ const configSlice = createSlice({
   }
 });
 
-export const { addLocalPlugin, removeLocalPlugin } = configSlice.actions;
+export const { addLocalPlugin, removeLocalPlugin } = pluginSlice.actions;
 
-export const selectSites = (state: RootState) => state.config.sites;
-export const selectStatus = (state: RootState) => state.config.status;
+export const selectTrackedSites = (state: RootState) => state.plugin.trackedSites;
+export const selectStatus = (state: RootState) => state.plugin.status;
 
-export default configSlice.reducer;
+export default pluginSlice.reducer;

@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { selectSites, selectStatus } from '../../../slices/pluginSlice';
+import { selectTrackedSites, selectStatus } from '../../../slices/pluginSlice';
 import { useAppSelector } from '../../../hooks';
 import { SiteData } from '../../../../common/types';
 
 import Site from './Site';
 
 function Listings() {
-  const data = useAppSelector(selectSites);
+  const data = useAppSelector(selectTrackedSites);
   const status = useAppSelector(selectStatus);
 
   let content;

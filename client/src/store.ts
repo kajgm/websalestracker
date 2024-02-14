@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import apiReducer from './slices/apiSlice';
 import sideBarReducer from './slices/sideBarSlice';
-import configReducer from './slices/pluginSlice';
+import pluginReducer from './slices/pluginSlice';
 
 const store = configureStore({
   reducer: {
     api: apiReducer,
     sidebar: sideBarReducer,
-    config: configReducer
+    plugin: pluginReducer
   }
 });
 
