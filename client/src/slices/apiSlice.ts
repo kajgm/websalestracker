@@ -25,13 +25,17 @@ const initialState: ApiState = {
   items: []
 };
 
-export const getCategoryUpdate = createAsyncThunk('api/getCategoryUpdate', async (_, { getState }) => {
-  const category = selectCategory(getState());
-  const site = selectSite(getState());
-  const response = await axios.get(site.endpoint + category + '/' + 'new' + site.type);
-  const newItems = response.data.data.children;
-  return newItems;
-});
+export const updateCategoryItems = createAsyncThunk<Array<SiteItem>, void, { state: RootState }>(
+  'api/updateCategoryItems',
+  async (_, { getState }) => {
+    const category = selectCategory(getState());
+    const site = selectSite(getState());
+    const response = await axios.get(site.endpoint + category + '/' + 'new' + site.type);
+    const newItems = response.data.data.children;
+
+    return newItems;
+  }
+);
 
 export const apiSlice = createSlice({
   name: 'api',
@@ -46,14 +50,14 @@ export const apiSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(getCategoryUpdate.pending, (state) => {
+      .addCase(updateCategoryItems.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(getCategoryUpdate.fulfilled, (state, action) => {
+      .addCase(updateCategoryItems.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.items = action.payload;
       })
-      .addCase(getCategoryUpdate.rejected, (state, action) => {
+      .addCase(updateCategoryItems.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'error';
       });

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { SiteItem } from '../../../common/types';
 
-function Item(props: SiteProps) {
+function Item(props: SiteItem) {
   const [isExpanded, setExpand] = useState(false);
-
   const searchTitle = props.title.match('\\[(.*?)\\]'); //Will need to update this
   const displayTitle = searchTitle ? searchTitle[0].replace(/[\[\]']+/g, '') : null;
 
@@ -25,7 +25,7 @@ function Item(props: SiteProps) {
               </div>
               {isExpanded && (
                 <div>
-                  <a href={props.description} target="_blank">
+                  <a href={props.url} target="_blank">
                     Link
                   </a>
                 </div>
