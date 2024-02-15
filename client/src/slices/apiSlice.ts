@@ -1,23 +1,20 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../store';
-import { SiteData } from '../../common/types';
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-interface redditPost {
-  data: {
-    title: string;
-    url: string;
-    id: string;
-  };
-}
+import type { RootState } from '../store';
+import { SiteData, SiteItem } from '../../common/types';
 
 interface ApiState {
+  status: string;
+  error: string;
   site: SiteData;
   category: string;
-  updated: Boolean;
-  posts: Array<redditPost>;
+  items: Array<SiteItem>;
 }
 
 const initialState: ApiState = {
+  status: 'idle',
+  error: '',
   site: {
     name: '',
     endpoint: '',
@@ -25,34 +22,49 @@ const initialState: ApiState = {
     categories: []
   },
   category: '',
-  updated: false,
-  posts: [{ data: { title: '', url: '', id: '' } }]
+  items: []
 };
+
+export const getCategoryUpdate = createAsyncThunk('api/getCategoryUpdate', async (_, { getState }) => {
+  const category = selectCategory(getState());
+  const site = selectSite(getState());
+  const response = await axios.get(site.endpoint + category + '/' + 'new' + site.type);
+  const newItems = response.data.data.children;
+  return newItems;
+});
 
 export const apiSlice = createSlice({
   name: 'api',
   initialState,
   reducers: {
-    requestPostUpdate: (state) => {
-      state.updated = true;
-    },
-    updatePosts: (state, action: PayloadAction<Array<redditPost>>) => {
-      state.posts = action.payload;
-    },
     updateSite: (state, action: PayloadAction<SiteData>) => {
       state.site = action.payload;
     },
     updateCategory: (state, action: PayloadAction<string>) => {
       state.category = action.payload;
     }
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(getCategoryUpdate.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(getCategoryUpdate.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.items = action.payload;
+      })
+      .addCase(getCategoryUpdate.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message || 'error';
+      });
   }
 });
 
-export const { requestPostUpdate, updatePosts, updateSite, updateCategory } = apiSlice.actions;
+export const { updateSite, updateCategory } = apiSlice.actions;
 
 export const selectSite = (state: RootState) => state.api.site;
 export const selectCategory = (state: RootState) => state.api.category;
-export const selectPosts = (state: RootState) => state.api.posts;
-export const selectUpdateStatus = (state: RootState) => state.api.updated;
+export const selectItems = (state: RootState) => state.api.items;
+export const selectStatus = (state: RootState) => state.api.status;
 
 export default apiSlice.reducer;

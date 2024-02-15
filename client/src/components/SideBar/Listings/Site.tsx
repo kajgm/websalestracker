@@ -1,11 +1,10 @@
 import React from 'react';
 import { FaTrash } from 'react-icons/fa';
 
-import ApiService from '../../../services/api.service';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { selectWidth } from '../../../slices/sideBarSlice';
 import { removeLocalPlugin } from '../../../slices/pluginSlice';
-import { requestPostUpdate, updatePosts, updateSite, updateCategory } from '../../../slices/apiSlice';
+import { updateSite, updateCategory, getCategoryUpdate } from '../../../slices/apiSlice';
 import { SiteData } from '../../../../common/types';
 
 import Category from './Category';
@@ -18,11 +17,8 @@ function Site(props: { id: number; siteInfo: SiteData }) {
   const siteName = props.siteInfo.name;
   const siteNameConcat = siteName.length < charScale ? siteName : siteName.slice(0, charScale) + '...';
 
-  const getCategory = (categoryName: string, sorting: string) => {
-    dispatch(requestPostUpdate());
-    ApiService.getReddit(props.siteInfo.endpoint, categoryName, sorting, props.siteInfo.type).then((response) => {
-      dispatch(updatePosts(response.data.data.children));
-    });
+  const getCategory = (categoryName: string) => {
+    dispatch(getCategoryUpdate());
     dispatch(updateSite(props.siteInfo));
     dispatch(updateCategory(categoryName));
   };
