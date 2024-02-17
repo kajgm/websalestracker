@@ -8,12 +8,13 @@ export interface SiteData {
 export interface SiteCategory {
   name: string;
   site: string;
-  items: Array<SiteItem>;
+  ids: Array<string>;
 }
 
 export interface SiteItem {
-  id: string;
-  title: string;
+  name: string;
+  site: string;
+  category: string;
   url: string;
   description: string;
 }

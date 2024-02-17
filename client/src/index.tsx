@@ -4,11 +4,11 @@ import { Provider } from 'react-redux';
 
 import store from './store';
 import App from './App';
-import { getLocalPlugins } from './slices/pluginSlice';
+import { getLocalSites } from './slices/siteSlice';
 
 import './global.css';
 
-store.dispatch(getLocalPlugins()); // Asynchronously load local config on start
+store.dispatch(getLocalSites()); // Asynchronously load local config on start
 
 const StrictApp = () => (
   <React.StrictMode>

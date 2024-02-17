@@ -32,7 +32,7 @@ function Site(props: { id: number; siteInfo: SiteData }) {
           </button>
         </div>
         {props.siteInfo.categories.map((name: string) => {
-          return <Category name={name} charScale={charScale} key={name} />;
+          return <Category name={name} site={props.siteInfo.name} charScale={charScale} key={name} />;
         })}
       </div>
     </>

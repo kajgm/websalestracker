@@ -1,16 +1,18 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+
+import { RootState } from '../store';
 import { SiteCategory } from '../../common/types';
 
 interface CategoryState {
   status: 'idle' | 'pending' | 'succeeded' | 'failed';
   error: string;
-  categories: Array<SiteCategory>;
+  ids: Array<SiteCategory>;
 }
 
 const initialState: CategoryState = {
   status: 'idle',
   error: '',
-  categories: []
+  ids: []
 };
 
 export const categorySlice = createSlice({
@@ -22,15 +24,15 @@ export const categorySlice = createSlice({
       const newCategory: SiteCategory = {
         name: categoryName,
         site: siteName,
-        items: []
+        ids: []
       };
-      state.categories.push(newCategory);
+      state.ids.push(newCategory);
     },
     removeCategory: (state, action: PayloadAction<{ categoryName: string; siteName: string }>) => {
       const { categoryName, siteName } = action.payload;
-      state.categories = state.categories.filter(
-        (category) => category.name === categoryName && category.site === siteName
-      );
+      state.ids = state.ids.filter((id) => id.name === categoryName && id.site === siteName);
     }
   }
 });
+
+export default categorySlice.reducer;

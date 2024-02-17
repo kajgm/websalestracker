@@ -51,7 +51,7 @@ const api = {
     return ipcRenderer.invoke('getAllSites');
   },
   removeSite: async (siteId: number) => {
-    ipcRenderer.invoke('deleteSite', siteId);
+    ipcRenderer.invoke('removeSite', siteId);
   }
 };
 contextBridge.exposeInMainWorld('Main', api);

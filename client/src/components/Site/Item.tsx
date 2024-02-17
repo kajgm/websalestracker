@@ -3,7 +3,7 @@ import { SiteItem } from '../../../common/types';
 
 function Item(props: SiteItem) {
   const [isExpanded, setExpand] = useState(false);
-  const searchTitle = props.title.match('\\[(.*?)\\]'); //Will need to update this
+  const searchTitle = props.name.match('\\[(.*?)\\]'); //Will need to update this
   const displayTitle = searchTitle ? searchTitle[0].replace(/[\[\]']+/g, '') : null;
 
   if (!displayTitle) {
