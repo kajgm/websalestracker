@@ -3,8 +3,7 @@ import { FaTrash } from 'react-icons/fa';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { selectWidth } from '../../../slices/sideBarSlice';
-import { removeLocalPlugin } from '../../../slices/pluginSlice';
-import { updateSite, updateCategory, updateCategoryItems } from '../../../slices/apiSlice';
+import { removeSite } from '../../../slices/siteSlice';
 import { SiteData } from '../../../../common/types';
 
 import Category from './Category';
@@ -17,12 +16,6 @@ function Site(props: { id: number; siteInfo: SiteData }) {
   const siteName = props.siteInfo.name;
   const siteNameConcat = siteName.length < charScale ? siteName : siteName.slice(0, charScale) + '...';
 
-  const getCategory = (categoryName: string) => {
-    dispatch(updateSite(props.siteInfo));
-    dispatch(updateCategory(categoryName));
-    dispatch(updateCategoryItems());
-  };
-
   return (
     <>
       <div className="flex flex-col gap-2 mx-auto w-4/5 pt-6" key={props.siteInfo.name}>
@@ -30,8 +23,8 @@ function Site(props: { id: number; siteInfo: SiteData }) {
           <h1 className="font-rubik font-bold text-2xl">{siteNameConcat}</h1>
           <button
             onClick={async () => {
-              dispatch(removeLocalPlugin(props.id));
-              window.Main.deletePlugin(props.id);
+              dispatch(removeSite(props.id));
+              window.Main.removeSite(props.id);
             }}
             className="ml-auto"
           >
@@ -39,7 +32,7 @@ function Site(props: { id: number; siteInfo: SiteData }) {
           </button>
         </div>
         {props.siteInfo.categories.map((name: string) => {
-          return <Category getCategory={getCategory} name={name} charScale={charScale} key={name} />;
+          return <Category name={name} charScale={charScale} key={name} />;
         })}
       </div>
     </>

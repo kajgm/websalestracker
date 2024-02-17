@@ -50,28 +50,28 @@ function createWindow() {
     window.close();
   });
 
-  //For user configured plugins
-  ipcMain.handle('getPlugin', async (_, pluginIndex: number) => {
-    const localData = store.get(STORE_KEYS.PLUGINS);
-    return localData[pluginIndex];
+  //For user configured sites
+  ipcMain.handle('getSite', async (_, siteIndex: number) => {
+    const localData = store.get(STORE_KEYS.SITES);
+    return localData[siteIndex];
   });
 
-  ipcMain.handle('getAllPlugins', async () => {
-    const localData = store.get(STORE_KEYS.PLUGINS);
+  ipcMain.handle('getAllSites', async () => {
+    const localData = store.get(STORE_KEYS.SITES);
     return localData;
   });
 
-  ipcMain.handle('addPlugin', async (_, newPlugin: SiteData) => {
-    const prevPlugins = store.get(STORE_KEYS.PLUGINS);
-    const result = store.set(STORE_KEYS.PLUGINS, [...(prevPlugins || []), newPlugin]);
+  ipcMain.handle('addSite', async (_, newSite: SiteData) => {
+    const prevSites = store.get(STORE_KEYS.SITES);
+    const result = store.set(STORE_KEYS.SITES, [...(prevSites || []), newSite]);
     return result;
   });
 
-  ipcMain.handle('deletePlugin', async (_, pluginIndex: number) => {
-    const prevPlugins = store.get(STORE_KEYS.PLUGINS);
-    const plugins = prevPlugins ?? [];
-    const newPlugins = plugins.filter((__, id: number) => pluginIndex !== id);
-    store.set(STORE_KEYS.PLUGINS, newPlugins);
+  ipcMain.handle('removeSite', async (_, siteIndex: number) => {
+    const prevSites = store.get(STORE_KEYS.SITES);
+    const sites = prevSites ?? [];
+    const newSites = sites.filter((__, id: number) => siteIndex !== id);
+    store.set(STORE_KEYS.SITES, newSites);
   });
 }
 

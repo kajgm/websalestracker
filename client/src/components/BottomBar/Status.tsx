@@ -2,11 +2,11 @@ import React from 'react';
 import { FaCircle } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 
-import { selectStatus } from '../../slices/apiSlice';
+import { selectApiStatus } from '../../slices/apiSlice';
 import { useAppSelector } from '../../hooks';
 
 function Status() {
-  const updated = useAppSelector(selectStatus);
+  const updated = useAppSelector(selectApiStatus);
 
   return (
     <>

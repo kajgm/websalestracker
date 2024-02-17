@@ -5,6 +5,12 @@ export interface SiteData {
   categories: Array<string>;
 }
 
+export interface SiteCategory {
+  name: string;
+  site: string;
+  items: Array<SiteItem>;
+}
+
 export interface SiteItem {
   id: string;
   title: string;

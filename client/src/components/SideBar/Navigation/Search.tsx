@@ -7,7 +7,6 @@ function Search() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setSearchInput(e.target.value);
-    //console.log('Searched for: ' + e.target.value);
   };
 
   return (

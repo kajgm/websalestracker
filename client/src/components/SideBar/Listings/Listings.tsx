@@ -1,18 +1,18 @@
 import React from 'react';
 
-import { selectTrackedSites, selectStatus } from '../../../slices/pluginSlice';
+import { selectSites, selectSiteStatus } from '../../../slices/siteSlice';
 import { useAppSelector } from '../../../hooks';
 import { SiteData } from '../../../../common/types';
 
 import Site from './Site';
 
 function Listings() {
-  const data = useAppSelector(selectTrackedSites);
-  const status = useAppSelector(selectStatus);
+  const data = useAppSelector(selectSites);
+  const status = useAppSelector(selectSiteStatus);
 
   let content;
 
-  if (status == 'loading') {
+  if (status == 'pending') {
     content = <div className="text-center my-5 font-rubik">Loading...</div>;
   } else if (status == 'succeeded') {
     content = data.length > 0 && (

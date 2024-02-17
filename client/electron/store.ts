@@ -2,11 +2,11 @@ import Store, { Schema } from 'electron-store';
 import { SiteData } from '../common/types';
 
 interface DataStore {
-  plugins: SiteData[];
+  sites: SiteData[];
 }
 
 const schema: Schema<DataStore> = {
-  plugins: {
+  sites: {
     type: 'array',
     properties: {
       siteData: {
@@ -18,7 +18,7 @@ const schema: Schema<DataStore> = {
   }
 };
 
-export const STORE_KEYS: { [key: string]: keyof DataStore } = { PLUGINS: 'plugins' };
+export const STORE_KEYS: { [key: string]: keyof DataStore } = { SITES: 'sites' };
 
 const store = new Store<DataStore>({ schema });
 

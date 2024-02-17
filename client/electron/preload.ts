@@ -41,17 +41,17 @@ const api = {
   /**
    * Access user stored data
    */
-  addPlugin: async (plugin: SiteData) => {
-    ipcRenderer.invoke('addPlugin', plugin);
+  addSite: async (site: SiteData) => {
+    ipcRenderer.invoke('addSite', site);
   },
-  getPlugin: async (pluginId: number) => {
-    return ipcRenderer.invoke('getPlugin', pluginId);
+  getSite: async (siteId: number) => {
+    return ipcRenderer.invoke('getSite', siteId);
   },
-  getAllPlugins: async () => {
-    return ipcRenderer.invoke('getAllPlugins');
+  getAllSites: async () => {
+    return ipcRenderer.invoke('getAllSites');
   },
-  deletePlugin: async (pluginId: number) => {
-    ipcRenderer.invoke('deletePlugin', pluginId);
+  removeSite: async (siteId: number) => {
+    ipcRenderer.invoke('deleteSite', siteId);
   }
 };
 contextBridge.exposeInMainWorld('Main', api);
