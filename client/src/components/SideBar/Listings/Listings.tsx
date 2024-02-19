@@ -4,7 +4,7 @@ import { selectSites, selectSiteStatus } from '../../../slices/siteSlice';
 import { useAppSelector } from '../../../hooks';
 import { SiteData } from '../../../../common/types';
 
-import Site from './Site';
+import SiteContainer from './SiteContainer';
 
 function Listings() {
   const data = useAppSelector(selectSites);
@@ -18,7 +18,7 @@ function Listings() {
     content = data.length > 0 && (
       <div className="overflow-auto">
         {data.map((siteInfo: SiteData, index: number) => {
-          return <Site id={index} siteInfo={siteInfo} key={siteInfo.name} />;
+          return <SiteContainer id={index} siteInfo={siteInfo} key={siteInfo.name} />;
         })}
       </div>
     );

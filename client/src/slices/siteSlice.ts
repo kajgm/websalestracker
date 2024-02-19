@@ -15,7 +15,7 @@ const initialState: SiteState = {
 };
 
 export const getLocalSites = createAsyncThunk('site/getLocalSites', async () => {
-  const localSites = await window.Main.getAllSites();
+  const localSites = window.Main ? await window.Main.getAllSites() : [];
   return localSites;
 });
 
@@ -24,10 +24,10 @@ const siteSlice = createSlice({
   initialState,
   reducers: {
     addSite: (state, action: PayloadAction<SiteData>) => {
-      state.sites.push(action.payload);
+      return { ...state, sites: [...state.sites, action.payload] };
     },
-    removeSite: (state, action: PayloadAction<number>) => {
-      state.sites.splice(action.payload, 1);
+    removeSite: (state, action: PayloadAction<SiteData>) => {
+      return { ...state, sites: state.sites.filter((site) => site.name !== action.payload.name) };
     }
   },
   extraReducers(builder) {

@@ -28,13 +28,14 @@ function App() {
           )}
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/favourite" element={<Favourite />} />
-            <Route path="/discover" element={<Discover />} />
-            <Route path="/hot" element={<Hot />} />
-            <Route path="/settings" element={<Settings />} />
-            {sites.map((site) => (
-              <Route path="/site/:site" element={<Site />} key={site.name} />
-            ))}
+            <Route path="favourite" element={<Favourite />} />
+            <Route path="discover" element={<Discover />} />
+            <Route path="hot" element={<Hot />} />
+            <Route path="settings" element={<Settings />} />
+            {sites.map((site) => {
+              const siteName = site.name;
+              return <Route path="site/:siteName" element={<Site />} key={siteName} />;
+            })}
           </Routes>
         </div>
       </Suspense>

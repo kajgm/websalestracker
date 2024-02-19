@@ -26,7 +26,9 @@ function Discover() {
                 return (
                   <button
                     onClick={async () => {
-                      window.Main.addSite(site);
+                      {
+                        window.Main && window.Main.addSite(site);
+                      }
                       dispatch(addSite(site));
                     }}
                     key={site.name}

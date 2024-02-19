@@ -6,23 +6,25 @@ import { useAppSelector } from '../hooks';
 import Main from '../layouts/Main';
 import Item from '../components/Site/Item';
 import Info from '../components/Site/Info';
-import { selectItemsByCategory } from '../slices/itemSlice';
+import { selectItems } from '../slices/itemSlice';
 
 function Site() {
-  const { category } = useParams();
-  const items = useAppSelector((state) => selectItemsByCategory(state, category || ''));
+  const { categoryName } = useParams();
+  const items = useAppSelector(selectItems).filter((item) => item.category === categoryName);
 
   return (
     <>
-      {category ? (
+      {categoryName ? (
         <Main>
           <div className="flex flex-col h-full overflow-auto">
-            <Info name={category} />
+            <Info name={categoryName} />
             <div className="bg-gray-dark2 rounded-lg overflow-auto">
               <div className="flex flex-wrap items-center content-start">
-                {items.map((e) => {
-                  return <Item {...e}></Item>;
-                })}
+                {items
+                  ? items.map((e) => {
+                      return <Item {...e}></Item>;
+                    })
+                  : null}
               </div>
             </div>
           </div>

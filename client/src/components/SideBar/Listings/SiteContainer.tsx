@@ -8,7 +8,7 @@ import { SiteData } from '../../../../common/types';
 
 import Category from './Category';
 
-function Site(props: { id: number; siteInfo: SiteData }) {
+function SiteContainer(props: { id: number; siteInfo: SiteData }) {
   const dispatch = useAppDispatch();
 
   const curWidth = useAppSelector(selectWidth);
@@ -23,8 +23,10 @@ function Site(props: { id: number; siteInfo: SiteData }) {
           <h1 className="font-rubik font-bold text-2xl">{siteNameConcat}</h1>
           <button
             onClick={async () => {
-              dispatch(removeSite(props.id));
-              window.Main.removeSite(props.id);
+              dispatch(removeSite(props.siteInfo));
+              {
+                window.Main && window.Main.removeSite(props.id);
+              }
             }}
             className="ml-auto"
           >
@@ -39,4 +41,4 @@ function Site(props: { id: number; siteInfo: SiteData }) {
   );
 }
 
-export default Site;
+export default SiteContainer;

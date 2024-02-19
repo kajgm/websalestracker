@@ -31,10 +31,6 @@ export const itemSlice = createSlice({
   }
 });
 
-export const selectItemsBySite = (state: RootState, site: string) =>
-  state.item.items.filter((item) => item.site === site);
-
-export const selectItemsByCategory = (state: RootState, category: string) =>
-  state.item.items.filter((item) => item.category === category);
+export const selectItems = (state: RootState) => state.item.items;
 
 export default itemSlice.reducer;
