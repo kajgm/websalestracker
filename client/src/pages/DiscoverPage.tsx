@@ -1,14 +1,13 @@
 import React from 'react';
-import { addSite } from '../slices/siteSlice';
+import { addSite } from '../slices/sitesSlice';
 import { useAppDispatch } from '../hooks';
 import { FaRocket } from 'react-icons/fa';
 
-import { SiteData } from '../../common/types';
 import Main from '../layouts/Main';
+import { defaultSites, defaultCategories } from '../data/defaultTrackers';
+import { TSite } from '../../common/types';
 
-import data from '../data/defaultApiEndpoints';
-
-function Discover() {
+function DiscoverPage() {
   const dispatch = useAppDispatch();
 
   return (
@@ -21,15 +20,17 @@ function Discover() {
         <div className="mb-2 bg-gray-dark2 p-6 rounded-xl">
           <h2 className="text-2xl font-rubik font-bold text-gray-light pb-6">Sites</h2>
           <div className="flex flex-row gap-6">
-            {data &&
-              data.map((site, index) => {
+            {defaultSites &&
+              defaultSites.map((site: TSite) => {
                 return (
                   <button
                     onClick={async () => {
                       {
                         window.Main && window.Main.addSite(site);
+                        //window.Main && window.Main.addCategories(site, defaultCategories);
                       }
                       dispatch(addSite(site));
+                      //dispatch(addCategories(site, defaultCategories))
                     }}
                     key={site.name}
                     className="text-2xl font-rubik font-bold p-6 bg-gray2 rounded-xl gap-2"
@@ -48,4 +49,4 @@ function Discover() {
   );
 }
 
-export default Discover;
+export default DiscoverPage;

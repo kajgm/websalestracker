@@ -1,0 +1,13 @@
+const defaultSites = [
+  {
+    name: 'reddit',
+    endpoint: 'https://www.reddit.com/r/',
+    type: '.json',
+    labels: ['bapcsalescanada', 'frugalmalefashioncdn', 'buildapcsales', 'frugalmalefashion']
+  },
+  { name: 'test', endpoint: 'https://test/', labels: ['label1', 'label2', 'label3'], type: '.json' }
+];
+
+const defaultCategories = [{}];
+
+export { defaultSites, defaultCategories };

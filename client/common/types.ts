@@ -1,20 +1,21 @@
-export interface SiteData {
-  name: string;
+export interface TSite {
+  name: string; //unique
   endpoint: string;
   type: string;
-  categories: Array<string>;
+  labels: Array<string>;
 }
 
-export interface SiteCategory {
-  name: string;
-  site: string;
-  ids: Array<string>;
+export interface TCategory {
+  name: string; //unique
+  siteNames: Array<string>;
+  siteLabels: Array<string>;
 }
 
-export interface SiteItem {
-  name: string;
-  site: string;
-  category: string;
-  url: string;
+export interface TItem {
+  id: number; //unique
+  title: string; //NOT unique
   description: string;
+  url: string;
+  siteName: string;
+  categoryName: string;
 }

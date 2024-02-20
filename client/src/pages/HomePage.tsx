@@ -2,7 +2,7 @@ import React from 'react';
 
 import Main from '../layouts/Main';
 
-function Home() {
+function HomePage() {
   return (
     <>
       <Main>
@@ -14,4 +14,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;

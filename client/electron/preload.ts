@@ -1,5 +1,5 @@
 import { ipcRenderer, contextBridge } from 'electron';
-import { SiteData } from '../common/types';
+import { TSite } from '../common/types';
 
 declare global {
   interface Window {
@@ -41,17 +41,17 @@ const api = {
   /**
    * Access user stored data
    */
-  addSite: async (site: SiteData) => {
+  addSite: async (site: TSite) => {
     ipcRenderer.invoke('addSite', site);
   },
-  getSite: async (siteId: number) => {
-    return ipcRenderer.invoke('getSite', siteId);
+  getSite: async (siteName: string) => {
+    return ipcRenderer.invoke('getSite', siteName);
   },
   getAllSites: async () => {
     return ipcRenderer.invoke('getAllSites');
   },
-  removeSite: async (siteId: number) => {
-    ipcRenderer.invoke('removeSite', siteId);
+  removeSite: async (siteName: string) => {
+    ipcRenderer.invoke('removeSite', siteName);
   }
 };
 contextBridge.exposeInMainWorld('Main', api);

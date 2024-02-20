@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { BrowserWindow, app, ipcMain } from 'electron';
 import isDev from 'electron-is-dev';
-import { SiteData } from '../common/types';
+import { TSite } from '../common/types';
 import store, { STORE_KEYS } from './store';
 
 const height = 600;
@@ -37,41 +37,34 @@ function createWindow() {
 
   // For AppBar
   ipcMain.on('minimize', () => {
-    // eslint-disable-next-line no-unused-expressions
     window.isMinimized() ? window.restore() : window.minimize();
-    // or alternatively: win.isVisible() ? win.hide() : win.show()
   });
   ipcMain.on('maximize', () => {
-    // eslint-disable-next-line no-unused-expressions
     window.isMaximized() ? window.restore() : window.maximize();
   });
-
   ipcMain.on('close', () => {
     window.close();
   });
 
   //For user configured sites
-  ipcMain.handle('getSite', async (_, siteIndex: number) => {
-    const localData = store.get(STORE_KEYS.SITES);
-    return localData[siteIndex];
+  ipcMain.handle('getSite', async (_, siteName: string) => {
+    const localData = store.get(STORE_KEYS.SITES) ?? [];
+    return localData.filter((site) => site.name === siteName);
   });
-
   ipcMain.handle('getAllSites', async () => {
     const localData = store.get(STORE_KEYS.SITES);
     return localData;
   });
-
-  ipcMain.handle('addSite', async (_, newSite: SiteData) => {
+  ipcMain.handle('addSite', async (_, newSite: TSite) => {
     const prevSites = store.get(STORE_KEYS.SITES);
     const result = store.set(STORE_KEYS.SITES, [...(prevSites || []), newSite]);
     return result;
   });
-
-  ipcMain.handle('removeSite', async (_, siteIndex: number) => {
-    const prevSites = store.get(STORE_KEYS.SITES);
-    const sites = prevSites ?? [];
-    const newSites = sites.filter((__, id: number) => siteIndex !== id);
-    store.set(STORE_KEYS.SITES, newSites);
+  ipcMain.handle('removeSite', async (_, siteName: string) => {
+    const sites = store.get(STORE_KEYS.SITES) ?? [];
+    const newSites = sites.filter((site: TSite) => site.name !== siteName);
+    const result = store.set(STORE_KEYS.SITES, newSites);
+    return result;
   });
 }
 

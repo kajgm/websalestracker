@@ -1,32 +1,23 @@
 import React from 'react';
 
-import { selectSites, selectSiteStatus } from '../../../slices/siteSlice';
+import { selectSites } from '../../../slices/sitesSlice';
 import { useAppSelector } from '../../../hooks';
-import { SiteData } from '../../../../common/types';
+import { TSite } from '../../../../common/types';
 
 import SiteContainer from './SiteContainer';
 
 function Listings() {
   const data = useAppSelector(selectSites);
-  const status = useAppSelector(selectSiteStatus);
 
-  let content;
-
-  if (status == 'pending') {
-    content = <div className="text-center my-5 font-rubik">Loading...</div>;
-  } else if (status == 'succeeded') {
-    content = data.length > 0 && (
+  return (
+    <>
       <div className="overflow-auto">
-        {data.map((siteInfo: SiteData, index: number) => {
-          return <SiteContainer id={index} siteInfo={siteInfo} key={siteInfo.name} />;
+        {data.map((siteInfo: TSite) => {
+          return <SiteContainer siteInfo={siteInfo} key={siteInfo.name} />;
         })}
       </div>
-    );
-  } else if (status == 'failed') {
-    <div className="text-center my-5 font-rubik">Sites not found</div>;
-  }
-
-  return <>{content}</>;
+    </>
+  );
 }
 
 export default Listings;

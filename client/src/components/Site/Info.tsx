@@ -1,7 +1,9 @@
 import React from 'react';
 
-function SiteInfo(props: { name: string }) {
-  const infoTitle = props.name;
+function SiteInfo(props: { siteName: string; label?: string }) {
+  const { siteName, label } = props;
+
+  const infoTitle = label ? siteName + ': ' + label : siteName;
 
   return (
     <div className="flex flex-wrap p-6 mb-2 bg-gray-dark2 rounded-xl">

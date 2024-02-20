@@ -1,17 +1,17 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import { SiteData } from '../../common/types';
+import { TSite } from '../../common/types';
 
 interface SiteState {
   status: 'idle' | 'pending' | 'succeeded' | 'failed';
   error: string;
-  sites: Array<SiteData>;
+  entities: Array<TSite>;
 }
 
 const initialState: SiteState = {
   status: 'idle',
   error: '',
-  sites: []
+  entities: []
 };
 
 export const getLocalSites = createAsyncThunk('site/getLocalSites', async () => {
@@ -23,11 +23,11 @@ const siteSlice = createSlice({
   name: 'site',
   initialState,
   reducers: {
-    addSite: (state, action: PayloadAction<SiteData>) => {
-      return { ...state, sites: [...state.sites, action.payload] };
+    addSite: (state, action: PayloadAction<TSite>) => {
+      state.entities.push(action.payload);
     },
-    removeSite: (state, action: PayloadAction<SiteData>) => {
-      return { ...state, sites: state.sites.filter((site) => site.name !== action.payload.name) };
+    removeSite: (state, action: PayloadAction<string>) => {
+      state.entities = state.entities.filter((site) => site.name !== action.payload);
     }
   },
   extraReducers(builder) {
@@ -37,7 +37,7 @@ const siteSlice = createSlice({
       })
       .addCase(getLocalSites.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.sites = action.payload;
+        state.entities = action.payload;
       })
       .addCase(getLocalSites.rejected, (state, action) => {
         state.status = 'failed';
@@ -48,7 +48,7 @@ const siteSlice = createSlice({
 
 export const { addSite, removeSite } = siteSlice.actions;
 
-export const selectSites = (state: RootState) => state.site.sites;
-export const selectSiteStatus = (state: RootState) => state.site.status;
+export const selectSites = (state: RootState) => state.sites.entities;
+export const selectSiteStatus = (state: RootState) => state.sites.status;
 
 export default siteSlice.reducer;

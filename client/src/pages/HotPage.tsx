@@ -3,7 +3,7 @@ import Main from '../layouts/Main';
 
 import { FaFire } from 'react-icons/fa';
 
-function Hot() {
+function HotPage() {
   return (
     <>
       <Main>
@@ -16,4 +16,4 @@ function Hot() {
   );
 }
 
-export default Hot;
+export default HotPage;

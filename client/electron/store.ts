@@ -1,8 +1,8 @@
 import Store, { Schema } from 'electron-store';
-import { SiteData } from '../common/types';
+import { TSite } from '../common/types';
 
 interface DataStore {
-  sites: SiteData[];
+  sites: TSite[];
 }
 
 const schema: Schema<DataStore> = {
