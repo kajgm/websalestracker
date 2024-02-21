@@ -32,10 +32,10 @@ function DiscoverPage() {
                       dispatch(addSite(site));
                       //dispatch(addCategories(site, defaultCategories))
                     }}
-                    key={site.name}
+                    key={site.id}
                     className="text-2xl font-rubik font-bold p-6 bg-gray2 rounded-xl gap-2"
                   >
-                    {site.name}
+                    {site.id}
                   </button>
                 );
               })}

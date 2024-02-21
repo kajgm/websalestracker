@@ -47,9 +47,9 @@ function createWindow() {
   });
 
   //For user configured sites
-  ipcMain.handle('getSite', async (_, siteName: string) => {
+  ipcMain.handle('getSite', async (_, siteId: string) => {
     const localData = store.get(STORE_KEYS.SITES) ?? [];
-    return localData.filter((site) => site.name === siteName);
+    return localData.filter((site) => site.id === siteId);
   });
   ipcMain.handle('getAllSites', async () => {
     const localData = store.get(STORE_KEYS.SITES);
@@ -60,9 +60,9 @@ function createWindow() {
     const result = store.set(STORE_KEYS.SITES, [...(prevSites || []), newSite]);
     return result;
   });
-  ipcMain.handle('removeSite', async (_, siteName: string) => {
+  ipcMain.handle('removeSite', async (_, siteId: string) => {
     const sites = store.get(STORE_KEYS.SITES) ?? [];
-    const newSites = sites.filter((site: TSite) => site.name !== siteName);
+    const newSites = sites.filter((site: TSite) => site.id !== siteId);
     const result = store.set(STORE_KEYS.SITES, newSites);
     return result;
   });

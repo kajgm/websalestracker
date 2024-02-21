@@ -1,18 +1,17 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createEntityAdapter, createSelector, createAsyncThunk } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import { TSite } from '../../common/types';
 
-interface SiteState {
-  status: 'idle' | 'pending' | 'succeeded' | 'failed';
-  error: string;
-  entities: Array<TSite>;
-}
+const sitesAdapter = createEntityAdapter({
+  selectId: (site: TSite) => site.id,
 
-const initialState: SiteState = {
+  sortComparer: (a, b) => a.id.localeCompare(b.id)
+});
+
+const initialState = sitesAdapter.getInitialState({
   status: 'idle',
-  error: '',
-  entities: []
-};
+  error: ''
+});
 
 export const getLocalSites = createAsyncThunk('site/getLocalSites', async () => {
   const localSites = window.Main ? await window.Main.getAllSites() : [];
@@ -23,12 +22,8 @@ const siteSlice = createSlice({
   name: 'site',
   initialState,
   reducers: {
-    addSite: (state, action: PayloadAction<TSite>) => {
-      state.entities.push(action.payload);
-    },
-    removeSite: (state, action: PayloadAction<string>) => {
-      state.entities = state.entities.filter((site) => site.name !== action.payload);
-    }
+    addSite: sitesAdapter.addOne,
+    removeSite: sitesAdapter.removeOne
   },
   extraReducers(builder) {
     builder
@@ -37,7 +32,7 @@ const siteSlice = createSlice({
       })
       .addCase(getLocalSites.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.entities = action.payload;
+        sitesAdapter.upsertMany(state, action.payload);
       })
       .addCase(getLocalSites.rejected, (state, action) => {
         state.status = 'failed';
@@ -48,7 +43,10 @@ const siteSlice = createSlice({
 
 export const { addSite, removeSite } = siteSlice.actions;
 
-export const selectSites = (state: RootState) => state.sites.entities;
-export const selectSiteStatus = (state: RootState) => state.sites.status;
+export const {
+  selectAll: selectAllSites,
+  selectById: selectSiteById,
+  selectIds: selectSiteIds
+} = sitesAdapter.getSelectors((state: RootState) => state.sites);
 
 export default siteSlice.reducer;

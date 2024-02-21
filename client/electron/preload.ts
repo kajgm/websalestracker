@@ -44,14 +44,14 @@ const api = {
   addSite: async (site: TSite) => {
     ipcRenderer.invoke('addSite', site);
   },
-  getSite: async (siteName: string) => {
-    return ipcRenderer.invoke('getSite', siteName);
+  getSite: async (siteId: string) => {
+    return ipcRenderer.invoke('getSite', siteId);
   },
   getAllSites: async () => {
     return ipcRenderer.invoke('getAllSites');
   },
-  removeSite: async (siteName: string) => {
-    ipcRenderer.invoke('removeSite', siteName);
+  removeSite: async (siteId: string) => {
+    ipcRenderer.invoke('removeSite', siteId);
   }
 };
 contextBridge.exposeInMainWorld('Main', api);

@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { useAppSelector } from './hooks';
-import { selectSites } from './slices/sitesSlice';
+import { selectAllSites } from './slices/sitesSlice';
 
 import Home from './pages/HomePage';
 import AppBar from './components/AppBar';
@@ -15,7 +15,7 @@ const SitePage = lazy(() => import('./pages/SitePage'));
 const Category = lazy(() => import('./pages/CategoryPage'));
 
 function App() {
-  const sites = useAppSelector(selectSites);
+  const sites = useAppSelector(selectAllSites);
 
   return (
     <BrowserRouter>
@@ -33,8 +33,8 @@ function App() {
             <Route path="hot" element={<HotPage />} />
             <Route path="settings" element={<SettingsPage />} />
             {sites.map((site) => {
-              const siteName = site.name;
-              return <Route path="site/:siteName" element={<SitePage />} key={siteName} />;
+              const siteId = site.id;
+              return <Route path="site/:siteId" element={<SitePage />} key={siteId} />;
             })}
           </Routes>
         </div>

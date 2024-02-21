@@ -1,11 +1,11 @@
 const defaultSites = [
   {
-    name: 'reddit',
+    id: 'reddit',
     endpoint: 'https://www.reddit.com/r/',
     type: '.json',
     labels: ['bapcsalescanada', 'frugalmalefashioncdn', 'buildapcsales', 'frugalmalefashion']
   },
-  { name: 'test', endpoint: 'https://test/', labels: ['label1', 'label2', 'label3'], type: '.json' }
+  { id: 'test', endpoint: 'https://test/', labels: ['label1', 'label2', 'label3'], type: '.json' }
 ];
 
 const defaultCategories = [{}];

@@ -7,17 +7,6 @@ export const categoriesSlice = createSlice({
   name: 'categories',
   initialState: Array<TCategory>,
   reducers: {
-    addCategory: (state, action: PayloadAction<string>) => {
-      const newCategory: TCategory = {
-        name: action.payload,
-        siteNames: [],
-        siteLabels: [],
-      };
-      state.push(newCategory);
-    },
-    removeCategory: (state, action: PayloadAction<string>) => {
-      state = state.filter((category) => category.name === action.payload);
-    }
   }
 });
 

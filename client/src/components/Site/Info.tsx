@@ -1,9 +1,9 @@
 import React from 'react';
 
-function SiteInfo(props: { siteName: string; label?: string }) {
-  const { siteName, label } = props;
+function SiteInfo(props: { siteId: string; label?: string }) {
+  const { siteId, label } = props;
 
-  const infoTitle = label ? siteName + ': ' + label : siteName;
+  const infoTitle = label ? siteId + ': ' + label : siteId;
 
   return (
     <div className="flex flex-wrap p-6 mb-2 bg-gray-dark2 rounded-xl">

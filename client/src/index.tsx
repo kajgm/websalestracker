@@ -8,17 +8,18 @@ import { getLocalSites } from './slices/sitesSlice';
 
 import './global.css';
 
-store.dispatch(getLocalSites()); // Asynchronously load local config on start
+async function start() {
+  store.dispatch(getLocalSites()); // Asynchronously load local config on start
 
-const StrictApp = () => (
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
-);
+  const root = createRoot(document.getElementById('root')!);
 
-const rootElement = document.getElementById('root')!;
-const root = createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </React.StrictMode>
+  );
+}
 
-root.render(<StrictApp />);
+start();

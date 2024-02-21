@@ -1,21 +1,22 @@
 export interface TSite {
-  name: string; //unique
+  id: string;
   endpoint: string;
   type: string;
   labels: Array<string>;
 }
 
 export interface TCategory {
-  name: string; //unique
-  siteNames: Array<string>;
+  id: string;
+  siteIds: Array<string>;
   siteLabels: Array<string>;
 }
 
 export interface TItem {
-  id: number; //unique
+  id: string; //unique
   title: string; //NOT unique
   description: string;
   url: string;
-  siteName: string;
-  categoryName: string;
+  price: number;
+  siteId: string;
+  categoryId: string;
 }

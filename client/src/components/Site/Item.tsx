@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { SiteItem } from '../../../common/types';
+import { TItem } from '../../../common/types';
 
-function Item(props: SiteItem) {
+function Item(props: TItem) {
   const [isExpanded, setExpand] = useState(false);
-  const searchTitle = props.name.match('\\[(.*?)\\]'); //Will need to update this
+  const searchTitle = props.title.match('\\[(.*?)\\]'); //Will need to update this
   const displayTitle = searchTitle ? searchTitle[0].replace(/[\[\]']+/g, '') : null;
 
   if (!displayTitle) {
