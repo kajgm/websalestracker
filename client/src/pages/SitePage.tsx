@@ -2,12 +2,12 @@ import React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 import { useAppSelector } from '../hooks';
+import { selectSiteById } from '../slices/sitesSlice';
 import { selectItemsBySiteId } from '../slices/itemsSlice';
 
 import Main from '../layouts/Main';
 import Item from '../components/Site/Item';
 import Info from '../components/Site/Info';
-import { selectSiteById } from '../slices/sitesSlice';
 
 function SitePage() {
   const { siteId } = useParams();
