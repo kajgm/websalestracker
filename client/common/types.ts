@@ -18,5 +18,5 @@ export interface TItem {
   url: string;
   price: number;
   siteId: string;
-  categoryId: string;
+  categoryId: string | undefined;
 }

@@ -17,7 +17,7 @@ function SitePage() {
     <>
       <Main>
         <div className="flex flex-col h-full overflow-auto">
-          <Info siteId={categoryId || ''} />
+          {/* <Info site={categoryId || ''} /> */}
           <div className="bg-gray-dark2 rounded-lg overflow-auto">
             <div className="flex flex-wrap items-center content-start">
               {items

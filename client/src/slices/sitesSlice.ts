@@ -4,7 +4,6 @@ import { TSite } from '../../common/types';
 
 const sitesAdapter = createEntityAdapter({
   selectId: (site: TSite) => site.id,
-
   sortComparer: (a, b) => a.id.localeCompare(b.id)
 });
 
