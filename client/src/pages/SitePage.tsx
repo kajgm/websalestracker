@@ -3,11 +3,11 @@ import { useLocation, useParams } from 'react-router-dom';
 
 import { useAppSelector } from '../hooks';
 import { selectSiteById } from '../slices/sitesSlice';
-import { selectAllItems, selectItemsByLabel, selectItemsBySiteId } from '../slices/itemsSlice';
+import { selectItemsByLabel, selectItemsBySiteId } from '../slices/itemsSlice';
 
 import Main from '../layouts/Main';
 import Item from '../components/Site/Item';
-import Info from '../components/Site/Info';
+import Info from '../components/Site/SiteInfo';
 
 function SitePage() {
   const { siteId } = useParams();

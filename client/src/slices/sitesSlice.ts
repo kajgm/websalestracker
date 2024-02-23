@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, createEntityAdapter, createSelector, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createEntityAdapter, createAsyncThunk } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import { TSite } from '../../common/types';
 
@@ -12,13 +12,13 @@ const initialState = sitesAdapter.getInitialState({
   error: ''
 });
 
-export const getLocalSites = createAsyncThunk('site/getLocalSites', async () => {
+export const getLocalSites = createAsyncThunk('sites/getLocalSites', async () => {
   const localSites = window.Main ? await window.Main.getAllSites() : [];
   return localSites;
 });
 
-const siteSlice = createSlice({
-  name: 'site',
+const sitesSlice = createSlice({
+  name: 'sites',
   initialState,
   reducers: {
     addSite: sitesAdapter.addOne,
@@ -40,7 +40,7 @@ const siteSlice = createSlice({
   }
 });
 
-export const { addSite, removeSite } = siteSlice.actions;
+export const { addSite, removeSite } = sitesSlice.actions;
 
 export const {
   selectAll: selectAllSites,
@@ -48,4 +48,4 @@ export const {
   selectIds: selectSiteIds
 } = sitesAdapter.getSelectors((state: RootState) => state.sites);
 
-export default siteSlice.reducer;
+export default sitesSlice.reducer;

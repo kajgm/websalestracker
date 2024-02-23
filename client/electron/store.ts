@@ -1,8 +1,9 @@
 import Store, { Schema } from 'electron-store';
-import { TSite } from '../common/types';
+import { TCategory, TSite } from '../common/types';
 
 interface DataStore {
   sites: TSite[];
+  categories: TCategory[];
 }
 
 const schema: Schema<DataStore> = {
@@ -15,10 +16,20 @@ const schema: Schema<DataStore> = {
       }
     },
     default: {}
+  },
+  categories: {
+    type: 'array',
+    properties: {
+      categoryData: {
+        type: 'object',
+        default: {}
+      }
+    },
+    default: {}
   }
 };
 
-export const STORE_KEYS: { [key: string]: keyof DataStore } = { SITES: 'sites' };
+export const STORE_KEYS: { [key: string]: keyof DataStore } = { SITES: 'sites', CATEGORIES: 'categories' };
 
 const store = new Store<DataStore>({ schema });
 

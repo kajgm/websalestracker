@@ -8,6 +8,9 @@ const defaultSites = [
   { id: 'test', endpoint: 'https://test/', labels: ['label1', 'label2', 'label3'], type: '.json' }
 ];
 
-const defaultCategories = [{}];
+const defaultCategories = [
+  { id: 'technology', siteIds: ['reddit'], siteLabels: ['bapcsalescanada', 'buildapcsales'] },
+  { id: 'clothing', siteIds: ['reddit'], siteLabels: ['frugalmalefashioncdn', 'frugalmalefashion'] }
+];
 
 export { defaultSites, defaultCategories };

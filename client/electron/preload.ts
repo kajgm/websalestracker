@@ -1,5 +1,5 @@
 import { ipcRenderer, contextBridge } from 'electron';
-import { TSite } from '../common/types';
+import { TCategory, TSite } from '../common/types';
 
 declare global {
   interface Window {
@@ -10,17 +10,7 @@ declare global {
 
 const api = {
   /**
-   * Here you can expose functions to the renderer process
-   * so they can interact with the main (electron) side
-   * without security problems.
-   *
-   * The function below can accessed using `window.Main.sayHello`
-   */
-  sendMessage: (message: string) => {
-    ipcRenderer.send('message', message);
-  },
-  /**
-    Here function for AppBar
+   * AppBar
    */
   Minimize: () => {
     ipcRenderer.send('minimize');
@@ -31,6 +21,7 @@ const api = {
   Close: () => {
     ipcRenderer.send('close');
   },
+
   /**
    * Provide an easier way to listen to events
    */
@@ -41,17 +32,38 @@ const api = {
   /**
    * Access user stored data
    */
+  // User stored sites
   addSite: async (site: TSite) => {
     ipcRenderer.invoke('addSite', site);
   },
   getSite: async (siteId: string) => {
     return ipcRenderer.invoke('getSite', siteId);
   },
+  removeSite: async (siteId: string) => {
+    ipcRenderer.invoke('removeSite', siteId);
+  },
   getAllSites: async () => {
     return ipcRenderer.invoke('getAllSites');
   },
-  removeSite: async (siteId: string) => {
-    ipcRenderer.invoke('removeSite', siteId);
+  removeAllSites: async () => {
+    ipcRenderer.invoke('removeAllSites');
+  },
+
+  // User stored categories
+  addCategory: async (categoryId: TCategory) => {
+    ipcRenderer.invoke('addCategory', categoryId);
+  },
+  getCategory: async (categoryId: string) => {
+    return ipcRenderer.invoke('getCategory', categoryId);
+  },
+  removeCategory: async (categoryId: string) => {
+    ipcRenderer.invoke('removeCategory', categoryId);
+  },
+  getAllCategories: async () => {
+    return ipcRenderer.invoke('getAllCategories');
+  },
+  removeAllCategories: async () => {
+    ipcRenderer.invoke('removeAllCategories');
   }
 };
 contextBridge.exposeInMainWorld('Main', api);
