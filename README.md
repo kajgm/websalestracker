@@ -22,7 +22,7 @@ Follow these steps to install and run the development environment:
 1. Clone the repository
 
 ```
-git clone git@github.com:kajgrant/websalestracker
+git clone git@github.com:kajgm/websalestracker
 ```
 
 2. Install node modules
